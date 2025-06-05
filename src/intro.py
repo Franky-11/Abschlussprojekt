@@ -24,7 +24,7 @@ with col2:
     st.write("")  # Eine leere Zeile
     st.image("images/electric-car-2545290_1280.png", width=400, use_container_width=True)
 
-tab1,tab2,tab3=st.tabs(["Warum das Ganze?","Was ist betroffen?","Aktueller Diskussionsstand"])
+tab1,tab2,tab3=st.tabs(["Warum das Ganze?","Betroffene Fahrzeug","Aktueller Diskussionsstand"])
 
 with tab1:
     st.markdown("""

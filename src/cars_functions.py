@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 
 @st.cache_data
 def read_df_cars():
@@ -28,7 +29,17 @@ def plot_cars(df):
 
 @st.cache_data
 def plot_e_cars(df,annot):
-    fig = px.bar(df, x=df.index, y="e_cars", color_discrete_sequence=['red'])
+    #fig = px.bar(df, x=df.index, y="e_cars", color_discrete_sequence=['red'])
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df.index,
+        y=df["e_cars"],
+        fill="tozeroy",
+        fillcolor='rgba(255,0,0,0.2)',
+        line_color='rgba(255,0,0,1)',
+        showlegend=False,
+        name='e_cars',
+    ))
     fig.update_xaxes(title_text="",range=['2018-06-01','2025-03-01'])
     fig.update_yaxes(title_text="Bestand E-Car",range=[0, 1.8*1E6])
 
@@ -58,9 +69,22 @@ def plot_e_cars(df,annot):
 
 @st.cache_data
 def plot_e_cars_percent(df,annot=False):
-    fig = px.line(df, x=df.index, y="%e_cars", color_discrete_sequence=['blue'], markers=True)
+    #fig = px.line(df, x=df.index, y="%e_cars", color_discrete_sequence=['blue'], markers=True)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df.index,
+        y=df["%e_cars"],
+        fill="tozeroy",
+        fillcolor='rgba(0,0,255,0.2)',
+        line_color='rgba(0,0,255,1)',
+        showlegend=False,
+        name='e_cars',
+    ))
+
     fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="E-Car Anteil (%)")
+
     if annot:
         annotations = [
             dict(x='2020-07-01', y=0.1, yref='paper', text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",
