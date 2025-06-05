@@ -15,6 +15,7 @@ placeholder=st.empty() # Platzhalter
 with chart1:
     st.markdown("***Chart 1***")
 
+
 with chart2:
     st.markdown("***Chart 2***")
 
