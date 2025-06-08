@@ -24,7 +24,7 @@ with col2:
     st.write("")  # Eine leere Zeile
     st.image("images/electric-car-2545290_1280.png", width=400, use_container_width=True)
 
-tab1,tab2,tab3=st.tabs(["Warum das Ganze?","Was ist betroffen?","Aktueller Diskussionsstand"])
+tab1,tab2,tab3=st.tabs(["Warum das Ganze?","Betroffene Fahrzeug","Aktueller Diskussionsstand"])
 
 with tab1:
     st.markdown("""
@@ -37,7 +37,7 @@ with tab1:
 
 with tab2:
     st.markdown("""
-    **Was ist betroffen?**
+    **Betroffene Fahrzeuge**
     * :material/new_releases: **Neue Pkw & leichte Nutzfahrzeuge:** Ab 2035 dürfen in der EU keine **neuen** Fahrzeuge mehr zugelassen werden, die ausschließlich mit fossilem Benzin oder Diesel betrieben werden.
     * :material/fuel: **Ausnahme für E-Fuels:** Fahrzeuge, die nachweislich ausschließlich mit CO2-neutralen synthetischen Kraftstoffen (E-Fuels) betrieben werden können, sollen weiterhin neu zugelassen werden dürfen.
     * :material/autorenew: **Bestandsfahrzeuge:** Alle bis 2034 zugelassenen Verbrenner-Fahrzeuge dürfen weiterhin uneingeschränkt gefahren und gehandelt werden. Es gibt kein Verbot für den Betrieb bestehender Fahrzeuge!
@@ -65,7 +65,7 @@ with st.expander("Mehr über das Projektteam",icon=":material/group:"):
     st.write("Diese App wurde entwickelt von:")
     st.markdown("""
     * **Frank Schulnies**: App-Design, Fahrzeugbestand
-    * **Phillip Schauer**: Ladensäuleninfrastrukutur
+    * **Philipp Schauer**: Ladensäuleninfrastrukutur
     * **Thomas Baur**: Emissionen
     """)
 

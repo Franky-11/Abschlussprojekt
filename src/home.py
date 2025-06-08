@@ -13,7 +13,7 @@ cars=st.Page("cars.py", title="Fahrzeugbestand", icon=":material/directions_car:
 charging_stations=st.Page("charging_stations.py", title="Ladensäuleninfrastruktur", icon=":material/electrical_services:")
 
 
-pg = st.navigation(pages=[intro, cars,charging_stations])
+pg = st.navigation(pages=[intro, cars])#,charging_stations])
 
 
 

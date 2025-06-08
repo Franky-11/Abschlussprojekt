@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 
 @st.cache_data
 def read_df_cars():
@@ -27,35 +28,81 @@ def plot_cars(df):
     return fig
 
 @st.cache_data
-def plot_e_cars(df):
-    fig = px.bar(df, x=df.index, y="e_cars", color_discrete_sequence=['red'])
+def plot_e_cars(df,annot):
+    #fig = px.bar(df, x=df.index, y="e_cars", color_discrete_sequence=['red'])
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df.index,
+        y=df["e_cars"],
+        fill="tozeroy",
+        fillcolor='rgba(255,0,0,0.2)',
+        line_color='rgba(255,0,0,1)',
+        showlegend=False,
+        name='e_cars',
+    ))
     fig.update_xaxes(title_text="",range=['2018-06-01','2025-03-01'])
     fig.update_yaxes(title_text="Bestand E-Car",range=[0, 1.8*1E6])
 
-    annotations = [
-        # Innovationsprämie (Juli 2020)
-        dict(
-            x='2020-07-01',  # Datum auf der X-Achse
-            y=0.3, yref='paper',  # y-Position (0=unten, 1=oben im Plotbereich)
-            text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",  # Text der Annotation
-            showarrow=True,  # Pfeil anzeigen
-            arrowhead=2,  # Art des Pfeilkopfs
-            ax=0, ay=-100,  # Pfeilversatz (ax=x-Versatz, ay=y-Versatz)
-            bgcolor="rgba(255, 255, 255, 0.8)",  # Hintergrundfarbe
-            bordercolor="gray",  # Randfarbe
-            borderwidth=1,  # Randbreite
-            borderpad=4,  # Abstand zum Rand
-            # font=dict(size=10, color="darkblue") # Schriftart
-        )]
+    if annot:
+        annotations = [
+            dict(x='2020-07-01', y=0.1, yref='paper', text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",
+                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4),
+            dict(x='2023-09-01', y=0.7, yref='paper', text="Umweltbonus endet für Firmenkunden", showarrow=True,
+                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
+                 borderpad=4),
+            dict(x='2023-12-18', y=0.8, yref='paper', text="Umweltbonus endet abrupt!", showarrow=True, arrowhead=2,
+                 ax=0, ay=-80, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
+                 font=dict(color="red", weight="bold")),
+            #dict(x='2023-01-01', y=0.05, yref='paper', text="Plug-in-Hybride nicht mehr gefördert", showarrow=True,
+                # arrowhead=2, ax=0, ay=40, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
+                 #borderpad=4),
+            dict(x='2021-01-01', y=0.2, yref='paper', text="EU-CO2-Flottenziele verschärft<br>(Herstellerdruck)",
+                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4)
+        ]
+        fig.update_layout(annotations=annotations)
 
-    fig.update_layout(annotations=annotations)
 
     return fig
 
 
 @st.cache_data
-def plot_e_cars_percent(df):
-    fig = px.line(df, x=df.index, y="%e_cars", color_discrete_sequence=['blue'], markers=True)
+def plot_e_cars_percent(df,annot=False):
+    #fig = px.line(df, x=df.index, y="%e_cars", color_discrete_sequence=['blue'], markers=True)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df.index,
+        y=df["%e_cars"],
+        fill="tozeroy",
+        fillcolor='rgba(0,0,255,0.2)',
+        line_color='rgba(0,0,255,1)',
+        showlegend=False,
+        name='e_cars',
+    ))
+
     fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="E-Car Anteil (%)")
+
+    if annot:
+        annotations = [
+            dict(x='2020-07-01', y=0.1, yref='paper', text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",
+                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4),
+            dict(x='2023-09-01', y=0.7, yref='paper', text="Umweltbonus endet für Firmenkunden", showarrow=True,
+                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
+                 borderpad=4),
+            dict(x='2023-12-18', y=0.8, yref='paper', text="Umweltbonus endet abrupt!", showarrow=True, arrowhead=2,
+                 ax=0, ay=-80, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
+                 font=dict(color="red", weight="bold")),
+            # dict(x='2023-01-01', y=0.05, yref='paper', text="Plug-in-Hybride nicht mehr gefördert", showarrow=True,
+            # arrowhead=2, ax=0, ay=40, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
+            # borderpad=4),
+            dict(x='2021-01-01', y=0.2, yref='paper', text="EU-CO2-Flottenziele verschärft<br>(Herstellerdruck)",
+                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4)
+        ]
+        fig.update_layout(annotations=annotations)
+
     return fig
