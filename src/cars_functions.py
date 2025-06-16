@@ -1,3 +1,5 @@
+from tkinter.messagebox import showerror
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -161,12 +163,31 @@ def read_df_fuel():
 
     return df_long
 
+def layout():
+    settings = {
+        "hovermode": "x unified",
+        "uniformtext_minsize": 16,
+        # Font-Größen
+        "yaxis_title_font_size": 16,
+        "legend_font_size": 16,
+        "xaxis_tickfont_size": 16,
+        "yaxis_tickfont_size": 16,
+        # Grid entfernen
+        "xaxis": {"showgrid": False},  # Hier muss xaxis auch ein dict sein
+        "yaxis": {"showgrid": False}  # Hier muss yaxis auch ein dict sein
+    }
+    return settings
+
+
+
+
 @st.cache_data
 def plot_car_fuel(df_long):
     fig = px.area(df_long, x="Jahr", y="Wert", color="Kraftstoff", color_discrete_sequence=px.colors.qualitative.Pastel)
     fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="PKW Bestand nach Kraftstoffarten")
-    fig.update_layout(hovermode="x unified")
+    fig.update_layout(**layout())
+
     fig.update_traces(hovertemplate="<b>%{fullData.name}</b><br>" +  # Name der Kennzahl (z.B. Benzin, Diesel)
                                     "%{y:,.0f}<extra></extra>" )
 
@@ -179,7 +200,7 @@ def plot_bev(df_long,annot):
                   color_discrete_sequence=px.colors.qualitative.Pastel)
     fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="PKW Bestand nach Kraftstoffarten")
-    fig.update_layout(hovermode="x unified")
+    fig.update_layout(**layout())
     fig.update_traces(hovertemplate="<b>%{fullData.name}</b><br>" +  # Name der Kennzahl (z.B. Benzin, Diesel)
                                     "%{y:,.0f}<extra></extra>"
                       # Wert mit Tausender-Trennzeichen und ohne Dezimalstellen
@@ -206,9 +227,6 @@ def plot_bev(df_long,annot):
 
         fig.update_layout(annotations=annotations)
 
-
-
-
     return fig
 
 @st.cache_data
@@ -220,6 +238,7 @@ def read_df_neu_bev():
     df_neuzu_bev=pd.read_csv("data/neuzulassung_bev.csv",delimiter=";",encoding='latin-1')
     return df_neuzu_bev
 
+
 @st.cache_data
 def plot_neu_bev(df_neuzu_bev):
     """
@@ -230,7 +249,87 @@ def plot_neu_bev(df_neuzu_bev):
     fig = px.area(df_neuzu_bev, x="jahr", y="BEV", color_discrete_sequence=px.colors.qualitative.Pastel)
     fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="Neuzulassungen BEV")
-    fig.update_layout(hovermode="x unified")
+    fig.update_layout(**layout())
     fig.update_traces(hovertemplate="<b>%{fullData.name}</b><br>" +  # Name der Kennzahl (z.B. Benzin, Diesel)
                                     "%{y:,.0f}<extra></extra>" )
     return fig
+
+@st.cache_data
+def read_df_bev_segmente(long=True):
+    df = pd.read_csv("data/bestand_nach_segment.csv", delimiter=";", encoding='latin-1')
+    df["PKW_ohne_BEV"] = df["PKW_Gesamt"] - df["BEV"]
+    sum_bev_2024 = df[df["Jahr"] == 2024]["BEV"].sum()
+    sum_bev_2023 = df[df["Jahr"] == 2023]["BEV"].sum()
+    sum_pkw_2024 = df[df["Jahr"] == 2024]["PKW_ohne_BEV"].sum()
+    sum_pkw_2023 = df[df["Jahr"] == 2023]["PKW_ohne_BEV"].sum()
+
+    def anteil_segment(row):
+        if row["Jahr"] == 2024:
+            return (row["BEV"] / sum_bev_2024) * 100
+        elif row["Jahr"] == 2023:
+            return (row["BEV"] / sum_bev_2023) * 100
+
+    def anteil_segment_pkw(row):
+        if row["Jahr"] == 2024:
+            return (row["PKW_ohne_BEV"] / sum_pkw_2024) * 100
+        elif row["Jahr"] == 2023:
+            return (row["PKW_ohne_BEV"] / sum_pkw_2023) * 100
+
+    df["Anteil_Segment_BEV"] = df.apply(anteil_segment, axis=1)
+
+    df["Anteil_Segment_PKW"] = df.apply(anteil_segment_pkw, axis=1)
+
+    df["Penetration"] = (df["BEV"] / df["PKW_Gesamt"]) * 100
+
+    df_sorted = df[df["Jahr"] == 2024].sort_values(by="Penetration", ascending=False)
+
+    if long:
+        id_vars = ["Jahr", "Segment"]
+        value_vars = ["Anteil_Segment_BEV", "Anteil_Segment_PKW"]
+
+        df_long = pd.melt(df, id_vars=id_vars,
+                          value_vars=value_vars,
+                          var_name='Anteil_Segment',
+                          value_name='Wert')
+        return df_long
+
+    return df_sorted
+
+
+@st.cache_data
+def plot_bev_segmente(df_long):
+    pull_segement = "SUVs"
+    pull_values = [0.1 if pull_segement == segment else 0 for segment in df_long["Segment"]]
+
+    fig = px.pie(df_long[df_long["Jahr"] == 2024], names="Segment", values="Wert", color="Segment",
+                 color_discrete_sequence=px.colors.qualitative.Pastel, hole=0.2, facet_col="Anteil_Segment",
+                 category_orders={"Anteil_Segment": ["Anteil_Segment_PKW", "Anteil_Segment_BEV"]})
+    fig.update_layout(uniformtext_minsize=14, uniformtext_mode='hide', showlegend=False, annotations=[
+        dict(text="PKW ohne BEV", x=0.22, y=1.0, showarrow=False, font=dict(size=16)),
+        dict(text="BEV", x=0.78, y=1.0, showarrow=False, font=dict(size=16))])
+
+    fig.update_traces(textposition='inside', textinfo='percent+label')
+    fig.update_traces(
+        # hovertemplate zum Anpassen des Hover-Textes
+        hovertemplate="<b>Segment: %{label}</b><br>" +
+                      "Anteil: %{percent}<extra></extra>")
+
+    fig.update_traces(pull=pull_values)
+    return fig
+
+@st.cache_data
+def plot_bev_penetration(df_sorted):
+    fig = px.bar(df_sorted, x="Segment", y="Penetration", color="Segment",
+                 color_discrete_sequence=px.colors.qualitative.Pastel, custom_data=["BEV", "PKW_Gesamt", "Penetration"])
+    fig.update_xaxes(title_text="")
+    fig.update_yaxes(title_text="Penetrationsrate pro Segement %")
+    fig.update_traces(
+        hovertemplate="<b>%{fullData.name}</b><br>" +  # Name des Segments
+                      "Anzahl BEV: %{customdata[0]:,.0f}<br>" +  # Anzahl_BEV
+                      "PKW Gesamt: %{customdata[1]:,.0f}<br>" +
+                      "Penetration: %{customdata[2]:.1f}%<extra></extra>")
+    fig.update_layout(**layout())
+    fig.update_layout(showlegend=False)
+
+    return fig
+

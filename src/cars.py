@@ -2,7 +2,7 @@ import streamlit as st
 from cars_functions import *
 import time
 
-from cars_functions import read_geojson
+#from cars_functions import read_geojson
 
 
 
@@ -11,15 +11,15 @@ if 'annot_checked' not in st.session_state:
 
 
 
-col1,col2=st.columns([2,3])
+col1,col2=st.columns([4,2])
 with col1:
     st.header("")
     st.write("")
 
-    st.header("Fahrzeugbestand")
+    st.title("Fahrzeugbestand")
 
 with col2:
-    st.image("images/cars_2.jpg",width=300)
+    st.image("images/cars_2.jpg",use_container_width=True)
 
 st.divider()
 
@@ -45,7 +45,12 @@ with col1:
                     df_neu_bev = read_df_neu_bev()
                     fig3 = plot_neu_bev(df_neu_bev)
                     st.metric("Neuzulassungen 2024",value="380 Tsd.",delta="-27%")
+                    st.markdown(" **:material/euro: :material/account_balance: Markt abhängig von staatlichen Anreizen**")
                     st.plotly_chart(fig3)
+
+
+
+
             fig2=plot_bev(df,st.session_state.annot_checked)
             st.plotly_chart(fig2)
 
@@ -63,6 +68,7 @@ with col2:
 
 
 
+
 st.divider()
 
 st.subheader("BEV-Fahrzeuge nach Bundesländern")
@@ -75,8 +81,8 @@ col1,col2=st.columns([4,2])
 
 with col1:
     with st.container(border=True):
-        fig=plot_car_map(df_cars_for_map,geojson)
-        st.plotly_chart(fig)
+            fig=plot_car_map(df_cars_for_map,geojson)
+            st.plotly_chart(fig)
 
 with col2:
     land_max, anteil_max = df_cars_for_map.loc[df_cars_for_map['Anteil_BEV'].idxmax()][["Bundesland", "Anteil_BEV"]]
@@ -92,7 +98,50 @@ with col2:
 
 st.divider()
 
-st.subheader("BEV-Neuzulassungen")
+st.subheader("BEV nach Segmenten")
+df_long=read_df_bev_segmente()
+df_sorted=read_df_bev_segmente(long=False)
+
+col1,col2=st.columns([4,2])
+with col1:
+    tab1, tab2 = st.tabs(
+        [":material/pie_chart: Segmentanteile 2025", "# :material/electric_car: BEV-Anteile in Segmenten 2025"])
+
+    with tab1:
+        with st.container(border=True):
+            fig=plot_bev_segmente(df_long)
+            st.plotly_chart(fig)
+
+    with tab2:
+        with st.container(border=True):
+            fig=plot_bev_penetration(df_sorted)
+            st.plotly_chart(fig)
+
+with col2:
+    st.markdown(":material/monitoring: **Key facts**")
+    st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long["Wert"].max(),1)}% | SUVs")
+
+    st.markdown("""
+           **🔌 Trend zu größeren, energieintensiveren<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fahrzeugen bei BEV**<br>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;könnte Effizienzgewinne der<br>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Elektromobilität teilweise untergraben
+           """, unsafe_allow_html=True)
+
+
+    st.markdown("""
+        **🔌Höchste BEV-Penetration**<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Oberklasse, SUVs & Minis
+        """,unsafe_allow_html=True)
+
+    st.markdown("""
+            **🔌Niedriger BEV-Anteil in Nischen**<br>
+           &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sportwagen, Wohnmobile
+            """, unsafe_allow_html=True)
+
+
+
+
+
 
 
 st.divider()
