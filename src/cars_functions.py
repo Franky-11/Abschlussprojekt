@@ -333,3 +333,39 @@ def plot_bev_penetration(df_sorted):
 
     return fig
 
+@st.cache_data
+def read_df_bev_zulassung_segmente():
+    df=pd.read_csv("data/bev_zulasssung_segmente.csv",delimiter=";",encoding='latin-1')
+    df.drop("Unnamed: 4", axis=1, inplace=True)
+    df.dropna(inplace=True)
+
+    df["Segment"] = [" ".join(text.split()[0:2]) if text == "OBERE MITTELKLASSE ZUSAMMEN" else text.split()[0] for text
+                     in df["Segment"]]
+
+    df_sorted = df.sort_values(by=["Segment", "Jahr"]).reset_index(drop=True)
+    df_sorted["penetration"] = (df_sorted["Anzahl_BEV"] / df_sorted["Gesamt"]) * 100
+
+    return df_sorted
+
+@st.cache_data
+def plot_bev_zulassung_segmente(df_sorted,segmente):
+    order = ["SUVs", "MINIS", "KLEINWAGEN", "KOMPAKTKLASSE", "MITTELKLASSE", "GELÄNDEWAGEN", "OBERE MITTELKLASSE",
+             "OBERKLASSE", "UTILITIES", "SONSTIGE", "MINI-VANS", "GROSSRAUM_VANS"]
+
+    fig = px.line(df_sorted[df_sorted["Segment"].isin(segmente)], x="Jahr", y="penetration", color="Segment",
+                  color_discrete_sequence=px.colors.qualitative.Pastel,
+                  category_orders={"Segment": order}, custom_data=["Gesamt", "Anzahl_BEV", "penetration"])
+    fig.update_traces(fill='tozeroy')
+    fig.update_xaxes(title_text="")
+
+    fig.update_yaxes(title_text="Anteil BEV an Neuzulassungen %")
+
+    fig.update_layout(**layout())
+
+    fig.update_traces(
+        hovertemplate="<b>%{fullData.name}</b><br>" +  # Name des Segments
+                      "Anzahl BEV: %{customdata[1]:,.0f}<br>" +  # Anzahl_BEV
+                      "PKW Gesamt: %{customdata[0]:,.0f}<br>" +
+                      "Anteil BEV: %{customdata[2]:.1f}%<extra></extra>")
+
+    return fig

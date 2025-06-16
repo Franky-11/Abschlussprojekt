@@ -55,19 +55,11 @@ with col1:
             st.plotly_chart(fig2)
 
 
-
-
-
 with col2:
     st.markdown(":material/monitoring: **Key facts**")
     st.metric(label="Gesamtbestand PKW 2025", value="49.3 Mio.", delta="+0.49% zum Vorjahr",delta_color="normal")
-    st.subheader("")
-
     st.metric(label="BEV-Fahrzeuge 2025", value="1.65 Mio. | Anteil 3.3 %", delta="+17.7% zum Vorjahr", delta_color="normal")
-
-
-
-
+    #st.subheader("")
 
 st.divider()
 
@@ -90,7 +82,6 @@ with col2:
 
     st.markdown(":material/monitoring: **Key facts**")
     st.metric(label="Höchster Anteil BEV", value=f"{land_max} | {round(anteil_max,1)}%")
-    st.subheader("")
     st.metric(label="Niedrigster Anteil BEV", value=f"{land_min} | {round(anteil_min,1)}%")
 
 
@@ -101,41 +92,50 @@ st.divider()
 st.subheader("BEV nach Segmenten")
 df_long=read_df_bev_segmente()
 df_sorted=read_df_bev_segmente(long=False)
+df_neu_bev_segment=read_df_bev_zulassung_segmente()
 
 col1,col2=st.columns([4,2])
 with col1:
-    tab1, tab2 = st.tabs(
-        [":material/pie_chart: Segmentanteile 2025", "# :material/electric_car: BEV-Anteile in Segmenten 2025"])
+    tab1, tab2,tab3 = st.tabs(
+        [":material/pie_chart: Segmentanteile 2025","# :material/electric_car: Anteil BEV an Neuzulassungen", "# :material/electric_car: BEV-Anteile in Segmenten 2025"])
 
     with tab1:
         with st.container(border=True):
             fig=plot_bev_segmente(df_long)
             st.plotly_chart(fig)
 
+
     with tab2:
+        with st.container(border=True):
+            segments=st.multiselect("Auswahl Segment",options=df_neu_bev_segment["Segment"].unique().tolist(),default=["OBERE MITTELKLASSE","KLEINWAGEN","MINIS"])
+            fig=plot_bev_zulassung_segmente(df_neu_bev_segment,segments)
+            st.plotly_chart(fig)
+
+
+    with tab3:
         with st.container(border=True):
             fig=plot_bev_penetration(df_sorted)
             st.plotly_chart(fig)
 
 with col2:
     st.markdown(":material/monitoring: **Key facts**")
-    st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long["Wert"].max(),1)}% | SUVs")
 
+    st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long["Wert"].max(),1)}% | SUVs")
+    st.markdown("------------------------------------------")
     st.markdown("""
            **🔌 Trend zu größeren, energieintensiveren<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fahrzeugen bei BEV**<br>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;könnte Effizienzgewinne der<br>
            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Elektromobilität teilweise untergraben
            """, unsafe_allow_html=True)
 
-
     st.markdown("""
         **🔌Höchste BEV-Penetration**<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Oberklasse, SUVs & Minis
         """,unsafe_allow_html=True)
-
     st.markdown("""
-            **🔌Niedriger BEV-Anteil in Nischen**<br>
-           &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sportwagen, Wohnmobile
+           **🔌Neuzulassungen BEV**<br>
+          &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minis & Kleinwagen rückläufig<br>
+         &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             """, unsafe_allow_html=True)
 
 
