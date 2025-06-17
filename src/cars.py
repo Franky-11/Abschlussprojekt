@@ -16,9 +16,10 @@ with col1:
     st.header("")
     st.write("")
 
-    st.title("Fahrzeugbestand")
+    st.title("Fahrzeugbestand :material/directions_car:")
 
 with col2:
+
     st.image("images/cars_2.jpg",use_container_width=True)
 
 st.divider()
