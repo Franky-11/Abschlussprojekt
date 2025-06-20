@@ -163,4 +163,56 @@ with st.spinner("Karte wird geladen..."):
 
 ### ----------------------------------------------------------------------------------------#
 
+if 'plz_fig' not in st.session_state:
+    st.session_state.plz_fig = None
+
+col1,col2=st.columns([4,2])
+
+with col1:
+    with st.container(border=True):
+
+        eingabe_plz = st.text_input("Geben Sie eine PLZ ein, um dorthin zu zoomen:", max_chars=5,
+                                    placeholder="z.B. 06846")
+
+        if st.button("Karte anzeigen") or st.session_state.plz_fig is None or eingabe_plz:
+            with st.spinner("Lade Geodaten..."):
+                geo_json_plz = read_geojson_plz()
+            with st.spinner("Lade und mergen der Fahrzeug- und Geodaten......"):
+                df_geo = read_df_geo()
+                bev_kreise = read_df_cars_for_plz_map()
+            default_center = {"lat": 51.0, "lon": 10.0}
+            default_zoom = 5
+            center_map = default_center
+            zoom_level = default_zoom
+
+            if eingabe_plz:
+                eingabe_plz_formatted = str(eingabe_plz).strip().zfill(5)
+                plz_row = bev_kreise[bev_kreise['PLZ'] == eingabe_plz_formatted]
+                if not plz_row.empty:
+                    center_map["lat"] = plz_row["lat"].iloc[0]
+                    center_map["lon"] = plz_row["lon"].iloc[0]
+                    zoom_level = 10
+                    st.success(f"Karte wird auf PLZ {eingabe_plz_formatted} zentriert.")
+                else:
+                    st.warning(f"PLZ {eingabe_plz_formatted} nicht in den Daten gefunden. Zeige Gesamtkarte.")
+
+            with st.spinner("Lade Karte..."):
+                st.session_state.plz_fig=plot_car_plz_map(bev_kreise,zoom_level,center_map,geo_json_plz)
+                st.plotly_chart(st.session_state.plz_fig)
+
+
+
+with col2:
+    df_cars_for_map = read_df_cars_for_map()
+    land_max, anteil_max = df_cars_for_map.loc[df_cars_for_map['Anteil_BEV'].idxmax()][["Bundesland", "Anteil_BEV"]]
+    land_min, anteil_min = df_cars_for_map.loc[df_cars_for_map['Anteil_BEV'].idxmin()][["Bundesland", "Anteil_BEV"]]
+
+    st.markdown(":material/monitoring: **Key facts**")
+    st.metric(label="Höchster Anteil BEV", value=f"{land_max} | {round(anteil_max,1)}%")
+    st.metric(label="Niedrigster Anteil BEV", value=f"{land_min} | {round(anteil_min,1)}%")
+
+
+    #st.metric(label="Höchster Anteil BEV", value=f"{land_max} ({anteil_max}%)")
+
+
 

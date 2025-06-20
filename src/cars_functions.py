@@ -499,6 +499,8 @@ def plot_prognose_bev(df_pivot):
                       "<b>Jahr:</b> %{y}<br>" +
                       "<b>Quelle:</b> %{x}<br>" +
                       "<b>Prognose:</b> %{z:,.1f} Mio.<extra></extra>")
+
+
     fig.update_layout(**layout())
     fig.update_layout(hovermode="closest")
     fig.update_layout(coloraxis_showscale=False)
@@ -588,6 +590,9 @@ def plot_data_and_fit(L,k,x0,fit):
             yanchor='top',
             bordercolor='gray',
             borderwidth=0.2 ))
+
+
+
 
     return fig
 

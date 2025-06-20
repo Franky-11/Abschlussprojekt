@@ -71,7 +71,6 @@ st.divider()
 
 
 st.subheader("Verteilung BEV auf PLZ Ebene")
-
 if 'plz_fig' not in st.session_state:
     st.session_state.plz_fig = None
 
@@ -119,10 +118,6 @@ with col2:
     st.markdown(":material/monitoring: **Key facts**")
     st.metric(label="Höchster Anteil BEV", value=f"{land_max} | {round(anteil_max,1)}%")
     st.metric(label="Niedrigster Anteil BEV", value=f"{land_min} | {round(anteil_min,1)}%")
-
-
-    #st.metric(label="Höchster Anteil BEV", value=f"{land_max} ({anteil_max}%)")
-
 
 
 
@@ -225,14 +220,13 @@ with col1:
                             st.markdown("**L**: Sättigungsgrenze\n\n**k**: Wachstumsrate\n\n**t_0**: Wendepunkt")
 
                         L=st.slider("Sättigung (Mio. BEV)",min_value=40,max_value=52,step=1)
-                        if st.checkbox("L const."):
-                            st.session_state.L_const=True
 
-                        st.divider()
                         k = st.slider("Wachstumsrate (1/Jahr)", 0.1, 0.5, 0.1)
                         x0 = st.slider("Wendepunkt (Jahr)", min_value=2025,max_value=2060,step=1)
                         x0=x0-2020
                         plot=st.form_submit_button('Plot function')
+                        if st.checkbox("L const."):
+                            st.session_state.L_const = True
                         if plot:
                             st.session_state.plot_function=True
                         if st.checkbox("Best Fit"):
@@ -269,3 +263,31 @@ with col1:
 
 with col2:
     st.markdown(":material/monitoring: **Key facts**")
+    st.metric(label="Ziel Bundesregierung bis 2030",
+              value=f"{15}Mio. BEV",delta=f"∆ {(15-1.65)}",delta_color="inverse")
+    st.divider()
+
+    st.markdown("""
+            **🔌Einbindung chinesischer Automobilhersteller**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verstärkte Marktpräsenz dieser Hersteller ist wichtig für einen
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;umfassenden Hochlauf von Elektromobilität
+            """, unsafe_allow_html=True)
+
+    st.markdown("""
+                   **🔌Ladeinfrastruktur ist unerlässlich**<br>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  muss dem Markthochlauf der BEV vorauslaufen
+                   """, unsafe_allow_html=True)
+
+    st.markdown("""
+                      **🔌Erweitertes Angebot an BEV-Modellen**<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  insbesondere in den unteren Preiskategorien (Klein- und
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kompaktwagen) ist essenziell
+                      """, unsafe_allow_html=True)
+
+    st.markdown("""
+                          **🔌Investitionen in Forschung und Entwicklung**<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Batterietechnologien, Integration von Elektrofahrzeugen als 
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mobile Zwischenspeicher für Strom (bidirektionales Laden)
+                          """, unsafe_allow_html=True)
+
+
