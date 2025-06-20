@@ -1,0 +1,16 @@
+Jahr;Prognose_BEV;Szenario;Quelle
+2025;1,65;Aktueller Stand;KBA
+2030;15;Ziel Bundesregierung;Ziel Bundesregierung
+2030;13,4;Modellierung der Herstellerbefragung;Studie LIS – Neuauflage 2024
+2030;8,9;Referenzszenario;BCG-Studie
+2030;13;"Szenario ""BEV Politik-Max""";BCG-Studie
+2030;11;"Szenario ""China-Max""";BCG-Studie
+2030;15;"Szenario ""BEV Politik-Max + China-Max""";BCG-Studie
+2030;10,7;Umweltbundesamt;Umweltbundesamt
+2030;10;Trend_Szenario;BEE-Studie
+2030;15;AMBIT_Szenario;BEE-Studie
+2035;25,2;Modellierung der Herstellerbefragung;Studie LIS – Neuauflage 2024
+2035;33;Potentialanalyse_birektionales Laden;Potentialanalyse_birektionales Laden
+2040;33,3;Basisprognose 2040;Verkehrsprognose 2040 
+2045;32,4;Trend_Szenario;BEE-Studie
+2045;40,7;AMBIT_Szenario;BEE-Studie

@@ -1,11 +1,15 @@
-from tkinter.messagebox import showerror
 
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+from scipy.optimize import curve_fit
+from sklearn.metrics import r2_score,root_mean_squared_error
 import plotly.graph_objects as go
 import json
+
+"""
+# Alte Visualisierung
 
 @st.cache_data
 def read_df_cars():
@@ -110,6 +114,10 @@ def plot_e_cars_percent(df,annot=False):
 
     return fig
 
+"""
+
+#-----------------------------------------------------------------------------#
+#Bundeslandkarte mit Verteilung BEV
 
 @st.cache_data
 def read_df_cars_for_map():
@@ -117,7 +125,7 @@ def read_df_cars_for_map():
     df['schluessel'] = df['schluessel'].astype(str).str.zfill(2)
     return df
 
-
+""""
 @st.cache_data
 def read_geojson():
     with open('data/bundeslaender_wgs84.geojson', 'r', encoding='utf-8') as f:
@@ -149,7 +157,12 @@ def plot_car_map(df_cars_for_map,geojson):
     return fig
 
 
-# Bestandsdiagrammme für TAB1
+"""
+
+#-------Fahrzeugbestand nach Kraftstoffarten und Entwicklung BEV-Bestand / Neuzulassungen-------------------------------------------------------------------------------------#
+
+
+
 @st.cache_data
 def read_df_fuel():
     df = pd.read_csv("data/Bestand_PKW_nach Kraftstoffarten.csv", delimiter=";")
@@ -229,6 +242,7 @@ def plot_bev(df_long,annot):
 
     return fig
 
+
 @st.cache_data
 def read_df_neu_bev():
     """
@@ -254,6 +268,83 @@ def plot_neu_bev(df_neuzu_bev):
                                     "%{y:,.0f}<extra></extra>" )
     return fig
 
+
+
+#------- Verteilung BEV auf PLZ Ebene---------------------------------------------------------------------------#
+
+@st.cache_data
+def read_geojson_plz():
+    with open('data/georef-germany-postleitzahl.geojson', 'r', encoding='utf-8') as f:
+        geojson_plz = json.load(f)
+    return geojson_plz
+
+
+@st.cache_data
+def read_df_geo():
+
+    data = {"PLZ": [], "lon": [], "lat": [], "plz_name_long": [], "krs_name": [], "krs_code": []}
+    geojson_plz=read_geojson_plz()
+
+    for kreis in geojson_plz["features"]:
+        data["PLZ"].append(kreis["properties"]["plz_code"])
+        data["plz_name_long"].append(kreis["properties"]["plz_name_long"])
+        data["krs_name"].append(kreis["properties"]["krs_name"])
+        data["krs_code"].append(kreis["properties"]["krs_code"])
+        data["lon"].append(kreis["properties"]["geo_point_2d"]["lon"])
+        data["lat"].append(kreis["properties"]["geo_point_2d"]["lat"])
+
+    df_geo = pd.DataFrame(data)
+
+    return df_geo
+
+
+@st.cache_data
+def read_df_cars_for_plz_map():
+    df_geo=read_df_geo()
+    df_bev_plz = pd.read_csv("data/BEV_nach_plz.csv", delimiter=";", encoding='latin-1')
+    df_bev_plz["PLZ"] = df_bev_plz["PLZ"].astype(str).str.zfill(5)
+    df_bev_plz["Anteil_BEV"] = df_bev_plz["Bestand_BEV"] / df_bev_plz["Bestand_PKW"] * 100
+    bev_kreise = pd.merge(df_bev_plz, df_geo, how="left", on="PLZ")
+    bev_kreise.dropna(inplace=True)
+
+    return bev_kreise
+
+
+#@st.cache_data
+def plot_car_plz_map(bev_kreise,zoom_level,center_map,geojson_plz):
+    fig = px.choropleth_map(bev_kreise,
+                            geojson=geojson_plz,  # Die konvertierte GeoJSON-Datei
+                            locations="PLZ",  # Spalte im DataFrame, die den 2-stelligen Schlüssel enthält
+                            featureidkey="properties.plz_code",  # Pfad zum 'schluessel' im GeoJSON-Feature
+                            # (wie in Ihrer GeoJSON-Struktur gesehen: 'properties': {'schluessel': '06', ...})
+                            color="Anteil_BEV",  # Spalte, die die Farbe der Region bestimmt
+                            color_continuous_scale="Blues",
+                            # Farbskala (z.B. "Viridis", "Plasma", "Jet", "Greens", "Blues")
+                            range_color=[0, 5],  # Stellen Sie sicher, dass die Farbskala die volle Bandbreite abdeckt
+                            map_style="carto-positron",
+                            # Basiskarte (z.B. "open-street-map", "carto-positron", "stamen-terrain")
+                            zoom=zoom_level,  # Zoom-Level für Deutschland (ca. 4.5 - 5.5)
+                            center=center_map,  # Zentraler Punkt für Deutschland
+                            opacity=0.8,  # Deckkraft der eingefärbten Regionen
+                            hover_name="plz_name_long",  # Was im Tooltip als Haupttitel angezeigt wird
+                            hover_data={'Anteil_BEV': ':.1f', "Bestand_PKW": ":,.0f", 'PLZ': False,
+                                        "Bestand_BEV": ":,.0f"},
+                            # Optional: Formatiert die Anzeige der PKW_Bestand im Tooltip (als ganze Zahl)
+                            # title="PKW-Bestand pro Bundesland in Deutschland" # Titel der Karte
+                            )
+
+    fig.update_traces(marker_line_width=0, marker_line_color='rgba(0,0,0,0)')
+
+    return fig
+
+
+
+
+
+
+
+#-------- BEV nach Segmenten-------------------------------------------------------------------------------------------------#
+# Diagramm 1
 @st.cache_data
 def read_df_bev_segmente(long=True):
     df = pd.read_csv("data/bestand_nach_segment.csv", delimiter=";", encoding='latin-1')
@@ -317,21 +408,9 @@ def plot_bev_segmente(df_long):
     fig.update_traces(pull=pull_values)
     return fig
 
-@st.cache_data
-def plot_bev_penetration(df_sorted):
-    fig = px.bar(df_sorted, x="Segment", y="Penetration", color="Segment",
-                 color_discrete_sequence=px.colors.qualitative.Pastel, custom_data=["BEV", "PKW_Gesamt", "Penetration"])
-    fig.update_xaxes(title_text="")
-    fig.update_yaxes(title_text="Penetrationsrate pro Segement %")
-    fig.update_traces(
-        hovertemplate="<b>%{fullData.name}</b><br>" +  # Name des Segments
-                      "Anzahl BEV: %{customdata[0]:,.0f}<br>" +  # Anzahl_BEV
-                      "PKW Gesamt: %{customdata[1]:,.0f}<br>" +
-                      "Penetration: %{customdata[2]:.1f}%<extra></extra>")
-    fig.update_layout(**layout())
-    fig.update_layout(showlegend=False)
 
-    return fig
+
+#-- Diagramm 2 Anteil  BEV an  Neuzulassungen  nach Segmenten und Gesamt------------#
 
 @st.cache_data
 def read_df_bev_zulassung_segmente():
@@ -345,7 +424,18 @@ def read_df_bev_zulassung_segmente():
     df_sorted = df.sort_values(by=["Segment", "Jahr"]).reset_index(drop=True)
     df_sorted["penetration"] = (df_sorted["Anzahl_BEV"] / df_sorted["Gesamt"]) * 100
 
-    return df_sorted
+    df_gesamt = df_sorted.groupby("Jahr").agg({"Gesamt": ["sum"], "Anzahl_BEV": ["sum"]}).reset_index()
+    df_gesamt["Anteil_BEV_Gesamt"] = df_gesamt[("Anzahl_BEV", "sum")] / df_gesamt[("Gesamt", "sum")] * 100
+    df_gesamt["Segment"] = "Gesamt"
+    df_gesamt["gesamt_pkw"] = df_gesamt[("Gesamt", "sum")]
+    df_gesamt["gesamt_BEV"] = df_gesamt[("Anzahl_BEV", "sum")]
+    df_for_concat = df_gesamt[["Jahr", "Segment", "gesamt_pkw", "gesamt_BEV", "Anteil_BEV_Gesamt"]]
+    df_for_concat = df_for_concat.droplevel(1, axis=1)
+    df_for_concat.columns = df_sorted.columns
+    df_for_plot = pd.concat([df_sorted, df_for_concat], axis=0, ignore_index=True)
+
+
+    return df_for_plot
 
 @st.cache_data
 def plot_bev_zulassung_segmente(df_sorted,segmente):
@@ -369,3 +459,144 @@ def plot_bev_zulassung_segmente(df_sorted,segmente):
                       "Anteil BEV: %{customdata[2]:.1f}%<extra></extra>")
 
     return fig
+
+
+# Diagramm---------- 3-- Durchdringung in den  BEV- Segmente
+
+@st.cache_data
+def plot_bev_penetration(df_sorted):
+    fig = px.bar(df_sorted, x="Segment", y="Penetration", color="Segment",
+                 color_discrete_sequence=px.colors.qualitative.Pastel, custom_data=["BEV", "PKW_Gesamt", "Penetration"])
+    fig.update_xaxes(title_text="")
+    fig.update_yaxes(title_text="Penetrationsrate pro Segement %")
+    fig.update_traces(
+        hovertemplate="<b>%{fullData.name}</b><br>" +  # Name des Segments
+                      "Anzahl BEV: %{customdata[0]:,.0f}<br>" +  # Anzahl_BEV
+                      "PKW Gesamt: %{customdata[1]:,.0f}<br>" +
+                      "Penetration: %{customdata[2]:.1f}%<extra></extra>")
+    fig.update_layout(**layout())
+    fig.update_layout(showlegend=False)
+
+    return fig
+
+# ----------BEV Prognose-----------------------------------------------
+@st.cache_data
+def read_df_bev_prognose():
+    df_studien=pd.read_csv("data/Prognose_BEV_Fahrzeuge.csv",delimiter=";",encoding="latin")
+    df_studien["Prognose_BEV"] = df_studien["Prognose_BEV"].str.replace(",", ".")
+    df_studien["Prognose_BEV"] = pd.to_numeric(df_studien["Prognose_BEV"])
+
+    df_pivot = pd.pivot(df_studien, columns=["Szenario", "Quelle"], values="Prognose_BEV", index="Jahr")
+    df_pivot.columns = [f"{col[0]} - {col[1]}" for col in df_pivot.columns]
+
+    return df_pivot
+
+@st.cache_data
+def plot_prognose_bev(df_pivot):
+    fig = px.imshow(df_pivot,text_auto=True, color_continuous_scale=px.colors.sequential.Viridis)  # Oder 'Plasma', 'Inferno', 'Blues', etc. )
+    fig.update_layout(xaxis=dict(showticklabels=False))
+    fig.update_traces(hovertemplate=
+                      "<b>Jahr:</b> %{y}<br>" +
+                      "<b>Quelle:</b> %{x}<br>" +
+                      "<b>Prognose:</b> %{z:,.1f} Mio.<extra></extra>")
+    fig.update_layout(**layout())
+    fig.update_layout(hovermode="closest")
+    fig.update_layout(coloraxis_showscale=False)
+
+    return fig
+
+
+
+
+#Tab2
+
+@st.cache_data
+def data_for_fit():
+    df = pd.read_csv("data/Prognose_BEV_Fahrzeuge_fit.csv", delimiter=";", encoding="latin")
+    df["Anzahl_Prognose"] = df["Anzahl_Prognose"].str.replace(",", ".")
+    df["Anzahl_Prognose"] = pd.to_numeric(df["Anzahl_Prognose"])
+
+    years = df["Jahr"]
+    x_data = years - 2020
+    y_data = df["Anzahl_Prognose"]
+
+    return years,x_data,y_data
+
+
+#def logistic_function(x, L, k,x0,L_const=None):
+
+  #  if L_const is not None:
+  #      L = L_const
+  #  return L / (1 + np.exp(-k * (x - x0)))
+
+
+def logistic_function_full(x, L, k, x0):
+    return L / (1 + np.exp(-k * (x - x0)))
+
+def logistic_function_L_fixed(x, k, x0, fixed_L_value):
+    return fixed_L_value / (1 + np.exp(-k * (x - x0)))
+
+
+def best_fit(fixed_L=None):
+    _, x_data, y_data=data_for_fit()
+    if fixed_L is None:
+        initial_guesses=[40,0.5,20]
+        params, covariance = curve_fit(logistic_function_full, x_data, y_data, p0=initial_guesses)
+        L,k,x0= params
+        return L,k,x0
+
+    #else:  # L ist konstant, k, x0 optimieren
+       # initial_guesses = [0.5, 20]
+        #params, covariance = curve_fit(logistic_function_L_fixed, x_data, y_data, p0=initial_guesses, args=(fixed_L,))
+       # k, x0 = params
+       # return fixed_L, k, x0
+
+    else:
+        def wrapped_logistic(x, k, x0):
+            return logistic_function_L_fixed(x, k, x0, fixed_L)
+
+        initial_guesses = [0.5, 20]
+        params, _ = curve_fit(wrapped_logistic, x_data, y_data, p0=initial_guesses)
+        k, x0 = params
+        return fixed_L, k, x0
+
+
+
+
+def plot_data_and_fit(L,k,x0,fit):
+    years, x_data, y_data=data_for_fit()
+    x_for_plot = np.linspace(2020, 2060, 100)
+    x_for_fit = x_for_plot - 2020
+    fitted_curve = logistic_function_full(x_for_fit, L, k, x0)
+
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=years, y=y_data, name='Historische Daten & Prognosen', mode='markers'))
+    if fit:
+        fig.add_trace(go.Line(x=x_for_plot, y=fitted_curve, name='Logistischer Fit', hovertemplate=None,
+                              line=dict(dash='dash', color='red', width=1)))
+
+
+    fig.update_layout(yaxis_title='BEV-Fahrzeuge in Mio.')
+    fig.update_layout(**layout())
+
+    fig.update_layout(
+        legend=dict(
+            x=0.8,
+            y=0.5,
+            xanchor='center',
+            yanchor='top',
+            bordercolor='gray',
+            borderwidth=0.2 ))
+
+    return fig
+
+
+def show_paramater(L,k,x0):
+    _,x_data,y_data=data_for_fit()
+    r=r2_score(y_data, logistic_function_full(x_data, L, k,x0))
+    rmse=root_mean_squared_error(y_data, logistic_function_full(x_data, L, k,x0))
+
+    df=pd.DataFrame({"Sättigung (Mio. BEV)":L,"Wachstumsrate":k,"Wendepunkt (Jahr)":int(x0+2020),"R^2":r,"RMSE":rmse},index=["Logistischer Fit"])
+    st.dataframe(df,use_container_width=True)
+
