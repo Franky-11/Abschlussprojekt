@@ -13,3 +13,15 @@ with col2:
 
 
 st.divider()
+
+# Berechnung Strombedarf
+
+# Die Berechnungen stützen sich auf Annahmen zum Fahrzeugbestand, zur Fahrleistung, zum spezifischen Energieverbrauch und zur Entwicklung der Ladeinfrastruktur.
+
+# Jährliche Fahrleistung:
+#  Der Energiebedarf wird auf Basis der voraussichtlichen jährlichen Fahrleistungen
+#  der E-Fahrzeuge berechnet. Die Studie zur Ladeinfrastruktur geht beispielsweise von etwa 12.000 Kilometern pro Elektrofahrzeug pro Jahr aus
+
+#  Energieverbrauch pro 100 km ist ein entscheidender Parameter.Für E - Pkw wird 15.8 kWh pro 100 km im Durchschnitt angenommen
+
+# Bruttostromverbrauch in Dt. vergleich
