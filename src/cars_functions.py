@@ -605,3 +605,5 @@ def show_paramater(L,k,x0):
     df=pd.DataFrame({"Sättigung (Mio. BEV)":L,"Wachstumsrate":k,"Wendepunkt (Jahr)":int(x0+2020),"R^2":r,"RMSE":rmse},index=["Logistischer Fit"])
     st.dataframe(df,use_container_width=True)
 
+
+
