@@ -61,6 +61,7 @@ with col1:
 with col2:
     st.markdown(":material/monitoring: **Key facts**")
     st.metric(label="Gesamtbestand PKW 2025", value="49.3 Mio.", delta="+0.49% zum Vorjahr",delta_color="normal")
+    st.write("")
     st.metric(label="BEV-Fahrzeuge 2025", value="1.65 Mio. | Anteil 3.3 %", delta="+17.7% zum Vorjahr", delta_color="normal")
     #st.subheader("")
 
@@ -117,6 +118,7 @@ with col2:
 
     st.markdown(":material/monitoring: **Key facts**")
     st.metric(label="Höchster Anteil BEV", value=f"{land_max} | {round(anteil_max,1)}%")
+    st.write("")
     st.metric(label="Niedrigster Anteil BEV", value=f"{land_min} | {round(anteil_min,1)}%")
 
 
@@ -161,19 +163,17 @@ with col2:
     st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long["Wert"].max(),1)}% | SUVs")
     st.markdown("------------------------------------------")
     st.markdown("""
-           **🔌 Trend zu größeren, energieintensiveren<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fahrzeugen bei BEV**<br>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;könnte Effizienzgewinne der<br>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Elektromobilität teilweise untergraben
+           **🔌 Trend zu größeren, energieintensiveren Fahrzeugen bei BEV**<br>
+           könnte Effizienzgewinne der Elektromobilität teilweise untergraben
            """, unsafe_allow_html=True)
 
     st.markdown("""
         **🔌Höchste BEV-Penetration**<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Oberklasse, SUVs & Minis
+        Oberklasse, SUVs & Minis
         """,unsafe_allow_html=True)
     st.markdown("""
            **🔌Neuzulassungen BEV**<br>
-          &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minis & Kleinwagen rückläufig<br>
-         &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+         Minis & Kleinwagen rückläufig
             """, unsafe_allow_html=True)
 
 
@@ -193,12 +193,12 @@ col1,col2=st.columns([4,2])
 with col1:
     tab1, tab2 = st.tabs([":material/stairs_2: BEV Prognose",":material/modeling: Prognose Fit"])
     with tab1:
-        with st.container(border=True):
+        with st.container(border=True,height=550):
             fig=plot_prognose_bev(df_bev_prognose)
             st.plotly_chart(fig)
 
     with tab2:
-        with st.container(border=True):
+        with st.container(border=True,height=550):
             #st.form()
            # L,k,x0=best_fit()
 
@@ -213,8 +213,8 @@ with col1:
 
             col3,col4=st.columns([1,3])
             with col3:
-                with st.popover("Fitting Parameter"):
-                    with st.form("Fitting"):
+                with st.popover("Fit Parameter"):
+                    with st.form("Logistische Funktion"):
                         with st.expander(":material/info_i: Logistische Funktion"):
                             st.latex(r'''Y(t) = \frac{L}{1 + e^{-k \cdot (t - t_0)}}''')
                             st.markdown("**L**: Sättigungsgrenze\n\n**k**: Wachstumsrate\n\n**t_0**: Wendepunkt")
@@ -269,25 +269,25 @@ with col2:
 
     st.markdown("""
             **🔌Einbindung chinesischer Automobilhersteller**<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verstärkte Marktpräsenz dieser Hersteller ist wichtig für einen
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;umfassenden Hochlauf von Elektromobilität
+            verstärkte Marktpräsenz dieser Hersteller ist wichtig für einen
+            umfassenden Hochlauf von Elektromobilität
             """, unsafe_allow_html=True)
 
     st.markdown("""
                    **🔌Ladeinfrastruktur ist unerlässlich**<br>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  muss dem Markthochlauf der BEV vorauslaufen
+                   muss dem Markthochlauf der BEV vorauslaufen
                    """, unsafe_allow_html=True)
 
     st.markdown("""
                       **🔌Erweitertes Angebot an BEV-Modellen**<br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  insbesondere in den unteren Preiskategorien (Klein- und
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kompaktwagen) ist essenziell
+                      insbesondere in den unteren Preiskategorien (Klein- und
+                    Kompaktwagen) ist essenziell
                       """, unsafe_allow_html=True)
 
     st.markdown("""
                           **🔌Investitionen in Forschung und Entwicklung**<br>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Batterietechnologien, Integration von Elektrofahrzeugen als 
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mobile Zwischenspeicher für Strom (bidirektionales Laden)
+                          Batterietechnologien, Integration von Elektrofahrzeugen als 
+                          mobile Zwischenspeicher für Strom (bidirektionales Laden)
                           """, unsafe_allow_html=True)
 
 
