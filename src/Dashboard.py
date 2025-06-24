@@ -4,7 +4,7 @@ import home
 import cars
 import strombedarf
 #import StrombedarfSimulator
-#import strombedarf_simulator
+import strombedarf_simulator
 import stromerzeugung
 import ladeinfrastruktur_map
 import netz_stress_test
@@ -14,6 +14,7 @@ import fazit
 
 # Seitenoptionen
 st.set_page_config(layout="wide")
+
 
 pages = {
     "Home":home,
