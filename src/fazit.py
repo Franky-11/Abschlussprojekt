@@ -45,30 +45,3 @@ def run():
     st.success("✅ Deutschlands Energielandschaft mit vollelektrischen Fahrzeugen ist machbar – wenn Energiewende, Netzausbau & gesellschaftlicher Wandel Hand in Hand gehen.")
 
 
-# Einfacher Taschenrechner am Ende der Seite
-def simple_calculator():
-    st.markdown("---")
-    st.markdown("## 🧮 Einfacher Taschenrechner")
-    
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        num1 = st.number_input("Zahl 1", value=0.0)
-    with col2:
-        operation = st.selectbox("Operation", ["+", "-", "*", "/"])
-    with col3:
-        num2 = st.number_input("Zahl 2", value=0.0)
-
-    if operation == "+":
-        result = num1 + num2
-    elif operation == "-":
-        result = num1 - num2
-    elif operation == "*":
-        result = num1 * num2
-    elif operation == "/":
-        result = num1 / num2 if num2 != 0 else "Division durch 0 nicht erlaubt"
-    else:
-        result = "Ungültige Operation"
-
-    st.markdown(f"**Ergebnis:** {result}")
-
-simple_calculator()
