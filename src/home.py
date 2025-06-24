@@ -1,30 +1,44 @@
 import streamlit as st
 
+def run():
+    st.title("🚗 Deutschlands E-Mobilitätswende – Ein datenbasierter Realitätscheck")
 
-st.set_page_config(layout="wide")
+    st.markdown("### 🧭 Einleitung & Fragestellung")
+    st.markdown("""
+    Die Mobilitätswende in Deutschland ist eine der zentralen Säulen der Energietransformation. 
+    Unser Projekt untersucht, ob die von der Bundesregierung formulierten Ziele zur Elektromobilität realistisch erreichbar sind – und unter welchen Voraussetzungen.
 
+    **Leitfrage**:  
+    *„Unsere Bundesregierung hat Ziele zur E-Mobilität gesetzlich verankert.“ Doch sind diese Ziele realistisch und erreichbar?*
 
-#dashboard = st.Page("Dashboard.py", title="Dashboard", icon=":material/dashboard:", default=True)
+    Neben klassischen Parametern wie Stromerzeugung und Fahrzeugentwicklung betrachten wir auch gesellschaftliche, infrastrukturelle und technologische Faktoren.
+    """)
 
-intro = st.Page("intro.py", title="Projektbeschreibung", icon=":material/info:")
+    st.markdown("### 🛠️ Projektverlauf")
+    st.markdown("""
+    - **Themenfindung** & Zieldefinition im Team  
+    - Auswahl technischer & organisatorischer Tools: `GitHub`, `Streamlit`, `Scrum`  
+    - Iterative Entwicklung mit agilen Etappen  
+    - Visualisierung & Validierung mit Stakeholder-Fokus  
+    - Abgeleitetes **Gesamtfazit** mit klaren Empfehlungen
+    """)
 
-cars=st.Page("cars.py", title="Fahrzeugbestand", icon=":material/directions_car:")
+    st.markdown("### 📅 Untersuchungszeiträume")
+    st.markdown("""
+    - Rückblick auf Entwicklungstrends (bis 2020)  
+    - Status Quo: Stand 2024  
+    - Etappen-Ziele bis 2025  
+    - Ausbaupläne & Zielbild 2030  
+    - Prognosen bis 2035 und darüber hinaus
+    """)
 
-strombedarf=st.Page("strombedarf.py", title="Strombedarf", icon=":material/electric_bolt:")
+    st.markdown("### 🔍 Analysefokus")
+    st.markdown("""
+    - Zusätzlicher Strombedarf durch BEVs  
+    - Belastbarkeit und Modernisierung des Stromnetzes  
+    - Flächenverfügbarkeit & Ausbaupotenzial Erneuerbarer  
+    - Wechselwirkungen zwischen Sektoren (Sektorkopplung)  
+    - Akzeptanz, Gesellschaft & Markt
+    """)
 
-stromerzeugung=st.Page("stromerzeugung.py", title="Stromerzeugung", icon=":material/charging_station:")
-
-fazit=st.Page("fazit.py", title="Fazit", icon=":material/fact_check:")
-
-
-charging_stations=st.Page("charging_stations.py", title="Ladensäuleninfrastruktur", icon=":material/ev_station:")
-
-
-pg = st.navigation(pages=[intro, cars, strombedarf,charging_stations, stromerzeugung, fazit])
-
-#pg = st.navigation({"Projektbeschreibung": [intro],"Fahrzeugbestand":[cars],"Strombedarf & Stromerzeugung": [dashboard]})
-
-
-pg.run()
-
-
+    st.success("Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren.")
