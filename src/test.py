@@ -69,7 +69,7 @@ with tab2:
 
 """
 
-""""
+
 
 import streamlit as st
 from streamlit_folium import st_folium
@@ -132,7 +132,7 @@ with st.spinner("Karte wird geladen..."):
         ).add_to(marker_cluster)
 
 
-"""
+
     legende_html = """
     <div style="
         position: fixed;
@@ -155,11 +155,12 @@ with st.spinner("Karte wird geladen..."):
     </div>
     """
 
+
     m.get_root().html.add_child(Element(legende_html))
 
     st_folium(m, width=900, height=600)
-""""
-"""
+
+
 
 ### ----------------------------------------------------------------------------------------#
 
