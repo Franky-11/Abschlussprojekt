@@ -3,8 +3,9 @@ import streamlit as st
 import home
 import cars
 import strombedarf
-import StrombedarfSimulator
-import strombedarf_simulator
+#import StrombedarfSimulator
+#import strombedarf_simulator
+import stromerzeugung
 import ladeinfrastruktur_map
 import netz_stress_test
 import akzeptanz_radar
@@ -12,12 +13,14 @@ import fazit
 
 
 # Seitenoptionen
+st.set_page_config(layout="wide")
+
 pages = {
     "Home":home,
     "Fahrzeugmarkt":cars,
     "Strombedarf":strombedarf,
-    "StrombedarfSimulator":StrombedarfSimulator,
-    "Strombedarf-Simulator": strombedarf_simulator,
+    #"StrombedarfSimulator":StrombedarfSimulator,
+    #"Strombedarf-Simulator": strombedarf_simulator,
     "Stromerzeugung":stromerzeugung,
     "Ladeinfrastruktur-Map": ladeinfrastruktur_map,
     "Netz-Stress-Test": netz_stress_test,
