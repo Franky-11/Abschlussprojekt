@@ -92,8 +92,8 @@ def plot_quantile(df_verbrauch):
     fig.update_layout(
         barmode='overlay',
         yaxis=dict(range=[0, max_wert], title='Verbrauch (kWh/100 km)'),
-        height=400,
-        plot_bgcolor='white', showlegend=False, title="Quantile der Testverbräuche (je n=70)"
+        height=400,showlegend=False, title="Quantile der Testverbräuche (je n=70)"
+        #plot_bgcolor='white', "
     )
 
     fig.update_layout(**layout())

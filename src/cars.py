@@ -67,47 +67,46 @@ def run():
 
 
 
-    # --------------BEV-Fahrzeuge auf PLZ Ebene-------------------#
+    # --------------BEV-Fahrzeuge auf Kreis  Ebene-------------------#
+
+    if "selected_laender" not in st.session_state:
+        st.session_state.selected_laender = ["Alle"]
+
     st.divider()
 
 
-    st.subheader("Verteilung BEV auf PLZ Ebene")
-    if 'plz_fig' not in st.session_state:
-        st.session_state.plz_fig = None
-
-    col1,col2=st.columns([4,2])
+    st.subheader("Verteilung BEV auf Kreisebene")
+    col1, col2 = st.columns([4, 2])
 
     with col1:
+        geojson_kreise=read_geojson_landkreise()
+        df_kreise_land=read_df_kreise_land()
+
         with st.container(border=True):
+            col_select,col_df=st.columns(2)
+            with col_select:
+                with st.popover("Auswahl Bundesländer"):
+                    with st.form("Auswahl Bundesländer"):
+                        options=df_kreise_land["Bundesland"].unique().tolist()+["Alle"]
+                        selected_laender=st.multiselect("Auswahl Bundesländer",options=options,default=st.session_state.selected_laender)
+                        if st.form_submit_button("Auswählen"):
+                            st.session_state.selected_laender=selected_laender
 
-            eingabe_plz = st.text_input("Geben Sie eine PLZ ein, um dorthin zu zoomen:", max_chars=5,
-                                        placeholder="z.B. 06846")
-
-            if st.button("Karte anzeigen") or st.session_state.plz_fig is None or eingabe_plz:
-                with st.spinner("Lade Geodaten..."):
-                    geo_json_plz = read_geojson_plz()
-                with st.spinner("Lade und mergen der Fahrzeug- und Geodaten......"):
-                    df_geo = read_df_geo()
-                    bev_kreise = read_df_cars_for_plz_map()
-                default_center = {"lat": 51.0, "lon": 10.0}
-                default_zoom = 5
-                center_map = default_center
-                zoom_level = default_zoom
-
-                if eingabe_plz:
-                    eingabe_plz_formatted = str(eingabe_plz).strip().zfill(5)
-                    plz_row = bev_kreise[bev_kreise['PLZ'] == eingabe_plz_formatted]
-                    if not plz_row.empty:
-                        center_map["lat"] = plz_row["lat"].iloc[0]
-                        center_map["lon"] = plz_row["lon"].iloc[0]
-                        zoom_level = 10
-                        st.success(f"Karte wird auf PLZ {eingabe_plz_formatted} zentriert.")
+                    if "Alle" in selected_laender:
+                        df_filtered=df_kreise_land
                     else:
-                        st.warning(f"PLZ {eingabe_plz_formatted} nicht in den Daten gefunden. Zeige Gesamtkarte.")
+                        df_filtered=df_kreise_land[df_kreise_land["Bundesland"].isin(selected_laender)]
+            with col_df:
+                with st.popover("Daten Bundesländer"):
+                    info=info_bundesland(df_filtered)
+                    st.dataframe(info,use_container_width=True,hide_index=True)
 
-                with st.spinner("Lade Karte..."):
-                    st.session_state.plz_fig=plot_car_plz_map(bev_kreise,zoom_level,center_map,geo_json_plz)
-                    st.plotly_chart(st.session_state.plz_fig)
+            fig=plot_bev_kreise(df_filtered,geojson_kreise)
+            st.plotly_chart(fig)
+
+
+
+
 
 
 

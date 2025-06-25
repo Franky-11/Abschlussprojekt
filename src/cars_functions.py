@@ -272,6 +272,8 @@ def plot_neu_bev(df_neuzu_bev):
 
 #------- Verteilung BEV auf PLZ Ebene---------------------------------------------------------------------------#
 
+"""
+
 @st.cache_data
 def read_geojson_plz():
     with open('data/georef-germany-postleitzahl.geojson', 'r', encoding='utf-8') as f:
@@ -336,6 +338,72 @@ def plot_car_plz_map(bev_kreise,zoom_level,center_map,geojson_plz):
     fig.update_traces(marker_line_width=0, marker_line_color='rgba(0,0,0,0)')
 
     return fig
+
+"""
+
+#----------BEV auf Kreisebene--------------------------------#
+
+@st.cache_data
+def read_geojson_landkreise():
+    with open("data/landkreise_simplify200.geojson", 'r', encoding='utf-8') as f:
+        geojson_kreise = json.load(f)
+
+    return geojson_kreise
+
+
+
+
+@st.cache_data
+def read_df_kreise_land():
+    df=pd.read_csv("data/df_kreise_land.CSV")
+    df["Kreis_code"] = df["Kreis_code"].astype(str).str.zfill(5)
+    df["SN_L"] = df["SN_L"].astype(str).str.zfill(2)
+    return df
+
+
+def info_bundesland(df_filtered):
+    info = df_filtered[["Bundesland", "Bestand_PKW_Bundesland", "Bestand_BEV_Bundesland", "Anteil_BEV_Bundesland"]]
+    info = info.drop_duplicates(subset="Bundesland")
+    return info
+
+
+
+def plot_bev_kreise(df_filtered,geojson_kreise):
+    hover_data = hover_data = {
+        "Bundesland": True,
+        "Anteil_BEV": ':.1f',
+        "Anteil_BEV_Bundesland": ':.1f',
+        "Delta_Anteil_BEV_Kreis_vs_Bundesland%": ':.1f',
+        "Bestand_PKW": ":,.0f",
+        "Bestand_BEV": ":,.0f",
+        "Kreis_code": False
+    }
+
+    fig = px.choropleth_map(df_filtered,
+                            geojson=geojson_kreise,  # Die konvertierte GeoJSON-Datei
+                            locations="Kreis_code",  # Spalte im DataFrame, die den 2-stelligen Schlüssel enthält
+                            featureidkey="properties.RS",  # Pfad zum 'schluessel' im GeoJSON-Feature
+                            # (wie in Ihrer GeoJSON-Struktur gesehen: 'properties': {'schluessel': '06', ...})
+                            color="Anteil_BEV",  # Spalte, die die Farbe der Region bestimmt
+                            color_continuous_scale="Blues",
+                            # Farbskala (z.B. "Viridis", "Plasma", "Jet", "Greens", "Blues")
+                            range_color=[0, 5],  # Stellen Sie sicher, dass die Farbskala die volle Bandbreite abdeckt
+                            map_style="carto-positron",
+                            # Basiskarte (z.B. "open-street-map", "carto-positron", "stamen-terrain")
+                            zoom=5,  # Zoom-Level für Deutschland (ca. 4.5 - 5.5)
+                            center={"lat": 51.0, "lon": 10.0},  # Zentraler Punkt für Deutschland
+                            opacity=0.8,  # Deckkraft der eingefärbten Regionen
+                            hover_name="Landkreis",  # Was im Tooltip als Haupttitel angezeigt wird
+                            hover_data=hover_data
+                            # {'Anteil_BEV': ':.1f','Anteil_BEV_Bundesland': ':.1f','Delta_Anteil_BEV_Kreis_vs_Bundesland%': ':.1f',"Bestand_PKW":":,.0f",'Kreis_code': False,"Bestand_BEV":":,.0f"}, # Optional: Formatiert die Anzeige der PKW_Bestand im Tooltip (als ganze Zahl)
+                            # title="PKW-Bestand pro Bundesland in Deutschland" # Titel der Karte
+                            )
+
+    fig.update_traces(marker_line_width=0, marker_line_color='rgba(0,0,0,0)')
+    return fig
+
+
+
 
 
 
