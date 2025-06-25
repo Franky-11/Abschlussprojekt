@@ -1,0 +1,20 @@
+
+
+[theme]
+base="dark"
+primaryColor="#1cea11"
+secondaryBackgroundColor="#7c7c94"
+
+
+
+#base="dark"
+#primaryColor="#1f77b4"
+backgroundColor="#0e1117"
+#secondaryBackgroundColor="#262730"
+textColor="#fafafa"
+
+[server]
+headless = true
+runOnSave = true
+
+
