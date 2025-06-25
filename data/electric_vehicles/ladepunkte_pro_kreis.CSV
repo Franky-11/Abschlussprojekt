@@ -14,8 +14,8 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 8125;Landkreis Heilbronn;1040
 8126;Landkreis Hohenlohekreis;445
 8215;Landkreis Karlsruhe;936
-8355;Landkreis Konstanz;506
-8317;Landkreis Lörrach;475
+8335;Landkreis Konstanz;506
+8336;Landkreis Lörrach;475
 8118;Landkreis Ludwigsburg;987
 8128;Landkreis Main-Tauber-Kreis;380
 8225;Landkreis Neckar-Odenwald-Kreis;284
@@ -64,10 +64,10 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 9362;Kreisfreie Stadt Regensburg;1006
 9163;Kreisfreie Stadt Rosenheim;107
 9565;Kreisfreie Stadt Schwabach;31
-9663;Kreisfreie Stadt Schweinfurt;181
+9662;Kreisfreie Stadt Schweinfurt;181
 9263;Kreisfreie Stadt Straubing;130
 9363;Kreisfreie Stadt Weiden i.d. OPf.;98
-9664;Kreisfreie Stadt Würzburg;434
+9663;Kreisfreie Stadt Würzburg;434
 9771;Landkreis Aichach-Friedberg;215
 9171;Landkreis Altötting;318
 9371;Landkreis Amberg-Sulzbach;184
@@ -84,7 +84,7 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 9174;Landkreis Dachau;245
 9271;Landkreis Deggendorf;322
 9773;Landkreis Dillingen a.d. Donau;131
-9272;Landkreis Dingolfing-Landau;567
+9279;Landkreis Dingolfing-Landau;567
 9779;Landkreis Donau-Ries;303
 9175;Landkreis Ebersberg;311
 9176;Landkreis Eichstätt;318
@@ -92,7 +92,7 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 9572;Landkreis Erlangen-Höchstadt;272
 9474;Landkreis Forchheim;220
 9178;Landkreis Freising;529
-9274;Landkreis Freyung-Grafenau;278
+9272;Landkreis Freyung-Grafenau;278
 9179;Landkreis Fürstenfeldbruck;369
 9573;Landkreis Fürth;202
 9180;Landkreis Garmisch-Partenkirchen;294
@@ -118,7 +118,7 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 9374;Landkreis Neustadt a.d. Waldnaab;178
 9775;Landkreis Neu-Ulm;418
 9574;Landkreis Nürnberger Land;349
-9778;Landkreis Oberallgäu;571
+9780;Landkreis Oberallgäu;571
 9777;Landkreis Ostallgäu;540
 9275;Landkreis Passau;550
 9186;Landkreis Pfaffenhofen a.d. Ilm;285
@@ -219,8 +219,8 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 3353;Landkreis Harburg;392
 3358;Landkreis Heidekreis;458
 3154;Landkreis Helmstedt;161
-3155;Landkreis Hildesheim;451
-3158;Landkreis Holzminden;82
+3254;Landkreis Hildesheim;451
+3255;Landkreis Holzminden;82
 3457;Landkreis Leer;224
 3354;Landkreis Lüchow-Dannenberg;82
 3355;Landkreis Lüneburg;311
@@ -228,25 +228,25 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 3155;Landkreis Northeim;390
 3458;Landkreis Oldenburg;179
 3459;Landkreis Osnabrück;588
-3253;Landkreis Osterholz;197
+3356;Landkreis Osterholz;197
 3157;Landkreis Peine;241
 3241;Landkreis Region Hannover;2933
 3357;Landkreis Rotenburg (Wümme);356
 3257;Landkreis Schaumburg;312
 3359;Landkreis Stade;359
 3360;Landkreis Uelzen;126
-3461;Landkreis Vechta;340
+3460;Landkreis Vechta;340
 3361;Landkreis Verden;279
-3462;Landkreis Wesermarsch;134
-3463;Landkreis Wittmund;103
-3156;Landkreis Wolfenbüttel;84
+3461;Landkreis Wesermarsch;134
+3462;Landkreis Wittmund;103
+3158;Landkreis Wolfenbüttel;84
 5554;Kreis Borken;1130
 5558;Kreis Coesfeld;440
 5358;Kreis Düren;586
 5954;Kreis Ennepe-Ruhr-Kreis;395
 5366;Kreis Euskirchen;294
 5754;Kreis Gütersloh;683
-5354;Kreis Heinsberg;459
+5370;Kreis Heinsberg;459
 5758;Kreis Herford;357
 5958;Kreis Hochsauerlandkreis;476
 5762;Kreis Höxter;305
@@ -275,7 +275,7 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 5911;Kreisfreie Stadt Bochum;807
 5314;Kreisfreie Stadt Bonn;796
 5512;Kreisfreie Stadt Bottrop;159
-5912;Kreisfreie Stadt Dortmund;1115
+5913;Kreisfreie Stadt Dortmund;1115
 5112;Kreisfreie Stadt Duisburg;577
 5111;Kreisfreie Stadt Düsseldorf;2015
 5113;Kreisfreie Stadt Essen;944
@@ -326,8 +326,8 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 7338;Landkreis Rhein-Pfalz-Kreis;229
 7339;Landkreis Südliche Weinstraße;152
 7340;Landkreis Südwestpfalz;79
-7233;Landkreis Trier-Saarburg;235
-7234;Landkreis Vulkaneifel;233
+7235;Landkreis Trier-Saarburg;235
+7233;Landkreis Vulkaneifel;233
 7143;Landkreis Westerwaldkreis;380
 10042;Landkreis Merzig-Wadern;158
 10043;Landkreis Neunkirchen;113
@@ -382,20 +382,20 @@ Kreis_code;Landkreis;Anzahl_Ladepunkte_0425
 16053;Kreisfreie Stadt Jena;208
 16054;Kreisfreie Stadt Suhl;69
 16055;Kreisfreie Stadt Weimar;148
-16058;Landkreis Altenburger Land;115
+16077;Landkreis Altenburger Land;115
 16061;Landkreis Eichsfeld;189
-16064;Landkreis Gotha;167
-16066;Landkreis Greiz;99
-16067;Landkreis Hildburghausen;99
+16067;Landkreis Gotha;167
+16076;Landkreis Greiz;99
+16069;Landkreis Hildburghausen;99
 16070;Landkreis Ilm-Kreis;237
 16065;Landkreis Kyffhäuserkreis;71
 16062;Landkreis Nordhausen;126
 16074;Landkreis Saale-Holzland-Kreis;160
 16075;Landkreis Saale-Orla-Kreis;184
 16073;Landkreis Saalfeld-Rudolstadt;139
-16069;Landkreis Schmalkalden-Meiningen;212
+16066;Landkreis Schmalkalden-Meiningen;212
 16068;Landkreis Sömmerda;75
 16072;Landkreis Sonneberg;79
-16060;Landkreis Unstrut-Hainich-Kreis;125
+16064;Landkreis Unstrut-Hainich-Kreis;125
 16063;Landkreis Wartburgkreis;188
-16076;Landkreis Weimarer Land;142
+16071;Landkreis Weimarer Land;142
