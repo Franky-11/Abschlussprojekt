@@ -162,7 +162,7 @@ with st.spinner("Karte wird geladen..."):
 
 
 
-### ----------------------------------------------------------------------------------------#
+### ---PLZ Visualisierung BEV (Frank)-------------------------------------------------------------------------------------#
 
 if 'plz_fig' not in st.session_state:
     st.session_state.plz_fig = None
