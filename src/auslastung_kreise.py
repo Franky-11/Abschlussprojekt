@@ -234,6 +234,16 @@ with st.container(border=True):
             st.warning("Szenarien wurden gelöscht.")
 
 
+        #if st.session_state.df is not None:
+         #   delete=st.text_input("Szenario löschen").strip()
+          #  szenario_id = int(delete)
+         #   st.session_state.df = st.session_state.df[
+         #       st.session_state.df["szenario"] != szenario_id]
+         #   st.success(f"Szenario {szenario_id} wurde gelöscht.")
+
+        
+
+
     with st.popover("Auslastung Daten",use_container_width=True):
         info=auslastung_status(df_auslastung,high_cut,low_cut)
         st.dataframe(info,use_container_width=True,hide_index=True)
@@ -251,6 +261,7 @@ with st.container(border=True):
 #szenarien=szenarien(df_szenarien)
 
 if st.session_state.df is not None:
+    st.subheader("Vergleich Szenarien")
     df_szenarien = st.session_state.df
     szenarien = szenarien(df_szenarien)
     fig = plot_szenarien(szenarien)
