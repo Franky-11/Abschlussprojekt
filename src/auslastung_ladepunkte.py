@@ -201,7 +201,7 @@ with st.container(border=True):
 
 
     with col_prog:
-        bev_prog = st.number_input("BEV-Fahrzeuge (Mio.)", value=1.65,step=5.50) * 1E6
+        bev_prog = st.number_input("BEV-Fahrzeuge (Mio.)", value=1.65,step=1.0) * 1E6
         ladepunkt_bedarf_for_schwelle = ((jahres_km / reichweite_bev) * (
                     mittlere_ladezeit / 60) * bev_prog * ladeanteil) / (y_schwelle)
         ladepunkte_differenz = (ladepunkt_bedarf_for_schwelle - ladepunkte) / ladepunkte * 100
@@ -212,8 +212,11 @@ with st.container(border=True):
     with col_bev:
         df_long = read_df_fuel()
         # bev_aktuell=df_long[df_long["Kraftstoff"] == "BEV"]["Wert"].max()
+        auslastung_ladepunkt=berechne_auslastung(bev_prog, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil)
+        diff_referenz_auslastung=(auslastung_ladepunkt-y_schwelle)/y_schwelle*100
+
         st.metric(f"∅ Auslastung pro Ladepunkt ",
-                  value=f"{berechne_auslastung(bev_prog, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil):.0f} h/a")
+                  value=f"{auslastung_ladepunkt:.0f} h/a",delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung",delta_color="inverse")
         st.markdown(
             f"""
             **🔢 Parameterübersicht**  
