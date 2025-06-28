@@ -132,7 +132,7 @@ if "szenario_df" not in st.session_state:
 
 
 
-st.title("⚡ Ladeinfrastruktur-Auslastung")
+st.header("⚡ Ladeinfrastruktur-Auslastung")
 
 
 with st.container(border=True):
@@ -246,22 +246,30 @@ with st.container(border=True):
 
         df_row = pd.DataFrame([{
             "Szenario": szenario_id,
-            "Ladepunkte": ladepunkte,
-            "Jahresfahrleistung": jahres_km,
-            "Reichweite_BEV": reichweite_bev,
+            "BEV-Fahrzeuge": bev_prog,
             "Anteil_Ladebedarf": ladeanteil,
-            "Ladezeit_Normal": normzeit,
-            "Ladezeit_Schnell": schnellzeit,
+            "Jahresfahrleistung (km)": jahres_km,
+            "Reichweite_BEV (km)": reichweite_bev,
+            "Ladepunkte": ladepunkte,
+            "Ladezeit_Normal (min)": normzeit,
+            "Ladezeit_Schnell (min)": schnellzeit,
             "Anteil_Schnell": schnellanteil,
-            "Mittlere_Ladezeit": mittlere_ladezeit,
-            "Referenz_Auslastung": y_schwelle,
-            "x_Schwelle (BEV)": int(x_schnitt),
-            "BEV-Prognose": bev_prog,
-            "Bedarf Ladepunkte (Ref-Auslastung, BEV-Prognose)":ladepunkt_bedarf_for_schwelle,
+            "Mittlere_Ladezeit (min)": int(mittlere_ladezeit),
+            "Auslastung_Ladepunkt (h/a)": int(auslastung_ladepunkt),
+            "Referenz_Auslastung (h/a)": int(y_schwelle),
+            "BEV an Ref.-Auslastung": int(x_schnitt),
+            "Bedarf Ladepunkte (bei Ref-Auslastung, BEV-Fahrzeuge)":int(ladepunkt_bedarf_for_schwelle)
         }])
 
         st.session_state.szenario_df = pd.concat([st.session_state.szenario_df, df_row], ignore_index=True)
         st.success("Szenario gespeichert.")
+
+    if st.button("❌ Alle Szenarien löschen"):
+        st.session_state.szenario_df = pd.DataFrame()
+        st.warning("Alle Szenarien gelöscht.")
+
+
+    
 
     with st.popover("📋 Szenarien-Tabelle", use_container_width=True):
         st.dataframe(
