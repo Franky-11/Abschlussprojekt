@@ -170,8 +170,8 @@ def run():
     overflow-wrap: break-word;
     ">
       <strong style="display:block; margin-bottom:4px;">EV pro Ladepunkt</strong>
-      <i style="background:#a63603;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> ≥21<br>
-      <i style="background:#e6550d;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 17–21<br>
+      <i style="background:#b30000;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> ≥21<br>
+      <i style="background:#e34a33;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 17–21<br>
       <i style="background:#fdae6b;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 14–17<br>
       <i style="background:#ffffff;width:14px;height:14px;display:inline-block;margin-right:6px; border:1px solid #999;"></i> 11–14<br>
       <i style="background:#66c2a4;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 8–11<br>
