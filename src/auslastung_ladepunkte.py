@@ -220,7 +220,8 @@ with st.container(border=True):
         st.markdown(
             f"""
             **🔢 Parameterübersicht**  
-            {bev_prog / 1e6:.1f} Mio. BEV • Ladeanteil: {ladeanteil * 100:.0f}% • Ladepunkte: {ladepunkte:,.0f}
+            {bev_prog / 1e6:.1f} Mio. BEV • 
+            Ladeanteil: {ladeanteil * 100:.0f}% • Ladepunkte: {ladepunkte:,.0f}
             """
         )
 
@@ -269,7 +270,7 @@ with st.container(border=True):
         st.warning("Alle Szenarien gelöscht.")
 
 
-    
+
 
     with st.popover("📋 Szenarien-Tabelle", use_container_width=True):
         st.dataframe(
