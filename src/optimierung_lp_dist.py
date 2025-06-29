@@ -69,8 +69,14 @@ if "opt_erfolgreich" not in st.session_state:
 
 if "lp_opt" not in st.session_state:
     st.session_state.lp_opt = None
-if "opt_modus_selection" not in st.session_state:
-    st.session_state.opt_modus_selection = "Fixe Ladepunktanzahl"  # Setze den Standardwert
+
+
+
+
+
+
+
+st.header("⚡ Ladeinfrastruktur-Prognose & Verteilung")
 
 ansicht = st.radio(
     "🗺️ Auswahl Karte (links)",
@@ -80,11 +86,6 @@ ansicht = st.radio(
 )
 st.session_state.ansicht_links = ansicht
 
-
-
-
-
-st.header("⚡ Ladeinfrastruktur-Prognose & Verteilung")
 
 
 df = read_df_lade_bev()
@@ -182,11 +183,6 @@ with st.container(border=True):
                         st.success("✅ Optimierung abgeschlossen!")
                         
                         
-                        
-
-
-
-
 
 
 # ------------------------- Ergebnisse anzeigen -------------------------
