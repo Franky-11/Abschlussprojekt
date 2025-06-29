@@ -34,12 +34,41 @@ pages = {
     "Fazit": fazit
 }
 
+# --- Ergänzung: Fallback, falls ein Modul keine run()-Funktion hat
+for _name, _mod in pages.items():
+    if not hasattr(_mod, "run"):
+        if hasattr(_mod, "st_display"):
+            # st_display als Ersatz für run verwenden
+            _mod.run = _mod.st_display
+        else:
+            # Platzhalter, damit das Dashboard nicht abstürzt
+            def _placeholder(name=_name):
+                st.error(f"Die Seite '{name}' hat keine ausführbare Funktion.")
+            _mod.run = _placeholder
+
 st.sidebar.title("🔀 Navigation")
 selection = st.sidebar.selectbox("Wähle eine Seite", list(pages.keys()))
 
 # Dynamisches Laden der Seite
 # page_module = __import__(f"{pages[selection]}")
 pages[selection].run()
+
+
+# --- Ergänzung: SMARD-Daten nur für die Stromerzeugung‑Seite anzeigen
+if selection == "Stromerzeugung" and hasattr(stromerzeugung, "get_smard_data"):
+    latest_ts, need_df, gen_df = stromerzeugung.get_smard_data()
+    if latest_ts is None:
+        st.error("Fehler beim Laden der SMARD-Daten.")
+    else:
+        st.subheader("🟢 Stromverbrauch und -erzeugung laut SMARD")
+        st.markdown(f"**Zeitstempel:** {latest_ts}")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Strombedarf (Verbrauch):**")
+            st.dataframe(need_df)
+        with col2:
+            st.markdown("**Stromerzeugung (gesamt):**")
+            st.dataframe(gen_df)
 
 
 
