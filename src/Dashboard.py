@@ -4,12 +4,15 @@ import home
 import cars
 import strombedarf
 #import StrombedarfSimulator
-import strombedarf_simulator
+#import strombedarf_simulator
 import stromerzeugung
-import ladeinfrastruktur_map
+
 import netz_stress_test
 import akzeptanz_radar
 import fazit
+import chargingpoints_by_district
+import number_of_chargingstations
+import optimierung_lp_dist
 
 
 # Seitenoptionen
@@ -23,7 +26,9 @@ pages = {
     #"StrombedarfSimulator":StrombedarfSimulator,
     #"Strombedarf-Simulator": strombedarf_simulator,
     "Stromerzeugung":stromerzeugung,
-    "Ladeinfrastruktur-Map": ladeinfrastruktur_map,
+    "Ladeinfrastruktur-Map": chargingpoints_by_district,
+    "Entwicklung der Ladesäulen":number_of_chargingstations,
+    "Optimierung Ladepunktverteilung":optimierung_lp_dist,
     "Netz-Stress-Test": netz_stress_test,
     "Akzeptanz-Radar": akzeptanz_radar,
     "Fazit": fazit
