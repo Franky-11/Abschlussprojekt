@@ -5,7 +5,7 @@ import numpy as np
 @st.cache_data
 def load_data():
     df = pd.read_csv(
-        "C:/Users/PC/Desktop/Abschlussprojekt/data/electric_vehicles/Ladesaeulenregister_BNetzA.csv",
+        "data/Ladesaeulenregister_BNetzA.csv",
         encoding="latin1",
         delimiter=";",
         parse_dates=["Inbetriebnahmedatum"],
