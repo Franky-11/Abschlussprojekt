@@ -6,7 +6,7 @@ with col1:
     st.header("")
     st.write("")
 
-    st.title("Ladensäuleninfrastruktur :material/ev_station:")
+    st.title("Ladesäuleninfrastruktur :material/ev_station:")
 
 with col2:
     st.image("images/charging-station-4636710_1920.jpg",use_container_width=True)
@@ -99,3 +99,5 @@ with st.spinner("Karte wird geladen..."):
     m.get_root().html.add_child(Element(legende_html))
 
     st_folium(m, width=900, height=600)
+
+    print(df.columns)

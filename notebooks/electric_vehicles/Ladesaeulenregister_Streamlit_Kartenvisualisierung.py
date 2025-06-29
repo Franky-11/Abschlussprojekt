@@ -50,7 +50,7 @@ def lade_und_bereinige_daten(pfad):
     return df
 
 #Daten einlesen
-df = lade_und_bereinige_daten("C:/Users/PC/Desktop/Abschlussprojekt/data/electric_vehicles/Ladesaeulenregister_BNetzA.CSV")
+df = lade_und_bereinige_daten("C:/Users/PC/Desktop/Abschlussprojekt/data/electric_vehicles/Ladesaeulenregister_BNetzA.csv")
 
 print(f"Aktuell verbleibende Datensätze: {len(df)}")
 
