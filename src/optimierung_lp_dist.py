@@ -62,6 +62,35 @@ def run():
 
         return fig
 
+
+    def info():
+        st.markdown("""
+                            **Verteilung der neuen BEV-Fahrzeuge:**  
+                            Die prognostizierte Gesamtanzahl der Batterie-elektrischen Fahrzeuge (BEV) wird proportional zum aktuellen PKW-Bestand auf die einzelnen Landkreise verteilt.
+                            $$ BEV_{Landkreis} = BEV_{Gesamt} \\times \\frac{PKW_{Landkreis}}{PKW_{Gesamt}} $$
+
+                            **Lineare Verteilung der Ladepunkte:**  
+                            Die anfängliche, "lineare" Verteilung der Ladepunkte erfolgt proportional zum aktuellen Bestand an Ladepunkten in den Landkreisen. Das heißt, Landkreise mit vielen Ladepunkten erhalten auch im prognostizierten Szenario mehr neue Ladepunkte.
+                            $$ LP_{linear, Landkreis} = LP_{Gesamt} \\times \\frac{LP_{aktuell, Landkreis}}{LP_{aktuell, Gesamt}} $$
+
+                            **Optimierungsziel (Modus "Fixe Ladepunktanzahl"):**  
+                            In diesem Modus wird die Verteilung der Ladepunkte so optimiert, dass das Verhältnis von BEV pro Ladepunkt ($BEV/LP$) in allen Landkreisen möglichst nahe an einem definierten **Zielverhältnis** (z.B. 12 BEV pro Ladepunkt) liegt. Die Gesamtzahl der Ladepunkte bleibt dabei konstant ($LP_{gesamt}$).
+                            Die Zielfunktion minimiert die Summe der quadrierten Abweichungen:
+                            $$ \\min \\sum_{i=1}^{n} \\left( \\frac{BEV_i}{LP_i} - Ziel \\right)^2 $$
+                            Unter der Nebenbedingung:
+                            $$ \\sum_{i=1}^{n} LP_i = LP_{Gesamt} $$
+                            Hierbei ist $BEV_i$ die Anzahl der BEV im Landkreis $i$, $LP_i$ die Anzahl der Ladepunkte im Landkreis $i$ und $Ziel$ das angestrebte BEV/LP-Verhältnis.
+
+                            **Optimierungsziel (Modus "Kostenfunktion (frei)"):**  
+                            Dieser Modus erlaubt eine flexiblere Verteilung, indem er nicht nur die Abweichung vom Zielverhältnis, sondern auch die Gesamtzahl der benötigten Ladepunkte berücksichtigt. Die Optimierung minimiert eine gewichtete Summe aus Fehlerquadraten und Gesamtkosten der Ladepunkte. Das Gewicht $$  \\beta $$ steuert, wie stark die Reduzierung der Ladepunkte bevorzugt wird, auch wenn dies zu größeren Abweichungen vom Zielverhältnis führt.
+                            $$ \\min \\left( \\sum_{i=1}^{n} \\left( \\frac{BEV_i}{LP_i} - Ziel \\right)^2 \\right) + \\beta \\times \\left( \\sum_{i=1}^{n} LP_i \\right) $$
+                            Hierbei ist $$  \\beta $$ das "Gewicht auf LP-Kosten" (Beta).
+
+                            **Randbedingungen für Ladepunkte ($LP_i$):**  
+                            Die Anzahl der Ladepunkte in einem Landkreis ($LP_i$) muss immer mindestens dem aktuellen Bestand ($LP_{aktuell, Landkreis}$) entsprechen und darf maximal so hoch sein, dass das BEV/LP-Verhältnis nicht unter 2 fällt ($LP_i \\le BEV_i / 2$), um eine sinnvolle Auslastung zu gewährleisten.
+                            """)
+
+
     # ------------------- Streamlit App -------------------
 
 
@@ -79,11 +108,6 @@ def run():
 
     if "ist" not in st.session_state:
         st.session_state.ist = True
-
-
-
-
-
 
 
     st.header("⚡ Ladeinfrastruktur-Prognose & Verteilung")
@@ -104,6 +128,8 @@ def run():
 
     # Container mit Seitenaufbau
     with st.container(border=True,height=1000):
+        with st.popover("📚 Berechnungsgrundlagen", use_container_width=True):
+            info()
         col_1, col_2 = st.columns(2)
 
         with col_1:
@@ -134,10 +160,11 @@ def run():
         with col_1:
             if st.session_state.ist:
                 st.session_state.ansicht_links = "IST"
-                st.metric("∅ BEV / LP (IST)", value=f"{df['BEV_pro_Ladepunkt'].mean():.0f} ± {df['BEV_prog_lp_prog_linear'].std():.0f}")
+                st.metric("∅ BEV / LP (IST)", value=f"{df['BEV_pro_Ladepunkt'].mean():.0f} ± {df['BEV_pro_Ladepunkt'].std():.0f}")
                 fig_left = plot_map(df, geojson_kreise, "BEV_pro_Ladepunkt", "IST", "BEV_pro_Ladepunkt")
             else:
-                st.metric("∅ BEV / LP (linear)", value=f"{df['BEV_prog_lp_prog_linear'].mean():.0f} ± {df['BEV_prog_lp_prog_linear'].std():.0f}")
+                delta=(df['BEV_prog_lp_prog_linear'].mean()-df['BEV_pro_Ladepunkt'].mean())/df['BEV_pro_Ladepunkt'].mean()*100
+                st.metric("∅ BEV / LP (linear)", value=f"{df['BEV_prog_lp_prog_linear'].mean():.0f} ± {df['BEV_prog_lp_prog_linear'].std():.0f}",delta=f"{delta:.1f}% zum IST-Zustand",delta_color="inverse")
                 fig_left = plot_map(df, geojson_kreise, "BEV_prog_lp_prog_linear", "linear", "BEV_prog_lp_prog_linear")
                 st.session_state.ansicht_links = "LINEAR"
 
@@ -155,13 +182,19 @@ def run():
         with col_2:
             if not st.session_state.ist:
                 with st.popover("🔧 Ladepunkt-Optimierung"):
+
                     with st.form("opt_form"):
+                        st.markdown(f"""
+                                    🔢 **Ausgewählte Parameter**:  
+                                        {bev_gesamt / 1e6:.1f} Mio. BEV  
+                                        {lp_gesamt} Ladepunkte""")
+                        st.divider()
                         ziel_ratio = st.slider("🎯 Zielverhältnis BEV / Ladepunkt", 5.0, 50.0, 12.0)
                         opt_modus = st.selectbox("Optimierungsmodus", ["Fixe Ladepunktanzahl", "Kostenfunktion (frei)"])
 
                         #gewicht = None
                         #if opt_modus == "Kostenfunktion (frei)":
-                        gewicht = st.number_input("⚖️ Gewicht auf LP-Kosten (Beta)", 0.0, 0.1, 0.0,step=0.01,help="Beta steuert, wie stark zusätzliche Ladepunkte 'kosten'. Höhere Werte bevorzugen sparsame Verteilungen – auch wenn das Zielverhältnis dann schlechter getroffen wird.")
+                        gewicht = st.number_input("⚖️ Gewicht auf LP-Kosten (Beta)", 0.0, 0.1, 0.0,step=0.01,help="Wenn Modus Kostenfunktion ausgewählt: Beta steuert, wie stark zusätzliche Ladepunkte 'kosten'. Höhere Werte bevorzugen sparsame Verteilungen – auch wenn das Zielverhältnis dann schlechter getroffen wird.")
 
                         start_opt = st.form_submit_button("🚀 Optimierung starten")
 
@@ -213,7 +246,8 @@ def run():
         with col_2:
             col_met,col_param,col_check=st.columns([1,1,1])
             with col_met:
-                st.metric("∅ BEV / LP (optimiert)", value=f"{df['BEV_prog_lp_opt'].mean():.0f} ± {df['BEV_prog_lp_opt'].std():.0f}")
+                delta_opt=(df['BEV_prog_lp_opt'].mean()-df['BEV_prog_lp_prog_linear'].mean())/df['BEV_prog_lp_prog_linear'].mean()*100
+                st.metric("∅ BEV / LP (optimiert)", value=f"{df['BEV_prog_lp_opt'].mean():.0f} ± {df['BEV_prog_lp_opt'].std():.0f}",delta=f"{delta_opt:.1f}% zur linearen LP-Skalierung",delta_color="inverse")
             with col_param:
                 st.markdown(
                     f"""
@@ -229,7 +263,9 @@ def run():
                 fig_right = plot_map(df, geojson_kreise, "BEV_prog_lp_opt", "optimiert", "BEV_prog_lp_prog_linear")
             else:
                 fig_right = plot_map(df, geojson_kreise, "LP_diff", "Zusätzliche Ladepunkte", "LP_diff")
+
             st.plotly_chart(fig_right, use_container_width=True)
+
             if check:
                 df_opt = df[["Landkreis_y", "BEV_prog_lp_opt", "lp_opt", "LP_diff"]]
                 df_opt.columns = ["Landkreis", "BEV/Lp optimiert", "Lp optimiert", "Zusätzlich benötigte Lp"]
