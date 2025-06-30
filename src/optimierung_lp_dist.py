@@ -67,11 +67,11 @@ def run():
         st.markdown("""
                             **Verteilung der neuen BEV-Fahrzeuge:**  
                             Die prognostizierte Gesamtanzahl der Batterie-elektrischen Fahrzeuge (BEV) wird proportional zum aktuellen PKW-Bestand auf die einzelnen Landkreise verteilt.
-                            $$ BEV_{Landkreis} = BEV_{Gesamt} \\times \\frac{PKW_{Landkreis}}{PKW_{Gesamt}} $$
+                            $$ BEV_{Landkreis} = BEV_{Prognose} \\times \\frac{PKW_{Landkreis}}{PKW_{Gesamt}} $$
 
                             **Lineare Verteilung der Ladepunkte:**  
                             Die anfängliche, "lineare" Verteilung der Ladepunkte erfolgt proportional zum aktuellen Bestand an Ladepunkten in den Landkreisen. Das heißt, Landkreise mit vielen Ladepunkten erhalten auch im prognostizierten Szenario mehr neue Ladepunkte.
-                            $$ LP_{linear, Landkreis} = LP_{Gesamt} \\times \\frac{LP_{aktuell, Landkreis}}{LP_{aktuell, Gesamt}} $$
+                            $$ LP_{linear, Landkreis} = LP_{Prognose} \\times \\frac{LP_{aktuell, Landkreis}}{LP_{aktuell, Gesamt}} $$
 
                             **Optimierungsziel (Modus "Fixe Ladepunktanzahl"):**  
                             In diesem Modus wird die Verteilung der Ladepunkte so optimiert, dass das Verhältnis von BEV pro Ladepunkt ($BEV/LP$) in allen Landkreisen möglichst nahe an einem definierten **Zielverhältnis** (z.B. 12 BEV pro Ladepunkt) liegt. Die Gesamtzahl der Ladepunkte bleibt dabei konstant ($LP_{gesamt}$).
