@@ -7,9 +7,6 @@ from datetime import timedelta
 st.subheader("TCO - Total Cost Ownership")
 
 
-
-
-
 st.audio("audio/TCO_Vergleich_2.wav",format="audio/wav",start_time=timedelta(seconds=98))
 
 with st.popover("Quellen anzeigen"):
