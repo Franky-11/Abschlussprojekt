@@ -34,6 +34,11 @@ def run():
                     st.dataframe(desc_stats.round(1),hide_index=True,use_container_width=True)
                 fig=plot_verbrauch(df_verbrauch)
                 st.plotly_chart(fig)
+                with st.popover("Quellen anzeigen"):
+                    st.markdown("""
+                            * Verbauchsdaten: ADAC, TCS (Touring Club Schweiz), ÖAMTC (Österreichischer Automobil-, Motorrad- und Touring Club) 
+                            * Reichweite BEV: ADAC
+                            """)
 
 
         with tab2:
@@ -105,6 +110,11 @@ def run():
 
         #st.markdown("------------------------------------------")
 
+    if "strombedarf_szenarien" not in st.session_state:
+        st.session_state.strombedarf_szenarien = {2025:None,2030:None,2035:None}
+
+
+
     st.divider()
 
     def strombedarf_szenarien(fahrzeuge, verbrauch, jahres_km):
@@ -141,28 +151,52 @@ def run():
 
     # --- Plotly Stacked Bar Chart: Strombedarf vs. EE ---
     jahre = list(range(2025, 2036))
-    bev_bedarf = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
+   # bev_bedarf = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
     ee_erzeugung = [260, 275, 290, 305, 320, 340, 360, 375, 385, 395, 400]
-    rest_ee = [ee - bev for ee, bev in zip(ee_erzeugung, bev_bedarf)]
+    ee={jahr:tw for jahr,tw in zip(jahre,ee_erzeugung)}
+
+   # rest_ee = [ee - bev for ee, bev in zip(ee_erzeugung, bev_bedarf)]
+
+
 
     # Aktuellen Nutzerwert im Szenariojahr einfügen
-    jahr_index = jahre.index(int(szenario))
-    bev_bedarf[jahr_index] = strombedarf_twh
-    rest_ee[jahr_index] = max(0, ee_erzeugung[jahr_index] - strombedarf_twh)
+  #  jahr_index = jahre.index(int(szenario))
+   # bev_bedarf[jahr_index] = strombedarf_twh
+   # rest_ee[jahr_index] = max(0, ee_erzeugung[jahr_index] - strombedarf_twh)
+
+    jahr = int(szenario)
+    strombedarf = strombedarf_szenarien(fahrzeuge, verbrauch, jahres_km)
+    strombedarf_twh = strombedarf / 1e9
+
+    # Session-State aktualisieren
+    st.session_state.strombedarf_szenarien[jahr] = strombedarf_twh
+
+    #jahre = list(range(2025, 2036))
+   # bev_bedarf = [st.session_state.strombedarf_szenarien.get(j, 0) for j in jahre]
+    #rest_ee = [max(0, ee - bedarf) for ee, bedarf in zip(ee_erzeugung, bev_bedarf)]
+
+    jahre_szen, bedarf_szen = zip(*[
+        (jahr, val) for jahr, val in st.session_state.strombedarf_szenarien.items() if val is not None ])
+
+    rest_ee = [ee[jahr]-bedarf for jahr,bedarf in zip(jahre_szen,bedarf_szen)]
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
         name="🔋 BEV-Strombedarf",
-        x=jahre,
-        y=bev_bedarf,
-        marker_color="#636EFA"
-    ))
+        x=jahre_szen,
+        #y=bev_bedarf,
+        y=bedarf_szen,
+        text=[f"{y:.1f} TWh" for y in bedarf_szen],
+        textfont=dict(size=18),
+        marker_color="#636EFA"))
+
     fig.add_trace(go.Bar(
         name="🌿 Restliche EE-Erzeugung",
-        x=jahre,
+       # x=jahre,
+        x=jahre_szen,
+        #y=rest_ee,
         y=rest_ee,
-        marker_color="#00CC96"
-    ))
+        marker_color="#00CC96"))
 
     fig.update_layout(
         barmode='stack',
@@ -171,8 +205,10 @@ def run():
         yaxis_title="Energie (TWh)",
         template="plotly_white",
         legend=dict(orientation="h", y=1.1, x=0.5, xanchor="center", yanchor="bottom"),
-        height=500
-    )
+        height=500)
+
 
     st.plotly_chart(fig, use_container_width=True)
 
+#st.set_page_config(layout="wide")
+#run()
