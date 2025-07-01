@@ -4,19 +4,21 @@ import importlib
 
 st.set_page_config(page_title="Dashboard", layout="wide")
 
-# Seitenoptionen
+
 pages = {
-    "Home": "home",
-    "Fahrzeugmarkt": "cars",
-    "Strombedarf": "strombedarf",
-    "Strombedarf-Simulator": "strombedarf_simulator",
-    "Stromerzeugung": "stromerzeugung",
-    "Ladeinfrastruktur-Map": "ladeinfrastruktur_map",
-    "Netz-Stress-Test": "netz_stress_test",
+    "Home":"home",
+    "Fahrzeugmarkt":"cars",
+    "Strombedarf":"strombedarf",
+    "Stromerzeugung":"stromerzeugung",
+    "Ladeinfrastruktur-Map": "chargingpoints_by_district",
+    "Entwicklung der Ladesäulen":"number_of_chargingstations",
+    "Optimierung Ladepunktverteilung":"optimierung_lp_dist",
     "Akzeptanz-Radar": "akzeptanz_radar",
     "SMARD CSV Daten": "smard_csv_daten",
     "Fazit": "fazit"
 }
+
+
 
 st.sidebar.title("🔀 Navigation")
 selection = st.sidebar.selectbox("Wähle eine Seite", list(pages.keys()))

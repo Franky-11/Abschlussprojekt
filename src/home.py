@@ -1,7 +1,7 @@
 import streamlit as st
 
 def run():
-    st.title("🚗 Deutschlands E-Mobilitätswende – Ein datenbasierter Realitätscheck")
+    st.title("Realitätscheck E-Mobilität – Ein datengetriebener Blick auf Deutschlands Weg zur Elektromobilität")
 
     st.markdown("### 🧭 Einleitung & Fragestellung")
     st.markdown("""
@@ -26,19 +26,22 @@ def run():
     st.markdown("### 📅 Untersuchungszeiträume")
     st.markdown("""
     - Rückblick auf Entwicklungstrends (bis 2020)  
-    - Status Quo: Stand 2024  
-    - Etappen-Ziele bis 2025  
-    - Ausbaupläne & Zielbild 2030  
+    - Status Quo
     - Prognosen bis 2035 und darüber hinaus
     """)
 
     st.markdown("### 🔍 Analysefokus")
     st.markdown("""
+    - Fahrzeugmarkt
     - Zusätzlicher Strombedarf durch BEVs  
-    - Belastbarkeit und Modernisierung des Stromnetzes  
-    - Flächenverfügbarkeit & Ausbaupotenzial Erneuerbarer  
-    - Wechselwirkungen zwischen Sektoren (Sektorkopplung)  
+    - Ladeinfrastruktur
+    - Stromerzeugung
     - Akzeptanz, Gesellschaft & Markt
     """)
 
     st.success("Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren.")
+
+  # Belastbarkeit und Modernisierung des Stromnetzes
+# - Flächenverfügbarkeit & Ausbaupotenzial
+   #Erneuerbarer
+#- Wechselwirkungen zwischen Sektoren(Sektorkopplung)
