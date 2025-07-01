@@ -16,7 +16,7 @@ def run():
         st.header("")
         st.write("")
 
-        st.title("Fahrzeugbestand :material/directions_car:")
+        st.title("Fahrzeugmarkt :material/directions_car:")
 
     with col2:
 
@@ -37,6 +37,8 @@ def run():
             with st.container(border=True, height=550):
                 fig1 = plot_car_fuel(df)
                 st.plotly_chart(fig1)
+                with st.popover("Quellen anzeigen"):
+                    st.markdown("**Kraftfahrzeugbundesamt**")
 
         with tab2:
             with st.container(border=True,height=550):
@@ -103,6 +105,9 @@ def run():
 
             fig=plot_bev_kreise(df_filtered,geojson_kreise)
             st.plotly_chart(fig)
+            with st.popover("Quellen anzeigen"):
+                st.markdown("""**Kraftfahrzeugbundesamt**    
+                Geojson:  OpenDataLab""")
 
 
 
@@ -142,6 +147,8 @@ def run():
             with st.container(border=True):
                 fig=plot_bev_segmente(df_long)
                 st.plotly_chart(fig)
+                with st.popover("Quellen anzeigen"):
+                    st.markdown("**Kraftfahrzeugbundesamt**")
 
 
         with tab2:
@@ -195,6 +202,15 @@ def run():
             with st.container(border=True,height=550):
                 fig=plot_prognose_bev(df_bev_prognose)
                 st.plotly_chart(fig)
+                with st.popover("Quellen anzeigen"):
+                    st.write("Studien")
+                    st.markdown("""
+                                   * **Agora Verkehrswende (Boston Consulting Group):** "Letzte Chance für 15 Millionen E-Autos bis 2030" (Langfassung).
+                                   * **Bundesverband Erneuerbare Energie e.V. (BEE):** "BEE-Mobilitätsszenarien 2045 – Eine Analyse von drei Szenarien zum Umsetzen der Klimaschutzziele bis 2045".
+                                   * **e-mobil BW GmbH, NRW.Energy4Climate GmbH (P3 automotive GmbH, Boesche Rechtsanwälte PartGmbB):** "Bidirektionales Laden in Deutschland: Marktentwicklung und Potenziale".
+                                   * **Nationale Leitstelle Ladeinfrastruktur (NOW GmbH, Reiner Lemoine Institut gGmbH):** "Ladeinfrastruktur nach 2025/2030: Szenarien für den Markthochlauf – Neuauflage 2024".
+                                   * **Intraplan, Trimode, MWP, ETR (im Auftrag des BMDV):** "Verkehrsprognose 2040 Band 6.1 E: Verkehrsentwicklungsprognose – Prognosefall 1 „Basisprognose 2040“ (Ergebnisse)".
+                                   """)
 
         with tab2:
             with st.container(border=True,height=550):
@@ -290,3 +306,5 @@ def run():
                               """, unsafe_allow_html=True)
 
 
+#st.set_page_config(layout="wide")
+#run()
