@@ -182,6 +182,32 @@ def run():
              Minis & Kleinwagen rückläufig
                 """, unsafe_allow_html=True)
 
+    #----------------TCO------------#
+
+    st.divider()
+
+    st.subheader("TCO - Total Cost Ownership")
+    col1, col2 = st.columns([4, 2])
+    with col1:
+        with st.container(border=True):
+            fig=tco_info()
+            st.plotly_chart(fig, use_container_width=True)
+            with st.popover("Quellen anzeigen"):
+                st.markdown("""
+                    * ADAC Vergleich Gesamtkosten E-Auto vs. Verbrenner:  
+                    https://www.adac.de/rund-ums-fahrzeug/auto-kaufen-verkaufen/autokosten/elektroauto-kostenvergleich/#vergleich-e-auto-vs-verbrenner
+                    * FACTSHEET TCO:  **NOW GmbH / Fraunhofer ISI** (im Auftrag des Bundesministeriums für Digitales und Verkehr (BMDV). (März 2023).  
+                     *FACTSHEET TCO: Eine Wirtschaftlichkeitsanalyse der Antriebsarten für Pkw*.
+                    """)
+
+    with col2:
+        st.markdown(":material/monitoring: **Key facts**")
+        st.markdown("🔌BEV der Mittelklasse und SUVs oft günstiger als ihre jeweiligen Verbrenner-Pendants")
+        st.markdown("🔌BEV-Kleinwagen oft nicht konkurrenzfähig gegenüber Verbrenner, erst späte Kostenparität ")
+        st.markdown("🔌Erst bei sinkenden Stromkosten und geringeren Kaufpreisen dürften E-Autos in der Gesamtkostenbilanz wieder mithalten")
+        st.write("")
+        st.markdown("🔌 Podcast zum Factsheet TCO (NOW GmbH / Fraunhofer ISI)")
+        st.audio("audio/TCO_Vergleich_2.wav", format="audio/wav")
 
 
 
@@ -306,5 +332,5 @@ def run():
                               """, unsafe_allow_html=True)
 
 
-#st.set_page_config(layout="wide")
-#run()
+st.set_page_config(layout="wide")
+run()

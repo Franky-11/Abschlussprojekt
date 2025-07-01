@@ -660,8 +660,6 @@ def plot_data_and_fit(L,k,x0,fit):
             borderwidth=0.2 ))
 
 
-
-
     return fig
 
 
@@ -674,4 +672,44 @@ def show_paramater(L,k,x0):
     st.dataframe(df,use_container_width=True)
 
 
+#----TCO---------------------#
+def tco_info():
 
+
+    data = {
+        "Strompreis (€ Cent/kWh)": [60, 45, 35, 18],
+        "Anteil günstigerer E-Autos (%)": [16, 22, 28, 36]
+    }
+    df_costs = pd.DataFrame(data)
+
+
+    df_costs = df_costs.sort_values(by="Strompreis (€ Cent/kWh)", ascending=False)
+
+
+    df_costs["Strompreis_label"] = (
+    df_costs["Strompreis (€ Cent/kWh)"]
+    .astype(int)
+    .astype(str)+ " ct")
+
+    fig = px.bar(
+        df_costs,
+        x="Strompreis_label",
+        y="Anteil günstigerer E-Autos (%)",
+        title="Anteil der Modellpaarungen mit günstigeren BEV",
+        text="Anteil günstigerer E-Autos (%)")
+
+    fig.update_traces(
+        texttemplate="%{text:.0f}%",
+        textposition="outside",marker_color=px.colors.qualitative.Pastel[0])
+
+    fig.update_yaxes(range=[0, 60])
+
+    fig.update_layout(
+        xaxis_title="Strompreis (ct/kWh)",
+        yaxis_title="Anteil Paarungen mit günstigeren BEV (%)",
+        xaxis_type="category",
+        margin=dict(t=50, b=50))
+
+    fig.update_layout(**layout())
+
+    return fig
