@@ -40,8 +40,22 @@ def run():
     """)
 
     st.success("Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren.")
+    # --- Expander für das Projektteam ---
 
-  # Belastbarkeit und Modernisierung des Stromnetzes
-# - Flächenverfügbarkeit & Ausbaupotenzial
-   #Erneuerbarer
-#- Wechselwirkungen zwischen Sektoren(Sektorkopplung)
+
+    with st.expander("Projektteam"):
+        st.markdown("""
+        Dieses Projekt wurde im Rahmen unserer Data Science-Weiterbildung erstellt.  
+        
+        Data Science Institute by Fabian Rappert / DSI Education GmbH Berlin  
+        https://data-science-institute.de 
+        
+        **Projektteam & Fokus**
+        * **Philipp Schauer** - Ladeinfrastruktur
+        * **Thomas Baur** - Projektmanagement, Stromerzeugung
+        * **Frank Schulnies** - Fahrzeugmarkt
+
+        Unser Ziel war es, ein nützliches und intuitives Tool zu entwickeln, das einen Beitrag zur Diskussion um die Zukunft der E-Mobilität leistet.
+        """)
+
+

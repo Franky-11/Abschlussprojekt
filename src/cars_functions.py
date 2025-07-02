@@ -572,6 +572,7 @@ def plot_prognose_bev(df_pivot):
     fig.update_layout(**layout())
     fig.update_layout(hovermode="closest")
     fig.update_layout(coloraxis_showscale=False)
+    fig.update_xaxes(title_text="Studie/Quelle")
 
     return fig
 
