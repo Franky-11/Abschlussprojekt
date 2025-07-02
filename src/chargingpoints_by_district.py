@@ -110,8 +110,8 @@ def run():
     # ---------- Farbskalen -------------------------------------------------- --------------------------------------------------
     max_lp = int(df_counts["Lp_summe"].max())
     scale_lp = cm.StepColormap(
-        colors=["#ffffff","#deebf7","#9ecae1","#3182bd","#08519c"],
-        index=[0,99,149,249,1999, max_lp],
+        colors=["#ffffff","#bce9f3","#8da8e8","#416fdf", "#003ac4","#000000"],
+        index=[0,99,149,249,999,1999, max_lp],
         caption="Ladepunkte je Landkreis"
     )
     max_ev = float(df_bev_lp["EV_per_LP"].max())
@@ -158,10 +158,11 @@ def run():
     overflow-wrap: break-word;
     ">
       <strong style="display:block; margin-bottom:4px;">Ladepunkte je Landkreis</strong>
-      <i style="background:#08519c;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> ≥2000<br>
-      <i style="background:#3182bd;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 250–1999<br>
-      <i style="background:#9ecae1;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 150–249<br>
-      <i style="background:#deebf7;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 100–149<br>
+      <i style="background:#000000;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> ≥2000<br>
+      <i style="background:#003ac4;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 1000–1999<br>
+      <i style="background:#416fdf;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 250–999<br>
+      <i style="background:#8da8e8;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 150–249<br>
+      <i style="background:#bce9f3;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 100–149<br>
       <i style="background:#ffffff;width:14px;height:14px;display:inline-block;margin-right:6px; border:1px solid #999;"></i> 0–99
     </div>
     '''
@@ -171,12 +172,12 @@ def run():
     ">
       <strong style="display:block; margin-bottom:4px;">EV pro Ladepunkt</strong>
       <i style="background:#b30000;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> ≥21<br>
-      <i style="background:#e34a33;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 17–21<br>
-      <i style="background:#fdae6b;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 14–17<br>
-      <i style="background:#ffffff;width:14px;height:14px;display:inline-block;margin-right:6px; border:1px solid #999;"></i> 11–14<br>
-      <i style="background:#66c2a4;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 8–11<br>
-      <i style="background:#238b45;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 5–8<br>
-      <i style="background:#00441b;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 2–5
+      <i style="background:#e34a33;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 17–20<br>
+      <i style="background:#fdae6b;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 14–16<br>
+      <i style="background:#ffffff;width:14px;height:14px;display:inline-block;margin-right:6px; border:1px solid #999;"></i> 11–13<br>
+      <i style="background:#66c2a4;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 8–10<br>
+      <i style="background:#238b45;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 5–7<br>
+      <i style="background:#00441b;width:14px;height:14px;display:inline-block;margin-right:6px;"></i> 2–4
     </div>
     '''
     # Füge Legenden vor Rendern hinzu
