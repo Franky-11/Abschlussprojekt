@@ -18,6 +18,7 @@ pages = {
     "Fazit": "conclusion",
 }
 
+
 # ───────────────────────── Sidebar ─────────────────────────
 st.sidebar.title("🔀 Navigation")
 selection = st.sidebar.selectbox("Wähle eine Seite", list(pages.keys()))
@@ -51,26 +52,11 @@ except (ModuleNotFoundError, AttributeError):
             "Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren."
         )
 
-        # ---------- Projektteam ----------
-        with st.expander("Projektteam"):
-            st.markdown(
-                """
-Dieses Projekt wurde im Rahmen unserer Data-Science-Weiterbildung erstellt.  
-<br>
-Data Science Institute by Fabian Rappert / DSI Education GmbH, Berlin  
-<https://data-science-institute.de>
 
-**Projektteam & Fokus**  
-* **Philipp Schauer** – Ladeinfrastruktur  
-* **Thomas Baur** – Projektmanagement, Stromerzeugung  
-* **Frank Schulnies** – Fahrzeugmarkt  
-
-Unser Ziel war es, ein nützliches und intuitives Tool zu entwickeln, das einen Beitrag zur Diskussion um die Zukunft der E-Mobilität leistet.
-"""
-            )
     else:
         st.error(f"Modul '{module_name}' konnte nicht geladen werden.")
 
 # ───────────────────────── Unerwartete Fehler ─────────────────────────
 except Exception as e:
     st.error(f"Fehler beim Laden von '{module_name}': {e}")
+
