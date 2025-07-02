@@ -1,41 +1,59 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import os
+import subprocess
+import pathlib
+import pydeck as pdk
+
+from fetch_power_plants import (
+    DEFAULT_DATA_PATH,
+    ENERGY_COLORS,
+    _get_mapbox_token,
+    _load_data,
+    _build_deck,
+)
+
+def _fetch_data():
+    with st.spinner("Lade aktuelle Kraftwerksdaten von Open Power System Data…"):
+        try:
+            script_path = pathlib.Path(__file__).parent / "fetch_power_plants.py"
+            subprocess.run(["python", str(script_path), "--source", "opsd"], check=True)
+            st.success("✅ Daten erfolgreich geladen.")
+        except subprocess.CalledProcessError as e:
+            st.error("❌ Fehler beim Abrufen der Daten.")
+            st.exception(e)
 
 def run():
-    st.title("⚡ Stromerzeugung in Deutschland (CSV-Daten)")
-    st.markdown("Visualisierung der **realisierten Erzeugung** nach Energieform auf Basis der SMARD-CSV-Daten.")
+    st.title("🗺️ Energielandkarte Deutschlands")
+    st.caption("Interaktive Übersicht aller Stromerzeugungsanlagen – filterbar nach Energieform.")
 
-    # Pfad zur CSV-Datei
-    csv_path = "data/smard/Realisierte_Erzeugung_202506210000_202507020000_Stunde_1.csv"
+    mapbox_token = _get_mapbox_token()
+    pdk.settings.mapbox_api_key = mapbox_token  # ✅ Mapbox API-Key für pydeck setzen
 
-    if not os.path.exists(csv_path):
-        st.warning("⚠️ CSV-Datei zur realisierten Erzeugung nicht gefunden.")
-        return
+    st.sidebar.header("⚙️ Einstellungen")
+    if st.sidebar.button("🔄 Kraftwerksdaten abrufen"):
+        _fetch_data()
 
-    try:
-        df = pd.read_csv(csv_path, sep=";", encoding="utf-8")
-        st.caption(f"✅ Geladene Spalten: {list(df.columns)}")
+    data_path = st.sidebar.text_input("Pfad zur Kraftwerks-CSV", value=DEFAULT_DATA_PATH)
+    df = _load_data(data_path)
+    if df is None or df.empty:
+        st.stop()
 
-        # Automatische Datumsspalten-Erkennung
-        datum_col = next((c for c in df.columns if "Datum" in c or "Zeit" in c), None)
-        if datum_col is None:
-            st.error("❌ Keine Spalte mit Datum/Zeitangabe gefunden.")
-            return
+    energy_types = sorted(df["type"].unique())
+    default_sel = [e for e in energy_types if e in {"Wind", "Solar"}] or energy_types
+    selection = st.sidebar.multiselect("Energieformen auswählen", energy_types, default=default_sel)
 
-        df[datum_col] = pd.to_datetime(df[datum_col], errors="coerce", dayfirst=True)
+    if not selection:
+        st.info("Bitte mindestens eine Energieform auswählen.")
+        st.stop()
 
-        # Energieformen zur Auswahl (alle Spalten außer Datum)
-        energieformen = df.columns.drop(datum_col)
-        energieform = st.selectbox("🔌 Energieform wählen", energieformen)
+    deck = _build_deck(df, selection, mapbox_token)
+    st.pydeck_chart(deck, use_container_width=True)
 
-        # Liniendiagramm
-        fig = px.line(df, x=datum_col, y=energieform,
-                      title=f"Realisierte Stromerzeugung: {energieform}",
-                      labels={datum_col: "Zeit", energieform: "Erzeugung (MW)"})
+    with st.expander("🗂️ Legende"):
+        st.dataframe(pd.DataFrame({
+            "Energieform": list(ENERGY_COLORS.keys()),
+            "Farbe (RGBA)": list(ENERGY_COLORS.values())
+        }))
 
-        st.plotly_chart(fig, use_container_width=True)
-
-    except Exception as e:
-        st.error(f"Fehler beim Verarbeiten der CSV-Datei: {e}")
+if __name__ == "__main__":
+    run()
