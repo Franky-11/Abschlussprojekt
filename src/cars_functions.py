@@ -222,20 +222,20 @@ def plot_bev(df_long,annot):
     if annot:
         annotations = [
             dict(x='2020', y=0.1, yref='paper', text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",
-                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
-                 borderwidth=1, borderpad=4),
+                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4,font=dict(color="white")),
             dict(x='2023', y=0.6, yref='paper', text="Umweltbonus endet für Firmenkunden", showarrow=True,
-                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
-                 borderpad=4),
+                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray", borderwidth=1,
+                 borderpad=4,font=dict(color="white")),
             dict(x='2024', y=0.8, yref='paper', text="Umweltbonus endet abrupt!", showarrow=True, arrowhead=2,
-                 ax=0, ay=-80, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
+                 ax=0, ay=-80, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
                  font=dict(color="red", weight="bold")),
             # dict(x='2023-01-01', y=0.05, yref='paper', text="Plug-in-Hybride nicht mehr gefördert", showarrow=True,
             # arrowhead=2, ax=0, ay=40, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
             # borderpad=4),
             dict(x='2021', y=0.2, yref='paper', text="EU-CO2-Flottenziele verschärft<br>(Herstellerdruck)",
-                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
-                 borderwidth=1, borderpad=4)
+                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4,font=dict(color="white"))
         ]
 
         fig.update_layout(annotations=annotations)
