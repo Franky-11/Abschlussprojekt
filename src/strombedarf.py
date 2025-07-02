@@ -5,19 +5,6 @@ from strombedarf_functions import *
 def run():
 
 
-    st.markdown("""
-        <style>
-        .watermark {
-            position: fixed;
-            bottom: 10%;
-            right: 5%;
-            opacity: 0.08;
-            z-index: 1;
-        }
-        </style>
-        <img class="watermark" src="images/electricity-2595842_1280.jpg" width="300">
-    """, unsafe_allow_html=True)
-
     col1,col2=st.columns([1,1])
     with col1:
         st.header("")
@@ -26,8 +13,7 @@ def run():
         st.title("Strombedarf:material/electric_bolt:")
 
     with col2:
-        pass
-        #st.image("images/electricity-2595842_1280.jpg",use_container_width=True)
+        st.image("images/electricity-2595842_1280.jpg",use_container_width=True)
 
 
     st.divider()
