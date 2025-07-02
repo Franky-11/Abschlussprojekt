@@ -38,6 +38,8 @@ def run():
                     st.markdown("""
                             * Verbauchsdaten: ADAC, TCS (Touring Club Schweiz), ÖAMTC (Österreichischer Automobil-, Motorrad- und Touring Club) 
                             * Reichweite BEV: ADAC
+                            Was ist WLTP:  
+                            WLTP steht für **Worldwide Harmonized Light-Duty Vehicles Test Procedure** (Weltweit harmonisiertes Prüfverfahren für leichte Nutzfahrzeuge).  
                             """)
 
 
