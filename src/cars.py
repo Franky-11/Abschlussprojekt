@@ -4,6 +4,7 @@ import time
 from watermarks import set_watermark
 set_watermark("images/watermark/cars.jpg")
 
+
 #from cars_functions import read_geojson
 
 def run():
