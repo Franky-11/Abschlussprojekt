@@ -268,5 +268,5 @@ def run():
         fig=plot_fig(st.session_state.check)
         st.plotly_chart(fig, use_container_width=True)
 
-st.set_page_config(layout="wide")
-run()
+#st.set_page_config(layout="wide")
+#run()
