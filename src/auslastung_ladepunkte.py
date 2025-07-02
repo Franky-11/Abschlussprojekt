@@ -119,167 +119,265 @@ def info_box():
 
 
 
+def alt():
+
+    # ————— Oberfläche —————
+
+    if "szenario_df" not in st.session_state:
+        st.session_state.szenario_df = pd.DataFrame()
+
+
+    st.header("⚡ Ladeinfrastruktur-Auslastung")
+
+
+    with st.container(border=True):
+        with st.popover("📘 Berechnungsgrundlagen", use_container_width=True):
+            info_box()
+
+        col_bev,col_tank,col_prog=st.columns(3)
+        # BEV-Parameter
+        with col_bev:
+            with st.popover("🔌 BEV-Parameter (öffentliches Laden)"):
+                #bev = st.number_input("Anzahl BEV", value=1_650_000, step=100_000)
+                ladepunkte = st.number_input("Anzahl Ladepunkte", value=170_000, step=10_000)
+                jahres_km = st.number_input("Jahresfahrleistung (km)", value=12_000,step=1000)
+                reichweite_bev = st.slider("Reichweite BEV (km)", 200, 500, 300)
+                ladeanteil = st.slider("Anteil BEV mit Ladebedarf (%)", 0, 100, 20) / 100
+
+                st.markdown("##### 🔄 Ladezeiten & Typ-Mix")
+                normzeit = st.slider("⏱️ Ladezeit Normalladepunkt (min)", 120, 360, 120)
+                schnellzeit = st.slider("⚡ Ladezeit Schnellladepunkt (min)", 10, 60, 30)
+                schnellanteil = st.slider("Anteil Schnellladepunkte (%)", 0, 100, 27) / 100
+                mittlere_ladezeit = gewichtete_ladezeit(normzeit, schnellzeit, schnellanteil)
+
+                st.info(f"Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min** bei {int(schnellanteil*100)} % Schnellladepunkten")
+        with col_tank:
+            # Schwellenwert-Parameter
+            with st.popover("⛽ Referenz-Schwellenwert"):
+               # pkw = st.number_input("Anzahl PKW", value=47_000_000)
+               # tankstellen = st.number_input("Anzahl Tankstellen", value=14_800)
+                #zapf = st.slider("Zapfsäulen je Tankstelle", 1, 20, 7)
+                pkw = 47304737
+                tankstellen = 14300
+                zapf = 7
+                st.markdown(
+                    f"""
+                       <div style="background-color:#1e1e1e;padding:10px;border-radius:6px;">
+                           <strong>🔧 Referenz: Verbrennerbasierte Auslastung</strong><br>
+                           🚗 Verbrenner-Fahrzeuge: <strong>{pkw / 1E6:.1f} Mio.</strong><br>
+                           ⛽ Zapfsäulen (gesamt): <strong>{(tankstellen * zapf) / 1E3:.1f} Tsd.</strong><br>
+                           <span style="font-size: 0.9em; color: #666;">Aus diesen Werten wird die Auslastung (h/a) je Zapfsäule berechnet</span>
+                       </div>
+                       """,
+                    unsafe_allow_html=True
+                )
+                st.write("")
+                reichweite = st.slider("Verbraucher-Reichweite (km)", 500, 900, 600)
+                tankzeit = st.slider("Tankzeit (min)", 1, 30, 5)
 
 
 
-# ————— Oberfläche —————
 
-if "szenario_df" not in st.session_state:
-    st.session_state.szenario_df = pd.DataFrame()
+                if st.checkbox("Eingabe Referenz-Auslastung"):
+                    y_schwelle=st.number_input("Referenz-Auslastung (h/a)", value=500, step=100)
+                else:
+                    y_schwelle = berechne_schwellenwert(pkw, tankstellen, zapf, jahres_km, reichweite, tankzeit)
+
+            st.metric(label="Ausgewählte Referenz-Auslastung pro Ladepunkt", value=f"{y_schwelle:,.0f} h/a")
+
+                # Simulation
+
+            bev_sim=np.arange(0,52,0.1)*1E6
+
+            auslastung_bev_sim=berechne_auslastung(bev_sim, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil)           #((jahres_km/reichweite_bev)*(mittlere_ladezeit/60)*bev_sim*ladeanteil)/(ladepunkte)
+
+            x_schnitt = float(np.interp(y_schwelle, auslastung_bev_sim, bev_sim))
 
 
 
+        with col_prog:
+            bev_prog = st.number_input("BEV-Fahrzeuge (Mio.)", value=1.65,step=1.0) * 1E6
+            ladepunkt_bedarf_for_schwelle = ((jahres_km / reichweite_bev) * (
+                        mittlere_ladezeit / 60) * bev_prog * ladeanteil) / (y_schwelle)
+            ladepunkte_differenz = (ladepunkt_bedarf_for_schwelle - ladepunkte) / ladepunkte * 100
 
+            st.metric(label=f"Bedarf Ladepunkte für Referenz-Auslastung von {y_schwelle:,.0f}h/a und {bev_prog/1e6:,.1f} Mio. BEV", value=f"{ladepunkt_bedarf_for_schwelle:,.0f}",
+                      delta=f"{ladepunkte_differenz:,.1f}% in Bezug zu {ladepunkte:,.0f} Ladepunkten", delta_color="inverse")
 
+        with col_bev:
+            df_long = read_df_fuel()
+            # bev_aktuell=df_long[df_long["Kraftstoff"] == "BEV"]["Wert"].max()
+            auslastung_ladepunkt=berechne_auslastung(bev_prog, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil)
+            diff_referenz_auslastung=(auslastung_ladepunkt-y_schwelle)/y_schwelle*100
 
-st.header("⚡ Ladeinfrastruktur-Auslastung")
-
-
-with st.container(border=True):
-    with st.popover("📘 Berechnungsgrundlagen", use_container_width=True):
-        info_box()
-
-    col_bev,col_tank,col_prog=st.columns(3)
-    # BEV-Parameter
-    with col_bev:
-        with st.popover("🔌 BEV-Parameter (öffentliches Laden)"):
-            #bev = st.number_input("Anzahl BEV", value=1_650_000, step=100_000)
-            ladepunkte = st.number_input("Anzahl Ladepunkte", value=170_000, step=10_000)
-            jahres_km = st.number_input("Jahresfahrleistung (km)", value=12_000,step=1000)
-            reichweite_bev = st.slider("Reichweite BEV (km)", 200, 500, 300)
-            ladeanteil = st.slider("Anteil BEV mit Ladebedarf (%)", 0, 100, 20) / 100
-
-            st.markdown("##### 🔄 Ladezeiten & Typ-Mix")
-            normzeit = st.slider("⏱️ Ladezeit Normalladepunkt (min)", 120, 360, 120)
-            schnellzeit = st.slider("⚡ Ladezeit Schnellladepunkt (min)", 10, 60, 30)
-            schnellanteil = st.slider("Anteil Schnellladepunkte (%)", 0, 100, 27) / 100
-            mittlere_ladezeit = gewichtete_ladezeit(normzeit, schnellzeit, schnellanteil)
-
-            st.info(f"Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min** bei {int(schnellanteil*100)} % Schnellladepunkten")
-    with col_tank:
-        # Schwellenwert-Parameter
-        with st.popover("⛽ Referenz-Schwellenwert"):
-           # pkw = st.number_input("Anzahl PKW", value=47_000_000)
-           # tankstellen = st.number_input("Anzahl Tankstellen", value=14_800)
-            #zapf = st.slider("Zapfsäulen je Tankstelle", 1, 20, 7)
-            pkw = 47304737
-            tankstellen = 14300
-            zapf = 7
+            st.metric(f"∅ Auslastung pro Ladepunkt ",
+                      value=f"{auslastung_ladepunkt:.0f} h/a",delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung",delta_color="inverse")
             st.markdown(
                 f"""
-                   <div style="background-color:#1e1e1e;padding:10px;border-radius:6px;">
-                       <strong>🔧 Referenz: Verbrennerbasierte Auslastung</strong><br>
-                       🚗 Verbrenner-Fahrzeuge: <strong>{pkw / 1E6:.1f} Mio.</strong><br>
-                       ⛽ Zapfsäulen (gesamt): <strong>{(tankstellen * zapf) / 1E3:.1f} Tsd.</strong><br>
-                       <span style="font-size: 0.9em; color: #666;">Aus diesen Werten wird die Auslastung (h/a) je Zapfsäule berechnet</span>
-                   </div>
-                   """,
-                unsafe_allow_html=True
+                **🔢 Parameterübersicht**  
+                {bev_prog / 1e6:.1f} Mio. BEV • 
+                Ladeanteil: {ladeanteil * 100:.0f}% • Ladepunkte: {ladepunkte:,.0f}
+                """
             )
-            st.write("")
-            reichweite = st.slider("Verbraucher-Reichweite (km)", 500, 900, 600)
-            tankzeit = st.slider("Tankzeit (min)", 1, 30, 5)
 
+        st.write("")
 
-
-
-            if st.checkbox("Eingabe Referenz-Auslastung"):
-                y_schwelle=st.number_input("Referenz-Auslastung (h/a)", value=500, step=100)
-            else:
-                y_schwelle = berechne_schwellenwert(pkw, tankstellen, zapf, jahres_km, reichweite, tankzeit)
-
-        st.metric(label="Ausgewählte Referenz-Auslastung pro Ladepunkt", value=f"{y_schwelle:,.0f} h/a")
-
-            # Simulation
-
-        bev_sim=np.arange(0,52,0.1)*1E6
-
-        auslastung_bev_sim=berechne_auslastung(bev_sim, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil)           #((jahres_km/reichweite_bev)*(mittlere_ladezeit/60)*bev_sim*ladeanteil)/(ladepunkte)
-
-        x_schnitt = float(np.interp(y_schwelle, auslastung_bev_sim, bev_sim))
-
-
-
-    with col_prog:
-        bev_prog = st.number_input("BEV-Fahrzeuge (Mio.)", value=1.65,step=1.0) * 1E6
-        ladepunkt_bedarf_for_schwelle = ((jahres_km / reichweite_bev) * (
-                    mittlere_ladezeit / 60) * bev_prog * ladeanteil) / (y_schwelle)
-        ladepunkte_differenz = (ladepunkt_bedarf_for_schwelle - ladepunkte) / ladepunkte * 100
-
-        st.metric(label=f"Bedarf Ladepunkte für Referenz-Auslastung von {y_schwelle:,.0f}h/a und {bev_prog/1e6:,.1f} Mio. BEV", value=f"{ladepunkt_bedarf_for_schwelle:,.0f}",
-                  delta=f"{ladepunkte_differenz:,.1f}% in Bezug zu {ladepunkte:,.0f} Ladepunkten", delta_color="inverse")
-
-    with col_bev:
-        df_long = read_df_fuel()
-        # bev_aktuell=df_long[df_long["Kraftstoff"] == "BEV"]["Wert"].max()
-        auslastung_ladepunkt=berechne_auslastung(bev_prog, ladepunkte, jahres_km, reichweite_bev, mittlere_ladezeit, ladeanteil)
-        diff_referenz_auslastung=(auslastung_ladepunkt-y_schwelle)/y_schwelle*100
-
-        st.metric(f"∅ Auslastung pro Ladepunkt ",
-                  value=f"{auslastung_ladepunkt:.0f} h/a",delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung",delta_color="inverse")
+        # ————— Plot —————
         st.markdown(
             f"""
-            **🔢 Parameterübersicht**  
-            {bev_prog / 1e6:.1f} Mio. BEV • 
-            Ladeanteil: {ladeanteil * 100:.0f}% • Ladepunkte: {ladepunkte:,.0f}
-            """
+            🚦 **Referenz-Auslastung:** {y_schwelle:,.0f} h/a<br>
+            📍 **Erreicht bei:** {x_schnitt / 1E6:.0f} M BEV-Fahrzeugen<br>
+            🔌 **Anzahl Ladepunkte:** {ladepunkte:,.0f}
+            """,
+            unsafe_allow_html=True
         )
 
-    st.write("")
+        fig=plot_auslastung(bev_sim, auslastung_bev_sim, x_schnitt, y_schwelle, ladepunkte)
+        st.plotly_chart(fig, use_container_width=True)
 
-    # ————— Plot —————
-    st.markdown(
-        f"""
-        🚦 **Referenz-Auslastung:** {y_schwelle:,.0f} h/a<br>
-        📍 **Erreicht bei:** {x_schnitt / 1E6:.0f} M BEV-Fahrzeugen<br>
-        🔌 **Anzahl Ladepunkte:** {ladepunkte:,.0f}
-        """,
-        unsafe_allow_html=True
+
+
+        if st.button("➕ Szenario speichern"):
+            szenario_id = len(st.session_state.szenario_df) + 1
+
+            df_row = pd.DataFrame([{
+                "Szenario": szenario_id,
+                "BEV-Fahrzeuge": bev_prog,
+                "Anteil_Ladebedarf": ladeanteil,
+                "Jahresfahrleistung (km)": jahres_km,
+                "Reichweite_BEV (km)": reichweite_bev,
+                "Ladepunkte": ladepunkte,
+                "Ladezeit_Normal (min)": normzeit,
+                "Ladezeit_Schnell (min)": schnellzeit,
+                "Anteil_Schnell": schnellanteil,
+                "Mittlere_Ladezeit (min)": int(mittlere_ladezeit),
+                "Auslastung_Ladepunkt (h/a)": int(auslastung_ladepunkt),
+                "Referenz_Auslastung (h/a)": int(y_schwelle),
+                "BEV an Ref.-Auslastung": int(x_schnitt),
+                "Bedarf Ladepunkte (bei Ref-Auslastung, BEV-Fahrzeuge)":int(ladepunkt_bedarf_for_schwelle)
+            }])
+
+            st.session_state.szenario_df = pd.concat([st.session_state.szenario_df, df_row], ignore_index=True)
+            st.success("Szenario gespeichert.")
+
+        if st.button("❌ Alle Szenarien löschen"):
+            st.session_state.szenario_df = pd.DataFrame()
+            st.warning("Alle Szenarien gelöscht.")
+
+
+
+
+        with st.popover("📋 Szenarien-Tabelle", use_container_width=True):
+            st.dataframe(
+                st.session_state.szenario_df,
+                hide_index=True,
+                use_container_width=True
+            )
+
+
+#-------------------------------------------------------------------------------------------------------#
+
+st.divider()
+
+col1,col2,col3=st.columns([1,1,1])
+
+with col1:
+    with st.popover("🔌 BEV-Parameter (öffentliches Laden)"):
+        # bev = st.number_input("Anzahl BEV", value=1_650_000, step=100_000)
+        bev_lp_ratio=st.slider("∅ BEV/Ladepunkt", 2, 80, 12)
+        jahres_km = st.number_input("Jahresfahrleistung (km)", value=12_000, step=1000)
+        reichweite_bev = st.slider("Reichweite BEV (km)", 200, 500, 300)
+        ladeanteil = st.slider("Anteil BEV mit Ladebedarf (%)", 0, 100, 20) / 100
+
+        st.markdown("##### 🔄 Ladezeiten & Typ-Mix")
+        normzeit = st.slider("⏱️ Ladezeit Normalladepunkt (min)", 120, 360, 120)
+        schnellzeit = st.slider("⚡ Ladezeit Schnellladepunkt (min)", 10, 60, 30)
+        schnellanteil = st.slider("Anteil Schnellladepunkte (%)", 0, 100, 27) / 100
+        mittlere_ladezeit = schnellanteil * schnellzeit + (1 - schnellanteil) * normzeit
+
+        st.info(
+            f"Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min** bei {int(schnellanteil * 100)} % Schnellladepunkten")
+
+
+
+with col3:
+    with st.popover("⛽ Referenz-Schwellenwert"):
+        # pkw = st.number_input("Anzahl PKW", value=47_000_000)
+        # tankstellen = st.number_input("Anzahl Tankstellen", value=14_800)
+        # zapf = st.slider("Zapfsäulen je Tankstelle", 1, 20, 7)
+        pkw = 47304737
+        tankstellen = 14300
+        zapf = 7
+        st.markdown(
+            f"""
+                      <div style="background-color:#1e1e1e;padding:10px;border-radius:6px;">
+                          <strong>🔧 Referenz: Verbrennerbasierte Auslastung</strong><br>
+                          🚗 Verbrenner-Fahrzeuge: <strong>{pkw / 1E6:.1f} Mio.</strong><br>
+                          ⛽ Zapfsäulen (gesamt): <strong>{(tankstellen * zapf) / 1E3:.1f} Tsd.</strong><br>
+                          <span style="font-size: 0.9em; color: #666;">Aus diesen Werten wird die Auslastung (h/a) je Zapfsäule berechnet</span>
+                      </div>
+                      """,
+            unsafe_allow_html=True
+        )
+        st.write("")
+        reichweite = st.slider("Verbraucher-Reichweite (km)", 500, 900, 600)
+        tankzeit = st.slider("Tankzeit (min)", 1, 30, 5)
+
+
+
+
+with col2:
+    auslastung_ladepunkt = (jahres_km / reichweite_bev) * (mittlere_ladezeit / 60) * bev_lp_ratio * ladeanteil
+    ref = ((jahres_km / reichweite) * (tankzeit / 60) * pkw)/(tankstellen*zapf)
+    diff_referenz_auslastung = (auslastung_ladepunkt - ref) / ref * 100
+
+    st.metric(f"∅ Auslastung pro Ladepunkt ",
+              value=f"{auslastung_ladepunkt:.0f} h/a",
+              delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung", delta_color="inverse")
+
+    # --- Gauge Chart for Utilization ---
+    # Determine max value for the gauge axis
+    gauge_max_value = max(ref * 1.5, auslastung_ladepunkt * 1.2, 1000)
+    gauge_min_value = 0
+
+    # Define thresholds for color coding based on the reference value
+    threshold_green_yellow = ref * 0.5
+    threshold_yellow_red = ref
+
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number+delta",
+        value=auslastung_ladepunkt,
+        domain={'x': [0, 1], 'y': [0, 1]},
+        title={'text': "<b>Auslastung Ladepunkt (h/a)</b>", 'font': {'size': 20, 'color': 'white'}},
+        # Title color for dark theme
+        delta={'reference': ref, 'relative': True, 'valueformat': ".1%", 'font': {'size': 16, 'color': 'white'}},
+        # Delta color for dark theme
+        gauge={
+            'axis': {'range': [gauge_min_value, gauge_max_value], 'tickwidth': 1, 'tickcolor': "darkblue",
+                     'tickfont': {'color': 'white'}},  # Tick color for dark theme
+            'bar': {'color': "cyan", 'thickness': 0.75},  # Make the bar transparent to use step colors
+            'bgcolor': "rgba(0,0,0,0)",  # Transparent background for the gauge itself
+            'borderwidth': 2,
+            'bordercolor': "gray",
+            'steps': [
+                {'range': [gauge_min_value, threshold_green_yellow], 'color': "green"},
+                {'range': [threshold_green_yellow, threshold_yellow_red], 'color': "yellow"},
+                {'range': [threshold_yellow_red, gauge_max_value], 'color': "red"}
+            ],
+            'threshold': {
+                'line': {'color': "white", 'width': 4},  # Reference line color for dark theme
+                'thickness': 0.75,
+                'value': ref
+            }
+        }
+    ))
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",  # Transparent background for the entire figure to match Streamlit's theme
+        font={'color': "white", 'family': "Arial"},  # Default font color for the plot
+        margin=dict(l=20, r=20, t=50, b=20)  # Adjust margins for better fit
     )
 
-    fig=plot_auslastung(bev_sim, auslastung_bev_sim, x_schnitt, y_schwelle, ladepunkte)
     st.plotly_chart(fig, use_container_width=True)
-
-
-
-    if st.button("➕ Szenario speichern"):
-        szenario_id = len(st.session_state.szenario_df) + 1
-
-        df_row = pd.DataFrame([{
-            "Szenario": szenario_id,
-            "BEV-Fahrzeuge": bev_prog,
-            "Anteil_Ladebedarf": ladeanteil,
-            "Jahresfahrleistung (km)": jahres_km,
-            "Reichweite_BEV (km)": reichweite_bev,
-            "Ladepunkte": ladepunkte,
-            "Ladezeit_Normal (min)": normzeit,
-            "Ladezeit_Schnell (min)": schnellzeit,
-            "Anteil_Schnell": schnellanteil,
-            "Mittlere_Ladezeit (min)": int(mittlere_ladezeit),
-            "Auslastung_Ladepunkt (h/a)": int(auslastung_ladepunkt),
-            "Referenz_Auslastung (h/a)": int(y_schwelle),
-            "BEV an Ref.-Auslastung": int(x_schnitt),
-            "Bedarf Ladepunkte (bei Ref-Auslastung, BEV-Fahrzeuge)":int(ladepunkt_bedarf_for_schwelle)
-        }])
-
-        st.session_state.szenario_df = pd.concat([st.session_state.szenario_df, df_row], ignore_index=True)
-        st.success("Szenario gespeichert.")
-
-    if st.button("❌ Alle Szenarien löschen"):
-        st.session_state.szenario_df = pd.DataFrame()
-        st.warning("Alle Szenarien gelöscht.")
-
-
-
-
-    with st.popover("📋 Szenarien-Tabelle", use_container_width=True):
-        st.dataframe(
-            st.session_state.szenario_df,
-            hide_index=True,
-            use_container_width=True
-        )
-
-
-
 
 

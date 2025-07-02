@@ -122,11 +122,11 @@ def run():
 
 
     st.title("🔌 Strombedarf-Simulator")
-    st.markdown("Berechne den jährlichen Strombedarf bei vollständiger Elektrifizierung des Straßenverkehrs.")
+    st.markdown("Berechnung des BEV-Strombedarfs für verschiedene Szenarien")
 
     st.sidebar.header("📊 Eingaben")
     szenario = st.sidebar.radio("Szenario", ["2025", "2030", "2035"])
-    fahrzeuge = st.sidebar.slider("Fahrzeuganzahl (in Mio.)", 1, 52, 15) * 1_000_000
+    fahrzeuge = st.sidebar.slider("Fahrzeuganzahl (in Mio.)", 1, 52, 2) * 1_000_000
     verbrauch = st.sidebar.slider("Verbrauch (kWh / 100 km)", 10, 25, 20)
     jahres_km = st.sidebar.slider("Jahresfahrleistung (km)", 8000, 20000, 12000)
     lastmanagement = st.sidebar.checkbox("Lastmanagement aktivieren")
@@ -135,7 +135,7 @@ def run():
     strombedarf = strombedarf_szenarien(fahrzeuge, verbrauch, jahres_km)
     strombedarf_twh = strombedarf / 1e9
 
-    st.metric("🔋 Strombedarf gesamt", f"{strombedarf_twh:.2f} TWh")
+    st.metric("🔋 Strombedarf gesamt", f"{strombedarf_twh:.2f} TWh für {szenario}")
 
     df = pd.DataFrame({
         "Szenario": [szenario],
@@ -152,7 +152,7 @@ def run():
     # --- Plotly Stacked Bar Chart: Strombedarf vs. EE ---
     jahre = list(range(2025, 2036))
    # bev_bedarf = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
-    ee_erzeugung = [260, 275, 290, 305, 320, 340, 360, 375, 385, 395, 400]
+    ee_erzeugung = [12.139*jahr-24280 for jahr in jahre]          ## Gesamt Stromerzeugung aus erneuerbaren energien, Prognose nach UBA Daten
     ee={jahr:tw for jahr,tw in zip(jahre,ee_erzeugung)}
 
    # rest_ee = [ee - bev for ee, bev in zip(ee_erzeugung, bev_bedarf)]
@@ -179,36 +179,79 @@ def run():
         (jahr, val) for jahr, val in st.session_state.strombedarf_szenarien.items() if val is not None ])
 
     rest_ee = [ee[jahr]-bedarf for jahr,bedarf in zip(jahre_szen,bedarf_szen)]
+    bev_prozent=[(bedarf/ee[jahr])*100 for jahr,bedarf in zip(jahre_szen,bedarf_szen)]
 
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        name="🔋 BEV-Strombedarf",
-        x=jahre_szen,
-        #y=bev_bedarf,
-        y=bedarf_szen,
-        text=[f"{y:.1f} TWh" for y in bedarf_szen],
-        textfont=dict(size=18),
-        marker_color="#636EFA"))
+    def plot_fig(check):
+        fig = go.Figure()
+        if not check:
+            fig.add_trace(go.Bar(
+                name="🔋 BEV-Strombedarf",
+                x=jahre_szen,
+                #y=bev_bedarf,
+                y=bedarf_szen,
+                text=[f"{y:.1f} TWh" for y in bedarf_szen],
+                textfont=dict(size=18),
+                marker_color="#636EFA"))
 
-    fig.add_trace(go.Bar(
-        name="🌿 Restliche EE-Erzeugung",
-       # x=jahre,
-        x=jahre_szen,
-        #y=rest_ee,
-        y=rest_ee,
-        marker_color="#00CC96"))
+            fig.add_trace(go.Bar(
+                name="🌿 Gesamterzeugung aus EE",
+               # x=jahre,
+                x=jahre_szen,
+                #y=rest_ee,
+                y=rest_ee,
+                marker_color="#00CC96"))
 
-    fig.update_layout(
-        barmode='stack',
-        title="⚡ Strombedarf der E-Mobilität vs. EE-Erzeugung (2025–2035)",
-        xaxis_title="Jahr",
-        yaxis_title="Energie (TWh)",
-        template="plotly_white",
-        legend=dict(orientation="h", y=1.1, x=0.5, xanchor="center", yanchor="bottom"),
-        height=500)
+            fig.update_layout(
+                barmode='stack',
+               # title="⚡ Strombedarf der E-Mobilität vs. EE-Erzeugung (2025–2035)",
+               # xaxis_title="Jahr",
+                yaxis_title="Energie (TWh)",
+                template="plotly_white",
+                legend=dict(orientation="h", y=1.1, x=0.5, xanchor="center", yanchor="bottom"),
+                height=500)
+        else:
+            fig.add_trace(go.Bar(
+                name="🔋 Anteil BEV-Strombedarf",
+                x=jahre_szen,
+                # y=bev_bedarf,
+                y=bev_prozent,
+                text=[f"{y:.1f}%" for y in bev_prozent],
+                textfont=dict(size=18),
+                marker_color="#636EFA"))
+
+            gewuenschte_jahre_ticks = [2025, 2030, 2035]
+
+            fig.update_layout(
+                barmode='stack',
+                #title="⚡ Strombedarf der E-Mobilität vs. EE-Erzeugung (2025–2035)",
+                #xaxis_title="Jahr",
+                yaxis_title="Anteil Strombedarf BEV (%)",
+                # Beachte, dass dein BEV-Anteil auf einer anderen Skala ist, was beim Stacken problematisch sein könnte.
+                # Vielleicht willst du hier eine sekundäre Y-Achse für den Prozentanteil?
+                template="plotly_white",
+                legend=dict(orientation="h", y=1.1, x=0.5, xanchor="center", yanchor="bottom"),
+                height=500,
+                xaxis=dict(
+                    tickmode='array',  # Wichtig: Sagt Plotly, dass du die Ticks manuell setzt
+                    tickvals=gewuenschte_jahre_ticks,  # Die Werte, an denen die Ticks erscheinen sollen
+                    ticktext=[str(jahr) for jahr in gewuenschte_jahre_ticks]  # Die Beschriftungen für die Ticks
+                )
+            )
 
 
-    st.plotly_chart(fig, use_container_width=True)
+
+        return fig
+
+    if "check" not in st.session_state:
+        st.session_state.check=False
+
+
+
+    with st.container(border=True, height=600):
+        st.markdown("⚡ Strombedarf der E-Mobilität vs. Gesamterzeugung aus erneuerbaren Energien (EE)")
+        st.session_state.check = st.checkbox("Anteil Strombedarf BEV an EE")
+        fig=plot_fig(st.session_state.check)
+        st.plotly_chart(fig, use_container_width=True)
 
 #st.set_page_config(layout="wide")
 #run()

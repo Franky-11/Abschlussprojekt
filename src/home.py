@@ -25,7 +25,7 @@ def run():
 
     st.markdown("### 📅 Untersuchungszeiträume")
     st.markdown("""
-    - Rückblick auf Entwicklungstrends (bis 2020)  
+    - Rückblick auf Entwicklungstrends 
     - Status Quo
     - Prognosen bis 2035 und darüber hinaus
     """)

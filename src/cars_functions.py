@@ -222,20 +222,20 @@ def plot_bev(df_long,annot):
     if annot:
         annotations = [
             dict(x='2020', y=0.1, yref='paper', text="Innovationsprämie startet<br>(Verdopplung Umweltbonus)",
-                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
-                 borderwidth=1, borderpad=4),
+                 showarrow=True, arrowhead=2, ax=-120, ay=-100, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4,font=dict(color="white")),
             dict(x='2023', y=0.6, yref='paper', text="Umweltbonus endet für Firmenkunden", showarrow=True,
-                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
-                 borderpad=4),
+                 arrowhead=2, ax=-180, ay=-60, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray", borderwidth=1,
+                 borderpad=4,font=dict(color="white")),
             dict(x='2024', y=0.8, yref='paper', text="Umweltbonus endet abrupt!", showarrow=True, arrowhead=2,
-                 ax=0, ay=-80, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
+                 ax=0, ay=-80, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="red", borderwidth=2, borderpad=4,
                  font=dict(color="red", weight="bold")),
             # dict(x='2023-01-01', y=0.05, yref='paper', text="Plug-in-Hybride nicht mehr gefördert", showarrow=True,
             # arrowhead=2, ax=0, ay=40, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray", borderwidth=1,
             # borderpad=4),
             dict(x='2021', y=0.2, yref='paper', text="EU-CO2-Flottenziele verschärft<br>(Herstellerdruck)",
-                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(255, 255, 255, 0.8)", bordercolor="gray",
-                 borderwidth=1, borderpad=4)
+                 showarrow=True, arrowhead=2, ax=0, ay=-100, bgcolor="rgba(50, 50, 50, 0.8)", bordercolor="gray",
+                 borderwidth=1, borderpad=4,font=dict(color="white"))
         ]
 
         fig.update_layout(annotations=annotations)
@@ -660,8 +660,6 @@ def plot_data_and_fit(L,k,x0,fit):
             borderwidth=0.2 ))
 
 
-
-
     return fig
 
 
@@ -674,4 +672,44 @@ def show_paramater(L,k,x0):
     st.dataframe(df,use_container_width=True)
 
 
+#----TCO---------------------#
+def tco_info():
 
+
+    data = {
+        "Strompreis (€ Cent/kWh)": [60, 45, 35, 18],
+        "Anteil günstigerer E-Autos (%)": [16, 22, 28, 36]
+    }
+    df_costs = pd.DataFrame(data)
+
+
+    df_costs = df_costs.sort_values(by="Strompreis (€ Cent/kWh)", ascending=False)
+
+
+    df_costs["Strompreis_label"] = (
+    df_costs["Strompreis (€ Cent/kWh)"]
+    .astype(int)
+    .astype(str)+ " ct")
+
+    fig = px.bar(
+        df_costs,
+        x="Strompreis_label",
+        y="Anteil günstigerer E-Autos (%)",
+        title="Anteil der Modellpaarungen mit günstigeren BEV",
+        text="Anteil günstigerer E-Autos (%)")
+
+    fig.update_traces(
+        texttemplate="%{text:.0f}%",
+        textposition="outside",marker_color=px.colors.qualitative.Pastel[0])
+
+    fig.update_yaxes(range=[0, 60])
+
+    fig.update_layout(
+        xaxis_title="Strompreis (ct/kWh)",
+        yaxis_title="Anteil Paarungen mit günstigeren BEV (%)",
+        xaxis_type="category",
+        margin=dict(t=50, b=50))
+
+    fig.update_layout(**layout())
+
+    return fig
