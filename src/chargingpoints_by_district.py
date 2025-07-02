@@ -11,6 +11,8 @@ import branca.colormap as cm
 from folium.plugins import DualMap
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
+from watermarks import set_watermark
+set_watermark("images/watermark/chargingpoints_pic.png")
 
 
 def run():
@@ -21,15 +23,15 @@ def run():
    # pass
 
     # ---------- Titelbereich ------------------------------------------------
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        st.title("Ladepunkteinfrastruktur :material/ev_station:")
-        st.write("***Gesamt:*** 169.082 Ladepunkte")
-        st.write("***Normalladepunkte:*** 129.450")
-        st.write("***Schnellladepunkte:*** 39.632")
-        st.write("***Wallboxen:*** 1 Mio.")
-    with col2:
-        st.image("images/charging-station-4636710_1920.jpg", use_container_width=True)
+#   col1, col2 = st.columns([1, 1])
+#   with col1:
+    st.title("Ladepunkteinfrastruktur :material/ev_station:")
+    st.write("***Gesamt:*** 169.082 Ladepunkte")
+    st.write("***Normalladepunkte:*** 129.450")
+    st.write("***Schnellladepunkte:*** 39.632")
+    st.write("***Wallboxen:*** 1 Mio.")
+#    with col2:
+#        st.image("images/charging-station-4636710_1920.jpg", use_container_width=True)
     st.divider()
 
     # ---------- Daten einlesen ----------------------------------------------

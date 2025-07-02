@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.express as px
 import os
 from pathlib import Path
+from watermarks import set_watermark
+set_watermark("images/watermark/chargingpoints_pic.png")
 
 # ────────────────────────────────────────────────────────────────
 # Helfer

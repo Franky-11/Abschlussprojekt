@@ -119,24 +119,6 @@ def _build_deck(df, selection, mapbox_token):
         tooltip={"text": "{name} ({type})\n{capacity_mw} MW"},
         mapbox_key=mapbox_token,
     )
-# def _build_deck(df, selection, mapbox_token):
-#   filtered = df[df["type"].isin(selection)]
-#    layer = pdk.Layer(
-#        "ScatterplotLayer",
-#        data=filtered,
-#        get_position="[lon, lat]",
-#        get_color="color",
-#        get_radius=5000,
-#        pickable=True,
-#    )
-#    return pdk.Deck(
-#        layers=[layer],
-#        initial_view_state=pdk.ViewState(latitude=51, longitude=10, zoom=5, pitch=0),
-#        tooltip={"text": "{name} ({type})\n{capacity_mw} MW"},
-#        map_style="mapbox://styles/mapbox/light-v9",
-#        mapbox_key=mapbox_token,
-#    )
-
 def _save_to_csv(df: pd.DataFrame, path: str):
     os.makedirs(pathlib.Path(path).parent, exist_ok=True)
     df.to_csv(path, index=False)

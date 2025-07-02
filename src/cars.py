@@ -1,6 +1,8 @@
 import streamlit as st
 from cars_functions import *
 import time
+from watermarks import set_watermark
+set_watermark("images/watermark/cars.jpg")
 
 #from cars_functions import read_geojson
 
@@ -11,16 +13,16 @@ def run():
 
 
 
-    col1,col2=st.columns([4,2])
-    with col1:
-        st.header("")
-        st.write("")
+#    col1,col2=st.columns([4,2])
+#    with col1:
+#        st.header("")
+#        st.write("")
 
-        st.title("Fahrzeugmarkt :material/directions_car:")
+    st.title("Fahrzeugmarkt :material/directions_car:")
 
-    with col2:
+#    with col2:
 
-        st.image("images/cars_2.jpg",use_container_width=True)
+#        st.image("images/cars_2.jpg",use_container_width=True)
 
     st.divider()
 

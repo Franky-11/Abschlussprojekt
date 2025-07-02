@@ -1,5 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+from watermarks import set_watermark
+set_watermark("images/watermark/chargingpoints_pic.png")
 from matplotlib.ticker import FuncFormatter
 
 from chargingpoints_functions import load_data

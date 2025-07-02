@@ -3,6 +3,8 @@ import pandas as pd
 import subprocess
 import pathlib
 import pydeck as pdk
+from watermarks import set_watermark
+set_watermark("images/watermark/chargingpoints_pic.png")
 
 from fetch_power_plants import (
     DEFAULT_DATA_PATH,

@@ -1,47 +1,41 @@
+
 import streamlit as st
+import importlib
 
-def run():
-    st.title("Realitätscheck E-Mobilität – Ein datengetriebener Blick auf Deutschlands Weg zur Elektromobilität")
+st.set_page_config(page_title="Dashboard", layout="wide")
 
-    st.markdown("### 🧭 Einleitung & Fragestellung")
-    st.markdown("""
-    Die Mobilitätswende in Deutschland ist eine der zentralen Säulen der Energietransformation. 
-    Unser Projekt untersucht, ob die von der Bundesregierung formulierten Ziele zur Elektromobilität realistisch erreichbar sind – und unter welchen Voraussetzungen.
 
-    **Leitfrage**:  
-    *„Unsere Bundesregierung hat Ziele zur E-Mobilität gesetzlich verankert.“ Doch sind diese Ziele realistisch und erreichbar?*
+pages = {
+    "Willkommen":"welcome",
+    "Intro":"intro",
+    "Scrum":"scrum",
+    "Stromerzeugung":"energy_production",
+    "Energie-Lieferanten": "energy_suppliers",
+    "Fahrzeugmarkt":"cars",
+    "Stromverbrauch & -bedarf":"energy_consumption",
+    "Ladeinfrastruktur": "chargingpoints_by_district",
+    "Ladepunktentwicklung":"number_of_chargingstations",
+    "Ladepunktverteilung":"charging_point_opt",
+    "Fazit":"conclusion"
+    
+    #    "Akzeptanz-Radar": "akzeptanz_radar",
 
-    Neben klassischen Parametern wie Stromerzeugung und Fahrzeugentwicklung betrachten wir auch gesellschaftliche, infrastrukturelle und technologische Faktoren.
-    """)
+    
+}
 
-    st.markdown("### 🛠️ Projektverlauf")
-    st.markdown("""
-    - **Themenfindung** & Zieldefinition im Team  
-    - Auswahl technischer & organisatorischer Tools: `GitHub`, `Streamlit`, `Scrum`  
-    - Iterative Entwicklung mit agilen Etappen  
-    - Visualisierung & Validierung mit Stakeholder-Fokus  
-    - Abgeleitetes **Gesamtfazit** mit klaren Empfehlungen
-    """)
+st.sidebar.title("🔀 Navigation")
+selection = st.sidebar.selectbox("Wähle eine Seite", list(pages.keys()))
 
-    st.markdown("### 📅 Untersuchungszeiträume")
-    st.markdown("""
-    - Rückblick auf Entwicklungstrends 
-    - Status Quo
-    - Prognosen bis 2035 und darüber hinaus
-    """)
+# Dynamisches Laden und Ausführen der Seite
 
-    st.markdown("### 🔍 Analysefokus")
-    st.markdown("""
-    - Fahrzeugmarkt
-    - Zusätzlicher Strombedarf durch BEVs  
-    - Ladeinfrastruktur
-    - Stromerzeugung
-    - Akzeptanz, Gesellschaft & Markt
-    """)
-
-    st.success("Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren.")
-
-  # Belastbarkeit und Modernisierung des Stromnetzes
-# - Flächenverfügbarkeit & Ausbaupotenzial
-   #Erneuerbarer
-#- Wechselwirkungen zwischen Sektoren(Sektorkopplung)
+module_name = pages[selection]
+try:
+    _mod = importlib.import_module(module_name)
+    if hasattr(_mod, "run") and callable(_mod.run):
+        _mod.run()
+    else:
+        st.error(f"Modul '{module_name}' enthält keine aufrufbare 'run()'-Funktion.")
+except ModuleNotFoundError as e:
+    st.error(f"Modul nicht gefunden: {e}")
+except Exception as e:
+    st.error(f"Fehler beim Laden des Moduls '{module_name}': {e}")
