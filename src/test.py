@@ -1,4 +1,4 @@
-""""
+"""
 if 'animation_active' not in st.session_state:
     st.session_state.animation_active = False
 
@@ -7,9 +7,9 @@ if 'animation_finished' not in st.session_state:
 
 if 'percent_checked' not in st.session_state:
     st.session_state.percent_checked = False
-""""
+"""
 
-""""
+"""
 df = read_df_cars()
 with tab1:
      with st.container(border=True,height=550):
