@@ -4,9 +4,11 @@ import importlib
 st.set_page_config(page_title="Dashboard", layout="wide")
 
 # ───────────────────────── Seiten-Register ─────────────────────────
+# Hinweis: Alle Seiten-Module müssen eine run() Funktion enthalten
 pages = {
     "Willkommen": "welcome",                 # Startseite
     "Intro": "intro",
+    # Scrum-Dashboard mit Burndown-Chart, Timeline und Meetingdaten
     "Scrum": "scrum",
     "Stromerzeugung": "energy_production",
     "Energie-Lieferanten": "energy_suppliers",
