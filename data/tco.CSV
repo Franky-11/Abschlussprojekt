@@ -1,0 +1,340 @@
+Hersteller;Modell;Antrieb;Leistung (kW);Grundpreis ;10k;15k;20k;30k;Strom_cent_kWh;Segment
+Audi;A3 allstreet 40 TFSI e S tronic;S/E;150;46000;86,7;64,7;53,9;43,5;35;Kompaktklasse
+Audi;A3 allstreet 35 TFSI;S;110;35400;77,4;58,6;49,6;40,6;35;Kompaktklasse
+Audi;A3 allstreet 35 TDI S tronic;D;110;41000;87,1;64;53,7;42,8;35;Kompaktklasse
+Audi;A3 Sportback 40 TFSI e S tronic;S/E;150;44200;84,3;62,8;52,3;42,2;35;Kompaktklasse
+Audi;A3 Sportback 30 TFSI;S;85;31300;72,5;54,7;46,2;37,7;35;Kompaktklasse
+Audi;A3 Sportback 30 TDI;D;85;34400;79,4;58,2;48,7;38,7;35;Kompaktklasse
+Audi;A6 Sportback e-tron;E;240;62800;122,9;89,1;73,2;56,4;35;Obere Mittelklasse
+Audi;S5 Limousine 3.0 V6 TFSI MHEV plus S tronic;S;270;78500;131,8;99,7;85,4;70,1;35;Mittelklasse
+Audi;A5 Limousine 2.0 TDI MHEV plus S tronic;D;150;54200;108,8;78,9;64,7;50,8;35;Mittelklasse
+Audi;A6 Sportback e-tron performance;E;280;75600;139,6;101,9;84,1;65,3;35;Obere Mittelklasse
+Audi;A8 60 TFSI e quattro tiptronic;S/E;340;120950;230,5;163,7;132,8;100,5;35;Oberklasse
+Audi;A8 55 TFSI quattro tiptronic;S;250;108850;221,2;157,8;128,3;97,5;35;Oberklasse
+Audi;A8 50 TDI quattro tiptronic;D;210;106600;222;156,2;125,2;93,4;35;Oberklasse
+Audi;Q4 40 e-tron;E;150;46150;94,4;69;56,9;44,1;35;Kompakt-SUV
+Audi;Q5 2.0 TFSI MHEV plus S tronic;S;150;52300;111,4;82,6;69,6;55,6;35;Mittelklasse-SUV
+Audi;Q5 2.0 TDI MHEV plus quattro S tronic;D;150;57100;115,7;85,4;71,6;56,8;35;Mittelklasse-SUV
+Audi;Q4 45 e-tron;E;210;52950;106,5;78,4;65;50,9;35;Kompakt-SUV
+Audi;Q4 Sportback 40 e-tron;E;150;48150;95,5;69,9;57,7;44,7;35;Kompakt-SUV
+Audi;Q4 Sportback 45 e-tron;E;210;54950;107,5;79,2;65,7;51,5;35;Kompakt-SUV
+Audi;Q5 Sportback 2.0 TFSI MHEV plus S tronic;S;150;54800;113,1;83,9;70,7;56,5;35;Mittelklasse-SUV
+Audi;Q6 e-tron;E;215;63500;123,3;88,3;72,6;55,6;35;Obere Mittelklasse-SUV
+Audi;Q7 55 TFSI quattro tiptronic (5-Sitzer);S;250;84000;175;128,3;107,4;85,7;35;Oberklasse-SUV
+Audi;Q7 45 TDI quattro tiptronic (5-Sitzer);D;170;80900;168,1;121,1;99,3;77,7;35;Oberklasse-SUV
+Audi;Q6 e-tron performance;E;240;68800;130,1;93,3;76,6;58,7;35;Obere Mittelklasse-SUV
+Audi;Q6 Sportback e-tron;E;215;65900;124,3;89,1;73,3;56,2;35;Obere Mittelklasse-SUV
+Audi;Q6 Sportback e-tron performance;E;240;71200;131;94;77,3;59,3;35;Obere Mittelklasse-SUV
+Audi;Q7 55 TFSI e quattro tiptronic (5-Sitzer);S/E;290;87300;168,6;123;103;81,1;35;Oberklasse-SUV
+Audi;Q8 55 TFSI e quattro tiptronic;S/E;290;94700;173,2;127,7;108;86,3;35;Oberklasse-SUV
+Audi;Q8 55 TFSI quattro tiptronic;S;250;91500;184,9;136,5;114,9;91,5;35;Oberklasse-SUV
+Audi;Q8 45 TDI quattro tiptronic;D;170;88400;180,7;131;108,3;85;35;Oberklasse-SUV
+Audi;S e-tron GT quattro;E;500;126000;210,3;152;128,2;99,4;35;Sportwagen 
+Audi;S6 Avant e-tron quattro;E;405;101150;167;122,8;102;79,7;35;Obere Mittelklasse 
+Audi;RS6 Avant tiptronic;SP;441;131500;251,2;184,7;154,2;122,4;35;Obere Mittelklasse 
+Audi;S6 Sportback e-tron quattro;E;405;99500;164,8;121,1;100,6;78,6;35;Obere Mittelklasse
+Audi;SQ6 e-tron quattro;E;380;93800;152,3;111,3;93;73,3;35;Obere Mittelklasse-SUV
+Audi;SQ6 Sportback e-tron quattro;E;380;96200;154,8;113;94,4;74,3;35;Obere Mittelklasse-SUV
+ALPINA;D3 S Touring Allrad Switch-Tronic;D;261;83000;150,3;112,5;93,9;76,9;35;Obere Mittelklasse
+ALPINA;D4 S Gran Coupé Allrad Switch-Tronic;D;261;86400;153,6;114,9;97,1;79;35;Obere Mittelklasse
+ALPINA;XD4 Switch-Tronic;D;290;92900;163,7;122,7;103,6;84,5;35;Mittelklasse-SUV
+BMW;225e Active Tourer xDrive Steptronic (DKG);SP/E;180;49350;95,4;70,7;58,3;46,7;35;Kompaktvan
+BMW;216i Active Tourer Steptronic (DKG);SP;90;36200;82,7;62,3;52,1;42,6;35;Kompaktvan
+BMW;218d Active Tourer Steptronic (DKG);D;110;42100;92,3;67,3;54,9;43,3;35;Kompaktvan
+BMW;330e Steptronic;SP/E;215;62600;118,1;86,1;70,2;55,3;35;Mittelklasse
+BMW;318i Steptronic;SP;115;46600;104,8;77,1;63,3;50,5;35;Mittelklasse
+BMW;318d Steptronic;D;110;51100;111,6;80,1;64,4;50,1;35;Mittelklasse
+BMW;330e Touring Steptronic;SP/E;215;63900;117,2;85,8;70,2;55,6;35;Mittelklasse
+BMW;318i Touring Steptronic;SP;115;47900;104,5;77,3;63,7;51;35;Mittelklasse
+BMW;318d Touring Steptronic;D;110;52400;108,9;78,6;63,4;49,7;35;Mittelklasse
+BMW;530e Steptronic;SP/E;220;65900;127;91,8;74,3;58,2;35;Obere Mittelklasse
+BMW;520i Steptronic;SP;153;59000;123,6;89,5;72,6;57;35;Obere Mittelklasse
+BMW;520d Steptronic;D;145;61300;133,7;95,3;76;58,4;35;Obere Mittelklasse
+BMW;530e Touring Steptronic;SP/E;220;68170;128,4;93;75,5;59,4;35;Obere Mittelklasse
+BMW;520i Touring Steptronic;SP;153;61000;125,4;91,1;74;58,3;35;Obere Mittelklasse
+BMW;520d Touring Steptronic;D;145;63300;134,3;95,9;76,6;59,1;35;Obere Mittelklasse
+BMW;550e Touring xDrive Steptronic;SP/E;360;80340;144,1;105,1;85,8;68;35;Obere Mittelklasse
+BMW;M340i Touring xDrive Steptronic Sport;SP;275;77900;147,6;109,7;90,7;73,1;35;Mittelklasse
+BMW;M340d Touring xDrive Steptronic Sport;D;250;77900;143,2;104,7;85,4;68,5;35;Mittelklasse
+BMW;550e xDrive Steptronic;SP/E;360;77900;144,2;104,9;85,4;67,4;35;Obere Mittelklasse
+BMW;M340i xDrive Steptronic Sport;SP;275;76600;147;109;89,9;72,3;35;Mittelklasse
+BMW;M340d xDrive Steptronic Sport;D;250;76600;146,8;106,9;86,9;69,3;35;Mittelklasse
+BMW;750e Design Pure Excellence xDrive Steptronic Sport;SP/E;360;126300;237;168,2;134,1;101,4;35;Oberklasse
+BMW;740d Design Pure Excellence xDrive Steptronic Sport;D;220;118200;240;169,1;133,4;100;35;Oberklasse
+BMW;i4 eDrive35;E;210;57500;108,5;78,4;63,3;48,9;35;Obere Mittelklasse 
+BMW;420i Gran Coupé Steptronic;SP;135;53300;105,1;78;64,6;52;35;Obere Mittelklasse 
+BMW;420d Gran Coupé Steptronic;D;140;56100;109,3;79,1;64,1;50,5;35;Obere Mittelklasse 
+BMW;i4 eDrive40;E;250;60500;112,5;81,4;65,7;50,8;35;Obere Mittelklasse 
+BMW;i4 M50;E;400;72100;128,9;94,4;77,1;61;35;Obere Mittelklasse 
+BMW;M440i Gran Coupé xDrive Steptronic Sport;SP;275;76700;139,8;104,4;86,6;70,3;35;Obere Mittelklasse 
+BMW;i4 xDrive40;E;295;64000;119;86,8;70,6;55,1;35;Obere Mittelklasse 
+BMW;i5 eDrive40;E;250;70200;134,8;97,6;78,6;60,4;35;Obere Mittelklasse
+BMW;i5 M60 xDrive;E;442;99500;177,5;129,2;104,5;81,1;35;Obere Mittelklasse
+BMW;M3;SP;353;95100;187;140,1;119;96,9;35;Mittelklasse
+BMW;i5 Touring eDrive40;E;250;72200;136,4;99,1;80;61,8;35;Obere Mittelklasse
+BMW;i5 Touring M60 xDrive;E;442;101500;178;129,9;105,3;81,9;35;Obere Mittelklasse
+BMW;M3 Competition Touring M xDrive Steptronic;SP;390;107200;202;150,9;127,8;103,8;35;Mittelklasse
+BMW;i7 eDrive50 Design Pure Excellence;E;335;115700;206,1;145,4;115,2;85,9;35;Oberklasse
+BMW;iX M70 xDrive;E;485;124900;202;146,6;119,4;93,1;35;Oberklasse-SUV
+BMW;iX xDrive45;E;300;83500;150,1;110,3;90,8;72,1;35;Oberklasse-SUV
+BMW;X5 xDrive40i Steptronic Sport;SP;280;94300;174,6;129;106,8;85,9;35;Oberklasse-SUV
+BMW;X5 xDrive30d Steptronic Sport;D;219;89900;174;127;103,5;82,4;35;Oberklasse-SUV
+BMW;iX xDrive60;E;400;99900;168,8;122,9;100,2;78,5;35;Oberklasse-SUV
+BMW;X6 xDrive40i M Sportpaket Steptronic Sport;SP;280;101900;189,1;139,8;115,7;93;35;Oberklasse-SUV 
+BMW;X7 xDrive40d Steptronic Sport;D;259;107600;192,7;140,7;114,8;91,8;35;Oberklasse-SUV
+BMW;iX1 eDrive20;E;150;48800;91,7;68,4;55,8;44,7;35;Kompakt-SUV
+BMW;X2 sDrive20i Steptronic (DKG);SP;125;48100;95,4;72,2;60;49,2;35;Kompakt-SUV 
+BMW;X2 sDrive18d Steptronic (DKG);D;110;48700;92,7;69;57,2;46,2;35;Kompakt-SUV 
+BMW;iX2 eDrive20;E;150;50300;95,7;71,4;58,3;46,6;35;Kompakt-SUV 
+BMW;iX3 Inspiring;E;210;67300;119,8;87,8;71,7;56,3;35;Mittelklasse-SUV
+BMW;X4 xDrive20i Steptronic;SP;135;60500;121,2;90,1;74,5;60;35;Mittelklasse-SUV 
+BMW;X4 xDrive20d Steptronic;D;140;63000;125,1;90,8;73,8;57,9;35;Mittelklasse-SUV 
+BMW;M5 Touring xDrive Steptronic;SP/E;535;146000;245;176,5;143,3;113,1;35;Obere Mittelklasse 
+BMW;X1 xDrive25e Steptronic (DKG);SP/E;180;51000;98,3;73,3;60,3;48,5;35;Kompakt-SUV
+BMW;X1 sDrive18i Steptronic (DKG);SP;100;44600;94,6;71,5;59,5;48,8;35;Kompakt-SUV
+BMW;X1 sDrive18d Steptronic (DKG);D;110;47200;99,4;72,7;59,3;46,8;35;Kompakt-SUV
+BMW;X3 30e xDrive Steptronic;SP/E;220;66000;120;88,9;73,3;58,9;35;Mittelklasse-SUV
+BMW;X3 20i xDrive Steptronic;SP;153;59400;115,3;85,9;71,1;57,6;35;Mittelklasse-SUV
+BMW;X3 20d xDrive Steptronic;D;145;61900;121,8;88,7;72,3;57,1;35;Mittelklasse-SUV
+BMW;X5 xDrive50e Steptronic Sport;SP/E;360;97300;168,2;123,7;102,1;81,8;35;Oberklasse-SUV
+Citroën;C5 Aircross Plug-In-Hybrid 225 Stop&Start Plus e-EAT8;S/E;165;47500;90,1;66,5;55,4;43,9;35;Kompakt-SUV
+Citroën;C4 PureTech 130 Plus EAT8;S;96;25350;67;51,6;43,9;36,3;35;Kompaktklasse
+Citroën;C5 Aircross BlueHDi 130 Stop&Start Max EAT8;D;96;36160;80;59,3;49,3;39,2;35;Kompakt-SUV
+Citroën;e-Berlingo M Plus;E;100;36940;79,6;59;48,8;38,2;35;Hochdachkombi / Kompaktvan
+Citroën;e-C3 Aircross You;E;83;26490;59,4;44,8;37,3;29,8;35;Kleinwagen-SUV
+Citroën;C3 Aircross Turbo 100 You;S;74;18790;58,7;45,4;38,8;32,5;35;Kleinwagen-SUV
+Citroën;e-C3 You;E;83;23300;56,9;42,9;35,6;28,4;35;Kleinwagen
+Citroën;C3 Turbo 100 You;S;74;15990;54,6;41,4;35,9;29,3;35;Kleinwagen
+Citroën;e-C4 136 You;E;100;31900;69,7;51,8;42,6;33,3;35;Kompaktklasse
+Citroën;e-C4 156 Plus;E;115;34100;74,7;55,3;45,3;35,4;35;Kompaktklasse
+Citroën;e-C4 X 136 You;E;100;32600;72,9;53,9;44,2;34,4;35;Kompaktklasse 
+Citroën;e-C4 X 156 Plus;E;115;34800;77,1;56,9;46,6;36,3;35;Kompaktklasse 
+Citroën;e-Jumpy Kombi M (50 kWh);E;100;44230;104,5;75,6;61,4;46,8;35;Van
+Citroën;e-Spacetourer M (50 kWh) Plus;E;100;46230;109,2;79,2;64,6;49,4;35;Van
+CUPRA;Born (60 kWh);E;170;41450;84,7;62,3;51,5;40,4;35;Kompaktklasse
+CUPRA;Leon VZ 2.0 TSI DSG;SP;221;48140;105;79,4;67,1;55,1;35;Kompaktklasse
+CUPRA;Leon 2.0 TDI DSG;D;110;41725;89,5;65,3;54,7;43,7;35;Kompaktklasse
+CUPRA;Born (77 kWh);E;170;47250;92,4;67,3;55,3;43;35;Kompaktklasse
+CUPRA;Born VZ;E;240;52770;102,8;75,7;62,7;49,3;35;Kompaktklasse 
+CUPRA;Formentor 1.5 e-HYBRID DSG;S/E;150;48030;86,7;65,1;54,4;44;35;Kompakt-SUV 
+CUPRA;Formentor 1.5 TSI;S;110;39420;83,7;63,5;54;44,4;35;Kompakt-SUV 
+CUPRA;Formentor 2.0 TDI DSG;D;110;44040;92,6;67,9;56,7;45,1;35;Kompakt-SUV 
+CUPRA;Leon 1.5 e-HYBRID DSG;S/E;150;43350;84,7;62,9;52,2;41,7;35;Kompaktklasse
+CUPRA;Leon Sportstourer 1.5 e-HYBRID DSG;S/E;150;45545;85,2;63,6;52,8;42,4;35;Kompaktklasse
+CUPRA;Leon Sportstourer VZ 2.0 TSI 4Drive DSG;SP;245;53610;112,8;85,4;72,2;59,2;35;Kompaktklasse 
+CUPRA;Leon Sportstourer 2.0 TDI DSG;D;110;43950;89,6;65,6;55;44,2;35;Kompaktklasse
+CUPRA;Tavascan Endurance;E;210;53240;99,7;73,7;61,2;48,3;35;Mittelklasse-SUV 
+CUPRA;Ateca 1.5 TSI DSG;S;110;43380;86,8;66,1;56,6;46,6;35;Kompakt-SUV
+CUPRA;Terramar 1.5 e-HYBRID DSG;S/E;150;50030;88;66;55,5;45;35;Kompakt-SUV
+CUPRA;Terramar 1.5 ETSI DSG;S;110;43020;84,1;64,2;54,7;45,3;35;Kompakt-SUV
+Dacia;Spring Electric 45 Essential;E;33;16900;43,4;32,2;27,3;21,5;35;Kleinstwagen
+DS Automobiles;DS 3 E-Tense Pallas;E;115;41500;81,7;60,9;50;39,3;35;Kleinwagen-SUV
+DS Automobiles;DS 3 MHEV 136 Pallas eDCT-6;S;100;32690;71,6;54,5;45,6;37;35;Kleinwagen-SUV
+DS Automobiles;DS 4 Plug-in-Hybrid 225 Pallas Automatik;S/E;165;44900;89,7;67,2;55,7;44,3;35;Kompaktklasse
+DS Automobiles;DS 4 Hybrid 136 Pallas eDCT-6;S;100;38640;84,8;63,5;53;42,4;35;Kompaktklasse
+DS Automobiles;DS 4 BlueHDi 130 Pallas Automatik;D;96;39640;88,4;65;53,6;42;35;Kompaktklasse
+DS Automobiles;DS 7 E-Tense 225 Pallas Automatik;S/E;165;53400;98,8;74,4;62,6;50,1;35;Kompakt-SUV
+DS Automobiles;DS 7 BlueHDi 130 Pallas Automatik;D;96;48160;96,4;71,2;59,1;46,5;35;Kompakt-SUV
+Fiat;500e (23,8 kWh) RED;E;70;29490;63,7;47,2;39;30,6;35;Kleinstwagen
+Fiat;500e (42 kWh) RED;E;87;33490;68,5;50,6;41,7;32,7;35;Kleinstwagen
+Fiat;500e 3+1 (23,8 kWh) RED;E;70;30490;66,3;49,3;40,7;32;35;Kleinstwagen
+Fiat;Pandina 1.0 GSE Hybrid Cross;S;51;19990;55,2;41,8;36,2;30,1;35;Kleinstwagen
+Fiat;500e 3+1 (42 kWh) RED;E;87;34490;70,5;52,2;43,1;33,9;35;Kleinstwagen
+Fiat;500e Cabrio (23,8 kWh) RED;E;70;32490;68,4;50,6;41,6;32,6;35;Kleinstwagen
+Fiat;500e Cabrio (42 kWh) RED;E;87;36490;73,7;54,3;44,6;34,8;35;Kleinstwagen
+Fiat;600e RED;E;115;36490;79,9;59,2;48,6;38,1;35;Kleinwagen-SUV
+Ford;Capri Extended Range (77 kWh) Premium;E;210;55400;104,6;76,7;63,5;49,9;35;Kompakt-SUV 
+Ford;Capri Extended Range (79 kWh) Premium AWD;E;250;59400;109,8;80,8;67,1;53;35;Kompakt-SUV 
+Ford;Capri Standard Range (52 kWh) Premium;E;125;48400;93,7;68,1;55,9;43,5;35;Kompakt-SUV 
+Ford;Explorer EV Extended Range (77 kWh) Premium;E;210;52900;101,6;74,8;62;49;35;Mittelklasse-SUV
+Ford;Explorer EV Extended Range (79 kWh) Premium AWD;E;250;56900;107,2;79,2;65,8;52,2;35;Mittelklasse-SUV
+Ford;Explorer EV Standard Range (52 kWh) Premium;E;125;46200;92,6;67,3;55,3;43,1;35;Mittelklasse-SUV
+Ford;Kuga 2.5 PHEV Titanium CVT;S/E;178;46850;91,3;66,8;55,1;43,6;35;Kompakt-SUV
+Ford;Kuga 1.5 EcoBoost Titanium;S;111;39950;85,3;63,9;53,7;43,5;35;Kompakt-SUV
+Ford;Kuga Active 2.5 PHEV CVT;S/E;178;48550;92,9;68;56,2;44,5;35;Kompakt-SUV
+Ford;Kuga Active 2.5 FHEV CVT;S;132;45550;93,3;68,8;57,1;45,5;35;Kompakt-SUV
+Ford;Mustang Mach-E Extended Range Premium;E;216;58500;110,1;79,2;64,5;49,4;35;Mittelklasse-SUV 
+Ford;Mustang Mach-E Rally;E;358;80300;143,2;103,5;84,4;65;35;Mittelklasse-SUV 
+Ford;Mustang Mach-E Standard Range;E;198;55800;106,5;78,1;64,6;50,3;35;Mittelklasse-SUV 
+Ford;Puma Gen-E;E;124;36900;72,4;52,3;42,9;33,2;35;Kleinwagen-SUV
+Ford;Tourneo Connect 1.5 EcoBoost PHEV Trend Automatik;S/E;110;43000;88,9;65,6;54,3;42,9;35;Hochdachkombi / Kompaktvan
+Ford;Tourneo Connect 1.5 EcoBoost Trend;S;85;31400;77,2;58,6;49,5;41,3;35;Hochdachkombi / Kompaktvan
+Honda;CR-V 2.0 i-MMD e:PHEV Advance Tech 2WD e-CVT;S/E;135;60800;103,6;75,7;62,1;48,6;35;Kompakt-SUV
+Honda;CR-V 2.0 i-MMD e:HEV Elegance 2WD e-CVT;S;135;49600;96;71,4;59,5;47,7;35;Kompakt-SUV
+Honda;e:Ny1;E;150;38990;86,2;65,3;54,3;43,3;35;Kompakt-SUV
+Honda;ZR-V 2.0 i-MMD e:HEV Elegance;S;135;42900;87,7;65,3;54,3;43,5;35;Kompakt-SUV
+Hyundai;Inster (42 kWh) Select;E;71;23900;55,3;40,2;33,7;26,6;35;Kleinstwagen
+Hyundai;Bayon 1.0 T-GDI Select;S;74;22900;59,6;45,1;38,4;32;35;Kleinwagen-SUV
+Hyundai;Inster (49 kWh) Select;E;85;25400;56,8;41,3;34,7;27,5;35;Kleinstwagen
+Hyundai;IONIQ 5 (63 kWh) 2WD;E;125;43900;88,5;64;53,1;41,4;35;Mittelklasse-Crossover 
+Hyundai;IONIQ 5 (84 kWh) DYNAMIQ 2WD;E;168;51650;98;70,4;57,8;44,7;35;Mittelklasse-Crossover 
+Hyundai;IONIQ 5 N;E;448;74900;135,6;100,1;83,9;66,9;35;Performance-Crossover 
+Audi;A3 allstreet 40 TFSI e S tronic;S/E;150;46000;84,2;62,2;51,4;41;18;Kompaktklasse
+Audi;A3 allstreet 35 TFSI;S;110;35400;77,4;58,6;49,6;40,6;18;Kompaktklasse
+Audi;A3 allstreet 35 TDI S tronic;D;110;41000;87,1;64;53,7;42,8;18;Kompaktklasse
+Audi;A3 Sportback 40 TFSI e S tronic;S/E;150;44200;81,9;60,4;49,8;39,7;18;Kompaktklasse
+Audi;A3 Sportback 30 TFSI;S;85;31300;72,5;54,7;46,2;37,7;18;Kompaktklasse
+Audi;A3 Sportback 30 TDI;D;85;34400;79,4;58,2;48,7;38,7;18;Kompaktklasse
+Audi;A6 Sportback e-tron;E;240;62800;120,6;86,8;70,9;54,1;18;Obere Mittelklasse
+Audi;S5 Limousine 3.0 V6 TFSI MHEV plus S tronic;S;270;78500;131,8;99,7;85,4;70,1;18;Mittelklasse
+Audi;A5 Limousine 2.0 TDI MHEV plus S tronic;D;150;54200;108,8;78,9;64,7;50,8;18;Mittelklasse
+Audi;A6 Sportback e-tron performance;E;280;75600;137,3;99,6;81,8;63;18;Obere Mittelklasse
+Audi;A8 60 TFSI e quattro tiptronic;S/E;340;120950;226,8;160,1;129,2;96,8;18;Oberklasse
+Audi;A8 55 TFSI quattro tiptronic;S;250;108850;221,2;157,8;128,3;97,5;18;Oberklasse
+Audi;A8 50 TDI quattro tiptronic;D;210;106600;222;156,2;125,2;93,4;18;Oberklasse
+Audi;Q4 40 e-tron;E;150;46150;91,6;66,2;54,1;41,3;18;Kompakt-SUV
+Audi;Q5 2.0 TFSI MHEV plus S tronic;S;150;52300;111,4;82,6;69,6;55,6;18;Mittelklasse-SUV
+Audi;Q5 2.0 TDI MHEV plus quattro S tronic;D;150;57100;115,7;85,4;71,6;56,8;18;Mittelklasse-SUV
+Audi;Q4 45 e-tron;E;210;52950;103,7;75,7;62,3;48,1;18;Kompakt-SUV
+Audi;Q4 Sportback 40 e-tron;E;150;48150;92,9;67,2;55;42,1;18;Kompakt-SUV
+Audi;Q4 Sportback 45 e-tron;E;210;54950;104,8;76,6;63,1;48,8;18;Kompakt-SUV
+Audi;Q5 Sportback 2.0 TFSI MHEV plus S tronic;S;150;54800;113,1;83,9;70,7;56,5;18;Mittelklasse-SUV
+Audi;Q6 e-tron;E;215;63500;120,6;85,6;69,9;52,9;18;Obere Mittelklasse-SUV
+Audi;Q7 55 TFSI quattro tiptronic (5-Sitzer);S;250;84000;175;128,3;107,4;85,7;18;Oberklasse-SUV
+Audi;Q7 45 TDI quattro tiptronic (5-Sitzer);D;170;80900;168,1;121,1;99,3;77,7;18;Oberklasse-SUV
+Audi;Q6 e-tron performance;E;240;68800;127,3;90,5;73,8;56;18;Obere Mittelklasse-SUV
+Audi;Q6 Sportback e-tron;E;215;65900;121,7;86,5;70,7;53,6;18;Obere Mittelklasse-SUV
+Audi;Q6 Sportback e-tron performance;E;240;71200;128,3;91,3;74,6;56,6;18;Obere Mittelklasse-SUV
+Audi;Q7 55 TFSI e quattro tiptronic (5-Sitzer);S/E;290;87300;164;118,3;98,3;76,4;18;Oberklasse-SUV
+Audi;Q8 55 TFSI e quattro tiptronic;S/E;290;94700;168,5;123;103,3;81,6;18;Oberklasse-SUV
+Audi;Q8 55 TFSI quattro tiptronic;S;250;91500;184,9;136,5;114,9;91,5;18;Oberklasse-SUV
+Audi;Q8 45 TDI quattro tiptronic;D;170;88400;180,7;131;108,3;85;18;Oberklasse-SUV
+Audi;S e-tron GT quattro;E;500;126000;207,3;148,9;125,1;96,3;18;Sportwagen 
+Audi;S6 Avant e-tron quattro;E;405;101150;164,2;120;99,2;76,9;18;Obere Mittelklasse 
+Audi;RS6 Avant tiptronic;SP;441;131500;251,2;184,7;154,2;122,4;18;Obere Mittelklasse 
+Audi;S6 Sportback e-tron quattro;E;405;99500;162,1;118,5;97,9;75,9;18;Obere Mittelklasse
+Audi;SQ6 e-tron quattro;E;380;93800;149,4;108,3;90,1;70,4;18;Obere Mittelklasse-SUV
+Audi;SQ6 Sportback e-tron quattro;E;380;96200;152;110,1;91,5;71,4;18;Obere Mittelklasse-SUV
+ALPINA;D3 S Touring Allrad Switch-Tronic;D;261;83000;150,3;112,5;93,9;76,9;18;Obere Mittelklasse
+ALPINA;D4 S Gran Coupé Allrad Switch-Tronic;D;261;86400;153,6;114,9;97,1;79;18;Obere Mittelklasse
+ALPINA;XD4 Switch-Tronic;D;290;92900;163,7;122,7;103,6;84,5;18;Mittelklasse-SUV
+BMW;225e Active Tourer xDrive Steptronic (DKG);SP/E;180;49350;92,7;68;55,7;44;18;Kompaktvan
+BMW;216i Active Tourer Steptronic (DKG);SP;90;36200;82,7;62,3;52,1;42,6;18;Kompaktvan
+BMW;218d Active Tourer Steptronic (DKG);D;110;42100;92,3;67,3;54,9;43,3;18;Kompaktvan
+BMW;330e Steptronic;SP/E;215;62600;114,7;82,7;66,8;51,9;18;Mittelklasse
+BMW;318i Steptronic;SP;115;46600;104,8;77,1;63,3;50,5;18;Mittelklasse
+BMW;318d Steptronic;D;110;51100;111,6;80,1;64,4;50,1;18;Mittelklasse
+BMW;330e Touring Steptronic;SP/E;215;63900;113,6;82,2;66,6;52;18;Mittelklasse
+BMW;318i Touring Steptronic;SP;115;47900;104,5;77,3;63,7;51;18;Mittelklasse
+BMW;318d Touring Steptronic;D;110;52400;108,9;78,6;63,4;49,7;18;Mittelklasse
+BMW;530e Steptronic;SP/E;220;65900;123,8;88,5;71,1;55;18;Obere Mittelklasse
+BMW;520i Steptronic;SP;153;59000;123,6;89,5;72,6;57;18;Obere Mittelklasse
+BMW;520d Steptronic;D;145;61300;133,7;95,3;76;58,4;18;Obere Mittelklasse
+BMW;530e Touring Steptronic;SP/E;220;68170;125,1;89,6;72,1;56;18;Obere Mittelklasse
+BMW;520i Touring Steptronic;SP;153;61000;125,4;91,1;74;58,3;18;Obere Mittelklasse
+BMW;520d Touring Steptronic;D;145;63300;134,3;95,9;76,6;59,1;18;Obere Mittelklasse
+BMW;550e Touring xDrive Steptronic;SP/E;360;80340;140,5;101,4;82,1;64,3;18;Obere Mittelklasse
+BMW;M340i Touring xDrive Steptronic Sport;SP;275;77900;147,6;109,7;90,7;73,1;18;Mittelklasse
+BMW;M340d Touring xDrive Steptronic Sport;D;250;77900;143,2;104,7;85,4;68,5;18;Mittelklasse
+BMW;550e xDrive Steptronic;SP/E;360;77900;140,6;101,3;81,8;63,8;18;Obere Mittelklasse
+BMW;M340i xDrive Steptronic Sport;SP;275;76600;147;109;89,9;72,3;18;Mittelklasse
+BMW;M340d xDrive Steptronic Sport;D;250;76600;146,8;106,9;86,9;69,3;18;Mittelklasse
+BMW;750e Design Pure Excellence xDrive Steptronic Sport;SP/E;360;126300;232,7;164;129,8;97,2;18;Oberklasse
+BMW;740d Design Pure Excellence xDrive Steptronic Sport;D;220;118200;240;169,1;133,4;100;18;Oberklasse
+BMW;i4 eDrive35;E;210;57500;106,3;76,3;61,1;46,7;18;Obere Mittelklasse 
+BMW;420i Gran Coupé Steptronic;SP;135;53300;105,1;78;64,6;52;18;Obere Mittelklasse 
+BMW;420d Gran Coupé Steptronic;D;140;56100;109,3;79,1;64,1;50,5;18;Obere Mittelklasse 
+BMW;i4 eDrive40;E;250;60500;110,3;79,2;63,5;48,6;18;Obere Mittelklasse 
+BMW;i4 M50;E;400;72100;126,2;91,8;74,5;58,4;18;Obere Mittelklasse 
+BMW;M440i Gran Coupé xDrive Steptronic Sport;SP;275;76700;139,8;104,4;86,6;70,3;18;Obere Mittelklasse 
+BMW;i4 xDrive40;E;295;64000;116,5;84,2;68;52,5;18;Obere Mittelklasse 
+BMW;i5 eDrive40;E;250;70200;132,3;95,1;76,1;57,9;18;Obere Mittelklasse
+BMW;i5 M60 xDrive;E;442;99500;174,6;126,3;101,6;78,2;18;Obere Mittelklasse
+BMW;M3;SP;353;95100;187;140,1;119;96,9;18;Mittelklasse
+BMW;i5 Touring eDrive40;E;250;72200;133,8;96,5;77,5;59,2;18;Obere Mittelklasse
+BMW;i5 Touring M60 xDrive;E;442;101500;175,1;126,9;102,3;79;18;Obere Mittelklasse
+BMW;M3 Competition Touring M xDrive Steptronic;SP;390;107200;202;150,9;127,8;103,8;18;Mittelklasse
+BMW;i7 eDrive50 Design Pure Excellence;E;335;115700;202,9;142,2;112;82,7;18;Oberklasse
+BMW;iX M70 xDrive;E;485;124900;198,6;143,2;116;89,6;18;Oberklasse-SUV
+BMW;iX xDrive45;E;300;83500;147,1;107,4;87,8;69,1;18;Oberklasse-SUV
+BMW;X5 xDrive40i Steptronic Sport;SP;280;94300;174,6;129;106,8;85,9;18;Oberklasse-SUV
+BMW;X5 xDrive30d Steptronic Sport;D;219;89900;174;127;103,5;82,4;18;Oberklasse-SUV
+BMW;iX xDrive60;E;400;99900;165,8;119,9;97,2;75,5;18;Oberklasse-SUV
+BMW;X6 xDrive40i M Sportpaket Steptronic Sport;SP;280;101900;189,1;139,8;115,7;93;18;Oberklasse-SUV 
+BMW;X7 xDrive40d Steptronic Sport;D;259;107600;192,7;140,7;114,8;91,8;18;Oberklasse-SUV
+BMW;iX1 eDrive20;E;150;48800;89,1;65,8;53,2;42;18;Kompakt-SUV
+BMW;X2 sDrive20i Steptronic (DKG);SP;125;48100;95,4;72,2;60;49,2;18;Kompakt-SUV 
+BMW;X2 sDrive18d Steptronic (DKG);D;110;48700;92,7;69;57,2;46,2;18;Kompakt-SUV 
+BMW;iX2 eDrive20;E;150;50300;93,2;68,8;55,7;44;18;Kompakt-SUV 
+BMW;iX3 Inspiring;E;210;67300;116,9;84,9;68,7;53,4;18;Mittelklasse-SUV
+BMW;X4 xDrive20i Steptronic;SP;135;60500;121,2;90,1;74,5;60;18;Mittelklasse-SUV 
+BMW;X4 xDrive20d Steptronic;D;140;63000;125,1;90,8;73,8;57,9;18;Mittelklasse-SUV 
+BMW;M5 Touring xDrive Steptronic;SP/E;535;146000;240,4;171,9;138,7;108,5;18;Obere Mittelklasse 
+BMW;X1 xDrive25e Steptronic (DKG);SP/E;180;51000;95,5;70,4;57,4;45,7;18;Kompakt-SUV
+BMW;X1 sDrive18i Steptronic (DKG);SP;100;44600;94,6;71,5;59,5;48,8;18;Kompakt-SUV
+BMW;X1 sDrive18d Steptronic (DKG);D;110;47200;99,4;72,7;59,3;46,8;18;Kompakt-SUV
+BMW;X3 30e xDrive Steptronic;SP/E;220;66000;116,3;85,2;69,6;55,2;18;Mittelklasse-SUV
+BMW;X3 20i xDrive Steptronic;SP;153;59400;115,3;85,9;71,1;57,6;18;Mittelklasse-SUV
+BMW;X3 20d xDrive Steptronic;D;145;61900;121,8;88,7;72,3;57,1;18;Mittelklasse-SUV
+BMW;X5 xDrive50e Steptronic Sport;SP/E;360;97300;163,8;119,3;97,8;77,4;18;Oberklasse-SUV
+Citroën;C5 Aircross Plug-In-Hybrid 225 Stop&Start Plus e-EAT8;S/E;165;47500;87,1;63,6;52,4;40,9;18;Kompakt-SUV
+Citroën;C4 PureTech 130 Plus EAT8;S;96;25350;67;51,6;43,9;36,3;18;Kompaktklasse
+Citroën;C5 Aircross BlueHDi 130 Stop&Start Max EAT8;D;96;36160;80;59,3;49,3;39,2;18;Kompakt-SUV
+Citroën;e-Berlingo M Plus;E;100;36940;76,6;56;45,8;35,2;18;Hochdachkombi / Kompaktvan
+Citroën;e-C3 Aircross You;E;83;26490;56,4;41,8;34,3;26,8;18;Kleinwagen-SUV
+Citroën;C3 Aircross Turbo 100 You;S;74;18790;58,7;45,4;38,8;32,5;18;Kleinwagen-SUV
+Citroën;e-C3 You;E;83;23300;54,1;40;32,8;25,5;18;Kleinwagen
+Citroën;C3 Turbo 100 You;S;74;15990;54,6;41,4;35,9;29,3;18;Kleinwagen
+Citroën;e-C4 136 You;E;100;31900;67,2;49,2;40;30,8;18;Kompaktklasse
+Citroën;e-C4 156 Plus;E;115;34100;72,2;52,8;42,9;32,9;18;Kompaktklasse
+Citroën;e-C4 X 136 You;E;100;32600;70,4;51,4;41,7;31,9;18;Kompaktklasse 
+Citroën;e-C4 X 156 Plus;E;115;34800;74,7;54,5;44,2;33,9;18;Kompaktklasse 
+Citroën;e-Jumpy Kombi M (50 kWh);E;100;44230;100,5;71,6;57,4;42,7;18;Van
+Citroën;e-Spacetourer M (50 kWh) Plus;E;100;46230;105,1;75,2;60,6;45,4;18;Van
+CUPRA;Born (60 kWh);E;170;41450;82,1;59,7;48,9;37,8;18;Kompaktklasse
+CUPRA;Leon VZ 2.0 TSI DSG;SP;221;48140;105;79,4;67,1;55,1;18;Kompaktklasse
+CUPRA;Leon 2.0 TDI DSG;D;110;41725;89,5;65,3;54,7;43,7;18;Kompaktklasse
+CUPRA;Born (77 kWh);E;170;47250;89,7;64,7;52,7;40,3;18;Kompaktklasse
+CUPRA;Born VZ;E;240;52770;100,3;73,2;60,2;46,8;18;Kompaktklasse 
+CUPRA;Formentor 1.5 e-HYBRID DSG;S/E;150;48030;84;62,4;51,7;41,3;18;Kompakt-SUV 
+CUPRA;Formentor 1.5 TSI;S;110;39420;83,7;63,5;54;44,4;18;Kompakt-SUV 
+CUPRA;Formentor 2.0 TDI DSG;D;110;44040;92,6;67,9;56,7;45,1;18;Kompakt-SUV 
+CUPRA;Leon 1.5 e-HYBRID DSG;S/E;150;43350;82,1;60,3;49,6;39;18;Kompaktklasse
+CUPRA;Leon Sportstourer 1.5 e-HYBRID DSG;S/E;150;45545;82,6;60,9;50,2;39,7;18;Kompaktklasse
+CUPRA;Leon Sportstourer VZ 2.0 TSI 4Drive DSG;SP;245;53610;112,8;85,4;72,2;59,2;18;Kompaktklasse 
+CUPRA;Leon Sportstourer 2.0 TDI DSG;D;110;43950;89,6;65,6;55;44,2;18;Kompaktklasse
+CUPRA;Tavascan Endurance;E;210;53240;97,2;71,1;58,6;45,8;18;Mittelklasse-SUV 
+CUPRA;Ateca 1.5 TSI DSG;S;110;43380;86,8;66,1;56,6;46,6;18;Kompakt-SUV
+CUPRA;Terramar 1.5 e-HYBRID DSG;S/E;150;50030;85,1;63,1;52,6;42,1;18;Kompakt-SUV
+CUPRA;Terramar 1.5 ETSI DSG;S;110;43020;84,1;64,2;54,7;45,3;18;Kompakt-SUV
+Dacia;Spring Electric 45 Essential;E;33;16900;41,1;29,8;24,9;19,1;18;Kleinstwagen
+DS Automobiles;DS 3 E-Tense Pallas;E;115;41500;79,1;58,3;47,4;36,7;18;Kleinwagen-SUV
+DS Automobiles;DS 3 MHEV 136 Pallas eDCT-6;S;100;32690;71,6;54,5;45,6;37;18;Kleinwagen-SUV
+DS Automobiles;DS 4 Plug-in-Hybrid 225 Pallas Automatik;S/E;165;44900;86,9;64,5;53;41,5;18;Kompaktklasse
+DS Automobiles;DS 4 Hybrid 136 Pallas eDCT-6;S;100;38640;84,8;63,5;53;42,4;18;Kompaktklasse
+DS Automobiles;DS 4 BlueHDi 130 Pallas Automatik;D;96;39640;88,4;65;53,6;42;18;Kompaktklasse
+DS Automobiles;DS 7 E-Tense 225 Pallas Automatik;S/E;165;53400;94,9;70,6;58,8;46,3;18;Kompakt-SUV
+DS Automobiles;DS 7 BlueHDi 130 Pallas Automatik;D;96;48160;96,4;71,2;59,1;46,5;18;Kompakt-SUV
+Fiat;500e (23,8 kWh) RED;E;70;29490;61,5;45,1;36,8;28,5;18;Kleinstwagen
+Fiat;500e (42 kWh) RED;E;87;33490;66,1;48,3;39,4;30,3;18;Kleinstwagen
+Fiat;500e 3+1 (23,8 kWh) RED;E;70;30490;64,2;47,1;38,5;29,9;18;Kleinstwagen
+Fiat;Pandina 1.0 GSE Hybrid Cross;S;51;19990;55,2;41,8;36,2;30,1;18;Kleinstwagen
+Fiat;500e 3+1 (42 kWh) RED;E;87;34490;68,1;49,9;40,7;31,5;18;Kleinstwagen
+Fiat;500e Cabrio (23,8 kWh) RED;E;70;32490;66,3;48,4;39,4;30,4;18;Kleinstwagen
+Fiat;500e Cabrio (42 kWh) RED;E;87;36490;71,2;51,8;42,1;32,3;18;Kleinstwagen
+Fiat;600e RED;E;115;36490;77,4;56,7;46,1;35,5;18;Kleinwagen-SUV
+Ford;Capri Extended Range (77 kWh) Premium;E;210;55400;102,2;74,3;61;47,5;18;Kompakt-SUV 
+Ford;Capri Extended Range (79 kWh) Premium AWD;E;250;59400;107,1;78,1;64,4;50,3;18;Kompakt-SUV 
+Ford;Capri Standard Range (52 kWh) Premium;E;125;48400;90,9;65,3;53,2;40,7;18;Kompakt-SUV 
+Ford;Explorer EV Extended Range (77 kWh) Premium;E;210;52900;99,1;72,2;59,5;46,4;18;Mittelklasse-SUV
+Ford;Explorer EV Extended Range (79 kWh) Premium AWD;E;250;56900;104,4;76,3;63;49,4;18;Mittelklasse-SUV
+Ford;Explorer EV Standard Range (52 kWh) Premium;E;125;46200;89,7;64,5;52,5;40,2;18;Mittelklasse-SUV
+Ford;Kuga 2.5 PHEV Titanium CVT;S/E;178;46850;88,6;64,1;52,4;40,9;18;Kompakt-SUV
+Ford;Kuga 1.5 EcoBoost Titanium;S;111;39950;85,3;63,9;53,7;43,5;18;Kompakt-SUV
+Ford;Kuga Active 2.5 PHEV CVT;S/E;178;48550;90,2;65,3;53,5;41,8;18;Kompakt-SUV
+Ford;Mustang Mach-E Extended Range Premium;E;216;58500;107,3;76,4;61,6;46,5;18;Mittelklasse-SUV 
+Ford;Mustang Mach-E Rally;E;358;80300;139,7;100;80,9;61,4;18;Mittelklasse-SUV 
+Ford;Mustang Mach-E Standard Range;E;198;55800;103,6;75,1;61,6;47,4;18;Mittelklasse-SUV 
+Ford;Puma Gen-E;E;124;36900;70,2;50,1;40,7;31;18;Kleinwagen-SUV
+Ford;Tourneo Connect 1.5 EcoBoost PHEV Trend Automatik;S/E;110;43000;85,7;62,5;51,2;39,8;18;Hochdachkombi / Kompaktvan
+Ford;Tourneo Connect 1.5 EcoBoost Trend;S;85;31400;77,2;58,6;49,5;41,3;18;Hochdachkombi / Kompaktvan
+Honda;CR-V 2.0 i-MMD e:PHEV Advance Tech 2WD e-CVT;S/E;135;60800;101;73,1;59,5;46,1;18;Kompakt-SUV
+Honda;CR-V 2.0 i-MMD e:HEV Elegance 2WD e-CVT;S;135;49600;96;71,4;59,5;47,7;18;Kompakt-SUV
+Honda;e:Ny1;E;150;38990;83,2;62,3;51,2;40,2;18;Kompakt-SUV
+Honda;ZR-V 2.0 i-MMD e:HEV Elegance;S;135;42900;87,7;65,3;54,3;43,5;18;Kompakt-SUV
+Hyundai;Inster (42 kWh) Select;E;71;23900;53;37,8;31,3;24,2;18;Kleinstwagen
+Hyundai;Bayon 1.0 T-GDI Select;S;74;22900;59,6;45,1;38,4;32;18;Kleinwagen-SUV
+Hyundai;Inster (49 kWh) Select;E;85;25400;54,3;38,8;32,2;25;18;Kleinstwagen
+Hyundai;IONIQ 5 (63 kWh) 2WD;E;125;43900;85,9;61,4;50,5;38,8;18;Mittelklasse-Crossover 
+Hyundai;IONIQ 5 (84 kWh) DYNAMIQ 2WD;E;168;51650;95,3;67,7;55,2;42;18;Mittelklasse-Crossover 
+Hyundai;IONIQ 5 N;E;448;74900;132,1;96,6;80,4;63,4;18;Performance-Crossover 
