@@ -4,6 +4,7 @@ from watermarks import set_watermark
 set_watermark("images/watermark/chargingpoints_pic.png")
 from matplotlib.ticker import FuncFormatter
 
+import matplotlib.image as mpimg
 from chargingpoints_functions import load_data
 from chargingpoints_functions import berechne_entwicklung
 from chargingpoints_functions import berechne_entwicklung_nach_art
@@ -61,7 +62,7 @@ def run():
     st.info(f"Referenzanstieg H2-2022 bis H2-2023: +{prozent} % (+{delta:,} Ladepunkte)")
 
     # Prognose-Button setzt Flag
-    if st.button("Prognose +49,74%"):
+    if st.button("Prognose +41.293 LP"):
         st.session_state["prognose_aktiv"] = True
 
     # Anzeige und Buttons nach Klick auf Prognose
