@@ -16,13 +16,14 @@ from render_burndown_chart import render_burndown_chart
 from datetime import datetime
 
 
+
 # ─────────────────────────────────────────────────────────────
 # Streamlit-Code als Funktion kapseln
 # ─────────────────────────────────────────────────────────────
 
 def run():
     # ───────────────── Streamlit-Setup ─────────────────
-    st.set_page_config(page_title="Scrum Dashboard", layout="wide")
+   # st.set_page_config(page_title="Scrum Dashboard", layout="wide")
     st.title("🧭 Scrum Übersicht – Abschlussprojekt")
 
     # ───────────────── Einleitung ──────────────────────
@@ -139,7 +140,7 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
         for _, row in df.iterrows():
             ax.plot([row["Datum_fmt"], row["Datum_fmt"]], [row["Startzeit_min"], row["Endezeit_min"]], marker='o')
         ax.set_xlabel("Datum")
-        ax.xaxis.set_major_formatter(mdates.DateFormatter("%-d.%m"))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%d.%m"))
         ax.set_ylim(0, 1440)
         ax.set_yticks(range(0, 1441, 60))
         ax.set_yticklabels([f"{h}:00" for h in range(25)])
@@ -148,6 +149,25 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
         ax.grid(True)
 
         st.pyplot(fig)
+
+    # ───────── Projektteam─────────
+
+    with st.expander("Projektteam"):
+        st.markdown(
+            """
+    Dieses Projekt wurde im Rahmen unserer Data-Science-Weiterbildung erstellt.  
+
+    Data Science Institute by Fabian Rappert / DSI Education GmbH, Berlin  
+    <https://data-science-institute.de>
+
+    **Projektteam & Fokus**  
+    * **Philipp Schauer** – Ladeinfrastruktur  
+    * **Thomas Baur** – Projektmanagement, Stromerzeugung  
+    * **Frank Schulnies** – Fahrzeugmarkt  
+
+    Unser Ziel war es, ein nützliches und intuitives Tool zu entwickeln, das einen Beitrag zur Diskussion um die Zukunft der E-Mobilität leistet.
+    """
+        )
 
     # ───────── Projektbeschreibung ─────────
 
