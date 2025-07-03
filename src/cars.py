@@ -8,8 +8,8 @@ from watermarks import set_watermark
 #from cars_functions import read_geojson
 
 def run():
-    #set_watermark("images/watermark/cars.jpg")
-    set_watermark("src/images/watermark/cars.jpg")
+    set_watermark("images/watermark/cars.jpg")
+    #set_watermark("src/images/watermark/cars.jpg")
     if 'annot_checked' not in st.session_state:
         st.session_state.annot_checked = False
 

@@ -12,8 +12,8 @@ from chargingpoints_functions import prognose_linear_referenz
 
 
 def run():
-    #set_watermark("images/watermark/chargingpoints_pic.png")
-    set_watermark("src/images/watermark/chargingpoints_pic.png")
+    set_watermark("images/watermark/chargingpoints_pic.png")
+    #set_watermark("src/images/watermark/chargingpoints_pic.png")
     # Initialisierung der Session-State-Flags
     if 'prognose_aktiv' not in st.session_state:
         st.session_state['prognose_aktiv'] = False

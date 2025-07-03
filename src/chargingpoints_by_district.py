@@ -13,8 +13,8 @@ from watermarks import set_watermark
 
 
 def run():
-    #set_watermark("images/watermark/chargingpoints_pic.png")
-    set_watermark("src/images/watermark/chargingpoints_pic.png")
+    set_watermark("images/watermark/chargingpoints_pic.png")
+    #set_watermark("src/images/watermark/chargingpoints_pic.png")
 # ---------- Seiteneinstellungen ----------------------------------------
 #try:
    # st.set_page_config(page_title="Ladepunkteinfrastruktur", layout="wide")

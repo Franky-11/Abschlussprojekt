@@ -4,8 +4,8 @@ import base64
 
 
 def run():
-    #set_watermark("images/watermark/chargingpoints_pic.png")
-    set_watermark("src/images/watermark/chargingpoints_pic.png")
+    set_watermark("images/watermark/chargingpoints_pic.png")
+    #set_watermark("src/images/watermark/chargingpoints_pic.png")
 
     st.markdown(
         f"""
