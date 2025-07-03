@@ -25,7 +25,8 @@ def _fetch_data():
             st.exception(e)
 
 def run():
-    set_watermark("images/watermark/chargingpoints_pic.png")
+    #set_watermark("images/watermark/chargingpoints_pic.png")
+    set_watermark("src/images/watermark/chargingpoints_pic.png")
     st.title("🗺️ Energielandkarte Deutschlands")
     st.caption("Interaktive Übersicht aller Stromerzeugungsanlagen – filterbar nach Energieform.")
 

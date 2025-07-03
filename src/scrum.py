@@ -23,7 +23,8 @@ from watermarks import set_watermark
 
 def run():
     # ───────────────── Streamlit-Setup ─────────────────
-    set_watermark("images/watermark/chargingpoints_pic.png")
+    #set_watermark("images/watermark/chargingpoints_pic.png")
+    set_watermark("src/images/watermark/chargingpoints_pic.png")
 
     st.title("🧭 Scrum Übersicht – Abschlussprojekt")
 

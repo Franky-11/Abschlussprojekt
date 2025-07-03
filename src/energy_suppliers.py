@@ -39,7 +39,8 @@ def _energy_cols(df: pd.DataFrame, time_cols: list[str]) -> list[str]:
 # Haupt‑App
 # ────────────────────────────────────────────────────────────────
 def run() -> None:
-    set_watermark("images/watermark/chargingpoints_pic.png")
+   # set_watermark("images/watermark/chargingpoints_pic.png")
+    set_watermark("src/images/watermark/chargingpoints_pic.png")
     st.title("📊 SMARD‑Auswertung: installierte Leistung / Erzeugung / Verbrauch")
 
     smard_path = Path("data/smard")

@@ -13,7 +13,8 @@ from cars_functions import read_geojson_landkreise
 
 
 def run():
-    set_watermark("images/watermark/chargingpoints_pic.png")
+    set_watermark("src/images/watermark/chargingpoints_pic.png")
+    #set_watermark("images/watermark/chargingpoints_pic.png")
     @st.cache_data
     def read_df_lade_bev():
         df = pd.read_csv("data/df_lade_bev.csv")
