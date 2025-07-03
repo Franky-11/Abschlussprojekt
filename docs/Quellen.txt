@@ -1,7 +1,0 @@
-GEOjson für PLZ-Gebiet:
-opendatasoft:https://public.opendatasoft.com/explore/dataset/georef-germany-postleitzahl/export/
-
-Deutschlandatlas
-
-Reichweite BEV:
-https://www.adac.de/rund-ums-fahrzeug/elektromobilitaet/elektroauto/stromverbrauch-elektroautos-adac-test/
