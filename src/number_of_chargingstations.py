@@ -4,7 +4,6 @@ from watermarks import set_watermark
 set_watermark("images/watermark/chargingpoints_pic.png")
 from matplotlib.ticker import FuncFormatter
 
-import matplotlib.image as mpimg
 from chargingpoints_functions import load_data
 from chargingpoints_functions import berechne_entwicklung
 from chargingpoints_functions import berechne_entwicklung_nach_art
