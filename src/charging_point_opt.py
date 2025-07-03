@@ -130,7 +130,7 @@ def run():
     geojson_kreise = read_geojson_landkreise()
 
     # Container mit Seitenaufbau
-    with st.container(border=True,height=1000):
+    with st.container(border=True,height=800):
         with st.popover("📚 Berechnungsgrundlagen", use_container_width=True):
             info()
         col_1, col_2 = st.columns(2)
@@ -279,7 +279,7 @@ def run():
 
     #-----Zeitliche Auslastungder Ladesäulen im Vergleich zur Zapfsäule
 
-    st.divider()
+    # st.divider()
 
     st.subheader("Zeitliche Auslastung der Ladepunkte")
     st.write("")
