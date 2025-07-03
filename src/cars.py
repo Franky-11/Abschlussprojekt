@@ -2,13 +2,13 @@ import streamlit as st
 from cars_functions import *
 import time
 from watermarks import set_watermark
-set_watermark("images/watermark/cars.jpg")
+
 
 
 #from cars_functions import read_geojson
 
 def run():
-
+    set_watermark("images/watermark/cars.jpg")
     if 'annot_checked' not in st.session_state:
         st.session_state.annot_checked = False
 

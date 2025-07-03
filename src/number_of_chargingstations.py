@@ -1,7 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 from matplotlib.ticker import FuncFormatter
 
 from chargingpoints_functions import load_data
@@ -12,6 +12,7 @@ from chargingpoints_functions import prognose_linear_referenz
 
 
 def run():
+    set_watermark("images/watermark/chargingpoints_pic.png")
     # Initialisierung der Session-State-Flags
     if 'prognose_aktiv' not in st.session_state:
         st.session_state['prognose_aktiv'] = False
@@ -101,7 +102,7 @@ def run():
         if st.button("tatsächlicher Bedarf"):
             st.session_state["demand_aktiv"] = True
         # Anzeige Text und Link bei Bedarf
-        if st.session_state["demand_aktiv"]:
+        if st.session_state['demand_aktiv']:
             st.markdown(
                 """
                 **Tatsächlicher Bedarf**: In der Studie 'Ladeinfrastruktur nach 2025/2030' wird je nach Szenario ein
@@ -112,15 +113,10 @@ def run():
             xt_all = xt2  # Liste der getickten Halbjahre
             if "2030-H2" in xt_all:
                 start_frac = xt_all.index("2030-H2") / (len(xt_all) - 1)
-                ax2.axhspan(
-                    380000,
-                    680000,
-                    xmin=start_frac,
-                    xmax=1,
-                    color="green",
-                    alpha=0.2,
-                    label="Zielbereich 380.000–680.000 LP"
-                )
+                x = ["2030-H2"[-1], df_prog["Halbjahr"].iloc[-1]]
+                y_lower = [380000, 380000]
+                y_upper = [680000, 680000]
+                ax2.fill_between(x, y_lower, y_upper, color="green", alpha=0.2, label="Zielbereich 380.000–680.000 LP")
         ax2.legend(loc="best")
         ax2.set_title("Prognose öffentliche Ladepunkte (konstante Steigung)", color="white")
         ax2.set_xlabel("Halbjahr", color="white")

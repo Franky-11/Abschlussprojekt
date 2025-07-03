@@ -2,11 +2,10 @@ import streamlit as st
 
 from energy_functions import *
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 def run():
-
-
+    set_watermark("images/watermark/chargingpoints_pic.png")
     st.title("Stromverbrauch & -bedarf:material/electric_bolt:")
 
     st.divider()

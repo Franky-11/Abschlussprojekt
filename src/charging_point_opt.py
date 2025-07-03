@@ -6,13 +6,14 @@ import plotly.graph_objects as go
 from scipy.optimize import minimize
 from streamlit import form_submit_button
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 from cars_functions import read_geojson_landkreise
 
 
 
 def run():
+    set_watermark("images/watermark/chargingpoints_pic.png")
     @st.cache_data
     def read_df_lade_bev():
         df = pd.read_csv("data/df_lade_bev.csv")
