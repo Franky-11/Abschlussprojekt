@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from render_burndown_chart import render_burndown_chart
 from datetime import datetime
-
+from watermarks import set_watermark
 
 
 # ─────────────────────────────────────────────────────────────
@@ -23,6 +23,7 @@ from datetime import datetime
 
 def run():
     # ───────────────── Streamlit-Setup ─────────────────
+    set_watermark("images/watermark/chargingpoints_pic.png")
 
     st.title("🧭 Scrum Übersicht – Abschlussprojekt")
 
