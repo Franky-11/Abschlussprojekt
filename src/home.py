@@ -8,7 +8,6 @@ st.set_page_config(page_title="E-Mobilität", layout="wide")
 pages = {
     "Willkommen": "welcome",                 # Startseite
     "Intro": "intro",
-    # Scrum-Dashboard mit Burndown-Chart, Timeline und Meetingdaten
     "Scrum": "scrum",
     "Stromerzeugung": "energy_production",
     "Energie-Lieferanten": "energy_suppliers",

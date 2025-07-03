@@ -12,9 +12,10 @@ def run():
     st.markdown("### 🧭 Einleitung & Fragestellung")
     st.markdown("""
     Die Mobilitätswende gilt als entscheidender Baustein auf dem Weg zur Klimaneutralität. 
-    Doch sind die politischen Zielsetzungen zur vollständigen Elektrifizierung des Straßenverkehrs – etwa 15 Millionen E-Fahrzeuge bis 2030 – unter den heutigen Rahmenbedingungen überhaupt erreichbar?
+    Doch sind die politischen Zielsetzungen zur Elektrifizierung des Straßenverkehrs – etwa 15 Millionen E-Fahrzeuge bis 2030 unter den heutigen Rahmenbedingungen überhaupt erreichbar?
 
-    In diesem Projekt analysieren wir die zentralen Einflussfaktoren mithilfe aktueller Datenquellen und interaktiver Visualisierungen. 
+    In diesem Projekt analysieren wir die zentralen Einflussfaktoren
+    mithilfe aktueller Datenquellen und interaktiver Visualisierungen. 
 
     **Leitfrage:**  
     *Sind die Ziele zur E-Mobilität realistisch erreichbar – und was müsste geschehen, damit sie Wirklichkeit werden können?*
@@ -35,9 +36,9 @@ def run():
     st.markdown("Unsere Analyse betrachtet sowohl historische Entwicklungen als auch aktuelle und zukünftige Szenarien.")
     st.markdown("### 📅 Untersuchungszeiträume")
     st.markdown("""
-    - Rückblick auf Entwicklungstrends 
+    - Rückblick & Entwicklungstrends 
     - Status Quo
-    - Prognosen bis 2035 und darüber hinaus
+    - Prognosen bis 2030 und darüber hinaus
     """)
 
     st.markdown("### 🔍 Analysefokus")

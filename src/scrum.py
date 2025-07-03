@@ -176,8 +176,7 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
             """
 Projektidee: Potenzialanalyse Elektromobilität Deutschland
 
-Hauptfrage: Kann Deutschland den Strombedarf einer vollständigen Umstellung
-auf Elektrofahrzeuge decken?
+Ein Podcast aus unseren ersten gesammelten Studien und Informationen, vermittelt einen ersten Eindruck unserer unserer ursprünglichen Fragen, die sich jedoch im Laufe des Projektes durch iterieren im Scrum verfeinerten.
 
 Teilbereiche: Fahrzeugmarkt, Ladeinfrastruktur, Stromerzeugung,
 gesellschaftliche Akzeptanz
@@ -192,7 +191,8 @@ Rollen:
 Abgabe & Präsentation: 04.07.2025 (30 min Vortrag + 10 min Q&A)
 """
         )
-
+        st.audio("audio/Ursprungsfragestellung.wav")
+        
     # ───────── Timeline-Bild ────────────
 
     # ───────── Burndown-Chart ───────────

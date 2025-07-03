@@ -5,6 +5,48 @@ from watermarks import set_watermark
 
 def run():
     set_watermark("images/watermark/chargingpoints_pic.png")
+  
+    st.title("📘 Fazit – Deutschlands E-Mobilitätswende im Realitätscheck")
+
+    st.markdown("## ⚡ Zusammenfassung & Ausblick")
+    st.markdown("""
+    Die zentralen Ergebnisse unseres Projekts zeigen:  
+    - **machbar**: Erneuerbare Energien können diesen Bedarf decken.
+    - Netzseitig **herausfordernd**: Lokale Netze brauchen **Modernisierung & Lastmanagement**.
+    - Gesellschaftlich **kritisch**: **Akzeptanz**, Transparenz und soziale Teilhabe sind entscheidend.
+    --- 
+    """)
+
+    st.markdown("### 🌐 1. Technische Machbarkeit")
+    st.markdown("""
+    - Mit dem geplanten Ausbau von Wind- und Solarenergie könnte Deutschland bis **2030 ca. 550–600 TWh** erneuerbaren Strom erzeugen.
+    - Der Strommehrbedarf durch E-Mobilität ist **im Rahmen dieser Ausbauziele** enthalten.
+    - **Flächenpotenzial vorhanden**: <3 % der Landesfläche für Wind & PV genügen.
+    """)
+
+    st.markdown("### 🔌 2. Netzinfrastruktur & Laststeuerung")
+    st.markdown("""
+    - Das **Übertragungsnetz** ist heute schon ausreichend dimensioniert.
+    - Zielsetzung Bundesregierung: **1. Mio** Ladepunkte bis 2030 = unrealistisch & unnötig
+    - 15 Mio BEV´s bis 2030: 2025 = 1,68 Mio Fahrzeuge -> das wären 2,7 Mio neue BEV´s/Jahr
+    - **Verteilnetze** müssen jedoch verstärkt & gesteuert werden.
+    - **Gesteuertes Laden**, dynamische Tarife & **bidirektionales Laden** (V2G) können Engpässe entschärfen
+    """)
+
+    st.markdown("### 🧠 3. Systemische Kopplung & smarte Energiezukunft")
+    st.markdown("""
+    - Elektromobilität ist **Teil eines größeren Stromverbrauchertrends** (Wärme, Industrie, etc.).
+    - E-Autos können perspektivisch als **Stromspeicher** agieren.
+    - Die Sektorenkopplung muss **strategisch geplant** und umgesetzt werden.
+    """)
+
+    st.markdown("### 🤝 4. Gesellschaftliche & politische Erfolgsfaktoren")
+    st.markdown("""
+    - **Akzeptanz** in Bevölkerung & Wirtschaft ist Schlüssel für Umsetzung.
+    - **Genehmigungsprozesse beschleunigen**, Kommunen & Bürger*innen beteiligen.
+    - **Zielbild 2030** erreichbar – mit ausreichender **politischer Konsequenz** und **gesellschaftlichem Schulterschluss**.
+    """)
+    
     st.title("📡 Akzeptanz-Radar")
     st.markdown("""
         Die Akzeptanz der Elektromobilität hängt stark von emotionalen, technischen und infrastrukturellen Faktoren ab. 
@@ -69,47 +111,7 @@ def run():
 
     st.plotly_chart(fig, use_container_width=True)
 
-    st.title("📘 Fazit – Deutschlands E-Mobilitätswende im Realitätscheck")
-
-    st.markdown("## ⚡ Zusammenfassung & Ausblick")
-    st.markdown("""
-    Die vollständige Elektrifizierung aller Straßenfahrzeuge in Deutschland würde den Strombedarf um ca. **150–180 TWh** pro Jahr erhöhen – was **25–30 %** des heutigen Stromverbrauchs entspricht.  
-    Die zentralen Ergebnisse unseres Projekts zeigen:  
-    - Technisch **machbar**: Erneuerbare Energien können diesen Bedarf decken.
-    - Netzseitig **herausfordernd**: Lokale Netze brauchen **Modernisierung & Lastmanagement**.
-    - Gesellschaftlich **kritisch**: **Akzeptanz**, Transparenz und soziale Teilhabe sind entscheidend.
-
-    --- 
-    """)
-
-    st.markdown("### 🌐 1. Technische Machbarkeit")
-    st.markdown("""
-    - Mit dem geplanten Ausbau von Wind- und Solarenergie könnte Deutschland bis **2030 ca. 550–600 TWh** erneuerbaren Strom erzeugen.
-    - Der Strommehrbedarf durch E-Mobilität ist **im Rahmen dieser Ausbauziele** enthalten.
-    - **Flächenpotenzial vorhanden**: <3 % der Landesfläche für Wind & PV genügen.
-    """)
-
-    st.markdown("### 🔌 2. Netzinfrastruktur & Laststeuerung")
-    st.markdown("""
-    - Das **Übertragungsnetz** ist heute schon ausreichend dimensioniert.
-    - **Verteilnetze** müssen jedoch verstärkt & gesteuert werden.
-    - **Gesteuertes Laden**, dynamische Tarife & **bidirektionales Laden** (V2G) können Engpässe entschärfen.
-    """)
-
-    st.markdown("### 🧠 3. Systemische Kopplung & smarte Energiezukunft")
-    st.markdown("""
-    - Elektromobilität ist **Teil eines größeren Stromverbrauchertrends** (Wärme, Industrie, etc.).
-    - E-Autos können perspektivisch als **Stromspeicher** agieren.
-    - Die Sektorenkopplung muss **strategisch geplant** und umgesetzt werden.
-    """)
-
-    st.markdown("### 🤝 4. Gesellschaftliche & politische Erfolgsfaktoren")
-    st.markdown("""
-    - **Akzeptanz** in Bevölkerung & Wirtschaft ist Schlüssel für Umsetzung.
-    - **Genehmigungsprozesse beschleunigen**, Kommunen & Bürger*innen beteiligen.
-    - **Zielbild 2030** erreichbar – mit ausreichender **politischer Konsequenz** und **gesellschaftlichem Schulterschluss**.
-    """)
-
-    st.success("✅ Deutschlands Energielandschaft mit vollelektrischen Fahrzeugen ist machbar – wenn Energiewende, Netzausbau & gesellschaftlicher Wandel Hand in Hand gehen.")
+    
+    st.success("✅ **Deutschlands Energielandschaft mit vollelektrischen Fahrzeugen ist machbar – wenn Energiewende, Netzausbau & gesellschaftlicher Wandel Hand in Hand gehen.**")
 
 
