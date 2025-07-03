@@ -1,9 +1,10 @@
 import streamlit as st
 import plotly.graph_objects as go
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 def run():
+    set_watermark("images/watermark/chargingpoints_pic.png")
     st.title("📡 Akzeptanz-Radar")
     st.markdown("""
         Die Akzeptanz der Elektromobilität hängt stark von emotionalen, technischen und infrastrukturellen Faktoren ab. 

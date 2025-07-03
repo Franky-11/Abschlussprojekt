@@ -1,10 +1,13 @@
 import streamlit as st
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 def run():
-    st.title("🔌 Realitätscheck Elektromobilität in Deutschland")
-    st.subheader("Ein datengetriebener Blick auf Chancen, Herausforderungen und Realisierbarkeit der Mobilitätswende")
+
+
+    set_watermark("images/watermark/chargingpoints_pic.png")
+    st.title("Realitätscheck E-Mobilität – Ein datengetriebener Blick auf Deutschlands Weg zur Elektromobilität")
+
 
     st.markdown("### 🧭 Einleitung & Fragestellung")
     st.markdown("""

@@ -1,6 +1,3 @@
-# chargingpoints_by_district_expanded2.py
-# Streamlit-App: Deutsche Ladepunkteinfrastruktur
-# ----------------------------------------------------------------------
 import streamlit as st
 from streamlit_folium import st_folium
 import pandas as pd
@@ -12,10 +9,11 @@ from folium.plugins import DualMap
 from dateutil.relativedelta import relativedelta
 import plotly.express as px
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 
 def run():
+    set_watermark("images/watermark/chargingpoints_pic.png")
 # ---------- Seiteneinstellungen ----------------------------------------
 #try:
    # st.set_page_config(page_title="Ladepunkteinfrastruktur", layout="wide")

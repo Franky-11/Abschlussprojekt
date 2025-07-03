@@ -4,7 +4,7 @@ import subprocess
 import pathlib
 import pydeck as pdk
 from watermarks import set_watermark
-set_watermark("images/watermark/chargingpoints_pic.png")
+
 
 from fetch_power_plants import (
     DEFAULT_DATA_PATH,
@@ -25,6 +25,7 @@ def _fetch_data():
             st.exception(e)
 
 def run():
+    set_watermark("images/watermark/chargingpoints_pic.png")
     st.title("🗺️ Energielandkarte Deutschlands")
     st.caption("Interaktive Übersicht aller Stromerzeugungsanlagen – filterbar nach Energieform.")
 
