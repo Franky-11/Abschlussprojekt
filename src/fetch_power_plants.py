@@ -75,10 +75,6 @@ OPS_DATA_URLS = [
 ]
 
 COLUMN_MAPPING = {
-    "name_bnetza": "name",
-    "name_uba": "name",
-    "project_name": "name",
-    "plant_name": "name",
     "energy_source_level_2": "type",
     "lat": "lat",
     "lon": "lon",
@@ -105,18 +101,26 @@ def _download_opsd_csvs():
         resp = requests.get(url)
         resp.raise_for_status()
         df = pd.read_csv(io.StringIO(resp.content.decode("utf-8")))
+        print("🔎 CSV Spalten:", df.columns.tolist())
         df_list.append(df)
     return pd.concat(df_list, ignore_index=True)
 
 def _apply_column_mapping(df: pd.DataFrame) -> pd.DataFrame:
+    print("📋 Vorhandene Spalten beim Mapping:", df.columns.tolist())
     for old, new in COLUMN_MAPPING.items():
         if old in df.columns:
             df[new] = df[old]
+    # Name column prioritization
+    name_sources = ["name_bnetza", "block_bnetza", "name_uba", "company", "municipality", "comment"]
+    df["name"] = None
+    for col in name_sources:
+        if col in df.columns:
+            df["name"] = df["name"].fillna(df[col])
+    df["name"] = df["name"].fillna("").astype(str).str.strip()
+    df["name"] = df["name"].replace("", pd.NA).fillna("Unbekannt")
     missing = [v for v in ["name", "type", "lat", "lon", "capacity_mw"] if v not in df.columns]
     if missing:
         raise KeyError(f"Pflichtfeld '{missing[0]}' in CSV nicht gefunden. Header: {list(df.columns)}")
-    df["name"] = df["name"].fillna("").astype(str).str.strip()
-    df["name"] = df["name"].replace("", pd.NA).fillna("Unbekannt")
     return df[["name", "type", "lat", "lon", "capacity_mw"]]
 
 def _load_data(path: str) -> pd.DataFrame:
@@ -137,7 +141,7 @@ def _get_mapbox_token():
         st.warning("🔑 Kein Mapbox-Token gefunden. Bitte in .streamlit/secrets.toml eintragen.")
         return ""
 
-def _build_deck(df, selection, mapbox_token):
+def _build_deck(df, selection, mapbox_token, tooltip_field="name"):
     pdk.settings.mapbox_api_key = mapbox_token  # ⬅️ Mapbox-Token korrekt setzen
     filtered = df[df["type"].isin(selection)]
 
@@ -159,7 +163,7 @@ def _build_deck(df, selection, mapbox_token):
             zoom=5,
             pitch=0,
         ),
-        tooltip={"text": "{name} ({type})\n{capacity_str} MW"},
+        tooltip={"text": f"{{{tooltip_field}}} ({{type}})\n{{capacity_str}} MW"},
     )
     return deck
     return pdk.Deck(

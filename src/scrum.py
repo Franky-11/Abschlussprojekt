@@ -68,34 +68,32 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
     )
 
     raw_data = [
-        ["2025-05-30", "10:00", "11:00", "Project Kick-off (Sprint 0)", "Other"],
-        ["2025-06-01", "10:27", "11:27", "Backlog Setup & Trello Board", "Backlog Refinement"],
-        ["2025-06-02", "11:00", "11:45", "Backlog Refinement #1", "Backlog Refinement"],
-        ["2025-06-03", "11:09", "12:09", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "15:37", "16:37", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "17:03", "18:03", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "18:05", "19:05", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "19:05", "20:05", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "20:06", "21:06", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "21:17", "22:17", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-03", "22:22", "23:22", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-05", "11:30", "12:15", "Sprint Retrospective #0", "Retrospective"],
-        ["2025-06-09", "15:00", "16:00", "Sprint Planning #1", "Sprint Planning"],
-        ["2025-06-13", "12:15", "13:15", "Daily Scrum (extended)", "Daily Scrum"],
-        ["2025-06-13", "13:00", "13:30", "Sprint Planning #1 – Dozenten Sync", "Sprint Planning"],
-        ["2025-06-20", "11:00", "12:00", "Sprint Review #1", "Sprint Review"],
-        ["2025-06-22", "12:00", "13:00", "Backlog Grooming", "Backlog Refinement"],
-        ["2025-06-23", "14:00", "15:00", "Sprint Review – Dozenten", "Sprint Review"],
-        ["2025-06-24", "23:30", "00:30", "Daily Scrum (late)", "Daily Scrum"],
-        ["2025-06-25", "20:00", "21:00", "Sprint Planning #2", "Sprint Planning"],
-        ["2025-06-26", "21:00", "22:00", "Architecture Sync", "Other"],
-        ["2025-06-27", "11:05", "11:35", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-27", "11:45", "12:15", "Daily Scrum", "Daily Scrum"],
-        ["2025-06-28", "12:00", "13:00", "Daily Scrum / Check-in", "Daily Scrum"],
-        ["2025-06-30", "14:00", "15:00", "Sprint Review #2", "Sprint Review"],
-        ["2025-07-01", "15:00", "16:00", "Sprint Planning #3", "Sprint Planning"],
-        ["2025-07-02", "12:16", "13:16", "Daily Scrum", "Daily Scrum"],
-        ["2025-07-02", "15:37", "16:37", "Daily Scrum", "Daily Scrum"],
+        ["2025-05-22", "12:59", "15:15", "Gruppeneinteilung", "Other"],
+        ["2025-05-26", "12:01", "13:15", "Projekttreffen, Einladung per Kalender", "Other"],
+        ["2025-05-30", "10:00", "11:29", "Projekttreffen", "Other"],
+        ["2025-06-01", "10:58", "13:00", "Trello Board + Meeting", "Backlog Refinement"],
+        ["2025-06-02", "11:00", "12:00", "Projekt Backlog", "Backlog Refinement"],
+        ["2025-06-03", "11:09", "13:09", "Backlog & Sprint Planning", "Sprint Planning"],
+        ["2025-06-05", "11:00", "11:45", "Präsentationen und Fachgespräch", "Review"],
+        ["2025-06-07", "10:00", "11:00", "Recherchesitzung, KI, Gemini-Link", "Other"],
+        ["2025-06-08", "10:30", "11:30", "Meeting", "Daily Scrum"],
+        ["2025-06-09", "10:30", "11:30", "Fragen und Vorbereitung für DSI", "Other"],
+        ["2025-06-11", "10:32", "12:32", "Meeting", "Daily Scrum"],
+        ["2025-06-13", "12:15", "13:15", "Abschlussmeeting", "Sprint Review"],
+        ["2025-06-16", "21:00", "22:00", "Backlog aktualisieren", "Backlog Refinement"],
+        ["2025-06-17", "15:15", "23:59", "Projektmeeting", "Other"],
+        ["2025-06-20", "11:00", "13:00", "Abschlussprojekt", "Sprint Review"],
+        ["2025-06-22", "12:00", "14:00", "Abschlussprojekt", "Sprint Review"],
+        ["2025-06-23", "14:00", "15:00", "Projektbesprechung", "Review"],
+        ["2025-06-24", "11:30", "18:30", "Projektmeeting", "Other"],
+        ["2025-06-25", "20:00", "23:50", "Projektbesprechung", "Other"],
+        ["2025-06-26", "21:00", "22:00", "DSI Abschlussprojekt", "Other"],
+        ["2025-06-28", "12:00", "15:00", "Meeting", "Daily Scrum"],
+        ["2025-06-29", "15:30", "17:30", "Meeting", "Daily Scrum"],
+        ["2025-06-30", "14:00", "17:00", "Abschlussmeeting", "Sprint Review"],
+        ["2025-07-01", "15:00", "18:00", "Abschlussmeeting", "Sprint Review"],
+        ["2025-07-02", "12:15", "23:30", "Nachentwicklung", "Other"],
+        ["2025-07-03", "09:30", "21:00", "Feinschliff & Übung", "Other"]
     ]
 
     data = []
@@ -112,6 +110,7 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
 
     total_minutes = sum([entry[3] for entry in data])
     st.metric("⏱ Gesamtzeit aller Meetings", f"{total_minutes / 60:.1f} Stunden")
+    st.metric("👥 Gesamtzeit nach Mannstunden", f"{total_minutes * 3 / 60:.1f} Stunden")
 
     df = pd.DataFrame(
         data,

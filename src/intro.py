@@ -3,17 +3,20 @@ from watermarks import set_watermark
 set_watermark("images/watermark/chargingpoints_pic.png")
 
 def run():
-    st.title("Realitätscheck E-Mobilität – Ein datengetriebener Blick auf Deutschlands Weg zur Elektromobilität")
+    st.title("🔌 Realitätscheck Elektromobilität in Deutschland")
+    st.subheader("Ein datengetriebener Blick auf Chancen, Herausforderungen und Realisierbarkeit der Mobilitätswende")
 
     st.markdown("### 🧭 Einleitung & Fragestellung")
     st.markdown("""
-    Die Mobilitätswende in Deutschland ist eine der zentralen Säulen der Energietransformation. 
-    Unser Projekt untersucht, ob die von der Bundesregierung formulierten Ziele zur Elektromobilität realistisch erreichbar sind – und unter welchen Voraussetzungen.
+    Die Mobilitätswende gilt als entscheidender Baustein auf dem Weg zur Klimaneutralität. 
+    Doch sind die politischen Zielsetzungen zur vollständigen Elektrifizierung des Straßenverkehrs – etwa 15 Millionen E-Fahrzeuge bis 2030 – unter den heutigen Rahmenbedingungen überhaupt erreichbar?
 
-    **Leitfrage**:  
-    *„Unsere Bundesregierung hat Ziele zur E-Mobilität gesetzlich verankert.“ Doch sind diese Ziele realistisch und erreichbar?*
+    In diesem Projekt analysieren wir die zentralen Einflussfaktoren mithilfe aktueller Datenquellen und interaktiver Visualisierungen. 
 
-    Neben klassischen Parametern wie Stromerzeugung und Fahrzeugentwicklung betrachten wir auch gesellschaftliche, infrastrukturelle und technologische Faktoren.
+    **Leitfrage:**  
+    *Sind die Ziele zur E-Mobilität realistisch erreichbar – und was müsste geschehen, damit sie Wirklichkeit werden können?*
+
+    Der Realitätscheck umfasst neben technischen und energetischen Aspekten auch gesellschaftliche, infrastrukturelle und wirtschaftliche Einflussgrößen.
     """)
 
     st.markdown("### 🛠️ Projektverlauf")
@@ -23,8 +26,10 @@ def run():
     - Iterative Entwicklung mit agilen Etappen  
     - Visualisierung & Validierung mit Stakeholder-Fokus  
     - Abgeleitetes **Gesamtfazit** mit klaren Empfehlungen
+    - Integration interaktiver Dashboards zur Ableitung datenbasierter Handlungsoptionen
     """)
 
+    st.markdown("Unsere Analyse betrachtet sowohl historische Entwicklungen als auch aktuelle und zukünftige Szenarien.")
     st.markdown("### 📅 Untersuchungszeiträume")
     st.markdown("""
     - Rückblick auf Entwicklungstrends 
@@ -34,11 +39,13 @@ def run():
 
     st.markdown("### 🔍 Analysefokus")
     st.markdown("""
-    - Fahrzeugmarkt
-    - Zusätzlicher Strombedarf durch BEVs  
-    - Ladeinfrastruktur
-    - Stromerzeugung
-    - Akzeptanz, Gesellschaft & Markt
+    Unser Analysemodell berücksichtigt sowohl technische als auch gesellschaftliche Dimensionen der Elektromobilität:
+
+    - Stromerzeugung & Versorgungsinfrastruktur  
+    - Zusätzlicher Strombedarf durch vollelektrische Pkw  
+    - Entwicklung des Fahrzeugmarkts  
+    - Ladeinfrastruktur & Netzausbau  
+    - Gesellschaftliche Akzeptanz und wirtschaftliche Rahmenbedingungen
     """)
 
     st.success("Nutze die Navigation links, um durch die einzelnen Kapitel und Visualisierungen zu navigieren.")

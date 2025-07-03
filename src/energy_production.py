@@ -62,7 +62,7 @@ def run():
     leistung_summary["capacity_mw"] = leistung_summary["capacity_mw"].map(lambda x: f"{x:,.2f} MW")
     st.dataframe(leistung_summary.rename(columns={"type": "Energieform", "capacity_mw": "Gesamtleistung"}))
 
-    deck = _build_deck(df, selection, mapbox_token)
+    deck = _build_deck(df, selection, mapbox_token, tooltip_field="name")
     st.pydeck_chart(deck, use_container_width=True)
 
     with st.expander("🗂️ Legende"):
