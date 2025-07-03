@@ -113,7 +113,7 @@ def run():
         st.session_state.ist = True
 
 
-    st.header("⚡ Ladeinfrastruktur-Prognose & Verteilung")
+    st.header("⚡ Ladepunktverteilung")
 
    # ansicht = st.radio(
     #    "🗺️ Auswahl Karte (links)",
@@ -281,120 +281,123 @@ def run():
 
     st.divider()
 
-    col1, col2, col3 = st.columns([1, 1, 1])
+    st.subheader("Zeitliche Auslastung der Ladepunkte")
+    st.write("")
+    with st.container(border=True, height=550):
+        col1, col2, col3 = st.columns([1, 1, 1])
 
-    with col1:
-        with st.popover("🔌 BEV-Parameter (öffentliches Laden)"):
-            with st.form("Laden"):
-                # bev = st.number_input("Anzahl BEV", value=1_650_000, step=100_000)
-                bev_lp_ratio = st.slider("∅ BEV/Ladepunkt", 2, 80, 12)
-                jahres_km = st.number_input("Jahresfahrleistung (km)", value=12_000, step=1000)
-                reichweite_bev = st.slider("Reichweite BEV (km)", 200, 500, 300)
-                ladeanteil = st.slider("Anteil BEV mit Ladebedarf (%)", 0, 100, 20) / 100
+        with col1:
+            with st.popover("🔌 BEV-Parameter (öffentliches Laden)"):
+                with st.form("Laden"):
+                    # bev = st.number_input("Anzahl BEV", value=1_650_000, step=100_000)
+                    bev_lp_ratio = st.slider("∅ BEV/Ladepunkt", 2, 80, 12)
+                    jahres_km = st.number_input("Jahresfahrleistung (km)", value=12_000, step=1000)
+                    reichweite_bev = st.slider("Reichweite BEV (km)", 200, 500, 300)
+                    ladeanteil = st.slider("Anteil BEV mit Ladebedarf (%)", 0, 100, 20) / 100
 
-                st.markdown("##### 🔄 Ladezeiten & Typ-Mix")
-                normzeit = st.slider("⏱️ Ladezeit Normalladepunkt (min)", 120, 360, 120)
-                schnellzeit = st.slider("⚡ Ladezeit Schnellladepunkt (min)", 10, 60, 30)
-                schnellanteil = st.slider("Anteil Schnellladepunkte (%)", 0, 100, 27) / 100
-                mittlere_ladezeit = schnellanteil * schnellzeit + (1 - schnellanteil) * normzeit
+                    st.markdown("##### 🔄 Ladezeiten & Typ-Mix")
+                    normzeit = st.slider("⏱️ Ladezeit Normalladepunkt (min)", 120, 360, 120)
+                    schnellzeit = st.slider("⚡ Ladezeit Schnellladepunkt (min)", 10, 60, 30)
+                    schnellanteil = st.slider("Anteil Schnellladepunkte (%)", 0, 100, 27) / 100
+                    mittlere_ladezeit = schnellanteil * schnellzeit + (1 - schnellanteil) * normzeit
 
-                st.info(
-                    f"Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min** bei {int(schnellanteil * 100)} % Schnellladepunkten")
-                st.form_submit_button("Parameter auswählen")
+                    st.info(
+                        f"Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min** bei {int(schnellanteil * 100)} % Schnellladepunkten")
+                    st.form_submit_button("Parameter auswählen")
 
-        st.markdown("---")  # Trennlinie für bessere Lesbarkeit
-        st.markdown("#### Ausgewählte BEV-Lade-Parameter:")
-        st.markdown(f"- ∅ BEV/Ladepunkt: **{bev_lp_ratio}**")
-        st.markdown(f"- Jahresfahrleistung: **{jahres_km} km**")
-        st.markdown(f"- Reichweite BEV: **{reichweite_bev} km**")
-        st.markdown(f"- Anteil BEV mit Ladebedarf: **{int(ladeanteil * 100)} %**")
-        st.markdown(f"- Ladezeit Normalladepunkt: **{normzeit} min**")
-        st.markdown(f"- Ladezeit Schnellladepunkt: **{schnellzeit} min**")
-        st.markdown(f"- Anteil Schnellladepunkte: **{int(schnellanteil * 100)} %**")
-        st.markdown(f"- Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min**")
-
-
-    with col3:
-        with st.popover("⛽ Referenz-Schwellenwert"):
-            with st.form("Tanken"):
-                # pkw = st.number_input("Anzahl PKW", value=47_000_000)
-                # tankstellen = st.number_input("Anzahl Tankstellen", value=14_800)
-                # zapf = st.slider("Zapfsäulen je Tankstelle", 1, 20, 7)
-                pkw = 47304737
-                tankstellen = 14300
-                zapf = 7
-                st.markdown(
-                    f"""
-                              <div style="background-color:#1e1e1e;padding:10px;border-radius:6px;">
-                                  <strong>🔧 Referenz: Verbrennerbasierte Auslastung</strong><br>
-                                  🚗 Verbrenner-Fahrzeuge: <strong>{pkw / 1E6:.1f} Mio.</strong><br>
-                                  ⛽ Zapfsäulen (gesamt): <strong>{(tankstellen * zapf) / 1E3:.1f} Tsd.</strong><br>
-                                  <span style="font-size: 0.9em; color: #666;">Aus diesen Werten wird die Auslastung (h/a) je Zapfsäule berechnet</span>
-                              </div>
-                              """,
-                    unsafe_allow_html=True
-                )
-                st.write("")
-                reichweite = st.slider("Verbraucher-Reichweite (km)", 500, 900, 600)
-                tankzeit = st.slider("Tankzeit (min)", 1, 30, 5)
-                st.form_submit_button("Parameter auswählen")
+           # st.markdown("---")  # Trennlinie für bessere Lesbarkeit
+           # st.markdown("#### Ausgewählte BEV-Lade-Parameter:")
+           # st.markdown(f"- ∅ BEV/Ladepunkt: **{bev_lp_ratio}**")
+           # st.markdown(f"- Jahresfahrleistung: **{jahres_km} km**")
+           # st.markdown(f"- Reichweite BEV: **{reichweite_bev} km**")
+            #st.markdown(f"- Anteil BEV mit Ladebedarf: **{int(ladeanteil * 100)} %**")
+           # st.markdown(f"- Ladezeit Normalladepunkt: **{normzeit} min**")
+           # st.markdown(f"- Ladezeit Schnellladepunkt: **{schnellzeit} min**")
+           # st.markdown(f"- Anteil Schnellladepunkte: **{int(schnellanteil * 100)} %**")
+           # st.markdown(f"- Mittlere Ladezeit: **{mittlere_ladezeit:.1f} min**")
 
 
+        with col3:
+            with st.popover("⛽ Referenz-Schwellenwert"):
+                with st.form("Tanken"):
+                    # pkw = st.number_input("Anzahl PKW", value=47_000_000)
+                    # tankstellen = st.number_input("Anzahl Tankstellen", value=14_800)
+                    # zapf = st.slider("Zapfsäulen je Tankstelle", 1, 20, 7)
+                    pkw = 47304737
+                    tankstellen = 14300
+                    zapf = 7
+                    st.markdown(
+                        f"""
+                                  <div style="background-color:#1e1e1e;padding:10px;border-radius:6px;">
+                                      <strong>🔧 Referenz: Verbrennerbasierte Auslastung</strong><br>
+                                      🚗 Verbrenner-Fahrzeuge: <strong>{pkw / 1E6:.1f} Mio.</strong><br>
+                                      ⛽ Zapfsäulen (gesamt): <strong>{(tankstellen * zapf) / 1E3:.1f} Tsd.</strong><br>
+                                      <span style="font-size: 0.9em; color: #666;">Aus diesen Werten wird die Auslastung (h/a) je Zapfsäule berechnet</span>
+                                  </div>
+                                  """,
+                        unsafe_allow_html=True
+                    )
+                    st.write("")
+                    reichweite = st.slider("Verbraucher-Reichweite (km)", 500, 900, 600)
+                    tankzeit = st.slider("Tankzeit (min)", 1, 30, 5)
+                    st.form_submit_button("Parameter auswählen")
 
-    with col2:
-        auslastung_ladepunkt = (jahres_km / reichweite_bev) * (mittlere_ladezeit / 60) * bev_lp_ratio * ladeanteil
-        ref = ((jahres_km / reichweite) * (tankzeit / 60) * pkw) / (tankstellen * zapf)
-        diff_referenz_auslastung = (auslastung_ladepunkt - ref) / ref * 100
-
-        st.metric(f"∅ Auslastung pro Ladepunkt ",
-                  value=f"{auslastung_ladepunkt:.0f} h/a",
-                  delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung", delta_color="inverse")
 
 
-        gauge_max_value = max(ref * 1.5, auslastung_ladepunkt * 1.2, 1000)
-        gauge_min_value = 0
+        with col2:
+            auslastung_ladepunkt = (jahres_km / reichweite_bev) * (mittlere_ladezeit / 60) * bev_lp_ratio * ladeanteil
+            ref = ((jahres_km / reichweite) * (tankzeit / 60) * pkw) / (tankstellen * zapf)
+            diff_referenz_auslastung = (auslastung_ladepunkt - ref) / ref * 100
 
-        threshold_green_yellow = ref * 0.5
-        threshold_yellow_red = ref
+            st.metric(f"∅ Auslastung pro Ladepunkt ",
+                      value=f"{auslastung_ladepunkt:.0f} h/a",
+                      delta=f"{diff_referenz_auslastung:,.1f}% zur Referenz-Auslastung", delta_color="inverse")
 
-        fig = go.Figure(go.Indicator(
-            mode="gauge+number",
-            value=auslastung_ladepunkt,
-            domain={'x': [0, 1], 'y': [0, 1]},
-            title={'text': "<b>Auslastung Ladepunkt (h/a)</b>", 'font': {'size': 20, 'color': 'white'}},
 
-           # delta={'reference': ref, 'relative': True, 'valueformat': ".1%", 'font': {'size': 16, 'color': 'white'}},
-            # Delta color for dark theme
-            gauge={
-                'axis': {'range': [gauge_min_value, gauge_max_value], 'tickwidth': 1, 'tickcolor': "darkblue",
-                         'tickfont': {'color': 'white'}},
-                'bar': {'color': "cyan", 'thickness': 0.75},
-                'bgcolor': "rgba(0,0,0,0)",  # Transparent background
-                'borderwidth': 2,
-                'bordercolor': "gray",
-                'steps': [
-                    {'range': [gauge_min_value, threshold_green_yellow], 'color': "green"},
-                    {'range': [threshold_green_yellow, threshold_yellow_red], 'color': "yellow"},
-                    {'range': [threshold_yellow_red, gauge_max_value], 'color': "red"}
-                ],
-                'threshold': {
-                    'line': {'color': "white", 'width': 4},  # Reference line color for dark theme
-                    'thickness': 0.75,
-                    'value': ref
+            gauge_max_value = max(ref * 1.5, auslastung_ladepunkt * 1.2, 1000)
+            gauge_min_value = 0
+
+            threshold_green_yellow = ref * 0.5
+            threshold_yellow_red = ref
+
+            fig = go.Figure(go.Indicator(
+                mode="gauge+number",
+                value=auslastung_ladepunkt,
+                domain={'x': [0, 1], 'y': [0, 1]},
+                title={'text': "<b>Auslastung Ladepunkt (h/a)</b>", 'font': {'size': 20, 'color': 'white'}},
+
+               # delta={'reference': ref, 'relative': True, 'valueformat': ".1%", 'font': {'size': 16, 'color': 'white'}},
+                # Delta color for dark theme
+                gauge={
+                    'axis': {'range': [gauge_min_value, gauge_max_value], 'tickwidth': 1, 'tickcolor': "darkblue",
+                             'tickfont': {'color': 'white'}},
+                    'bar': {'color': "cyan", 'thickness': 0.75},
+                    'bgcolor': "rgba(0,0,0,0)",  # Transparent background
+                    'borderwidth': 2,
+                    'bordercolor': "gray",
+                    'steps': [
+                        {'range': [gauge_min_value, threshold_green_yellow], 'color': "green"},
+                        {'range': [threshold_green_yellow, threshold_yellow_red], 'color': "yellow"},
+                        {'range': [threshold_yellow_red, gauge_max_value], 'color': "red"}
+                    ],
+                    'threshold': {
+                        'line': {'color': "white", 'width': 4},  # Reference line color for dark theme
+                        'thickness': 0.75,
+                        'value': ref
+                    }
                 }
-            }
-        ))
+            ))
 
-        fig.update_layout(
-            paper_bgcolor="rgba(0,0,0,0)",
-            font={'color': "white", 'family': "Arial"},
-            margin=dict(l=20, r=20, t=50, b=20)
-        )
+            fig.update_layout(
+                paper_bgcolor="rgba(0,0,0,0)",
+                font={'color': "white", 'family': "Arial"},
+                margin=dict(l=20, r=20, t=50, b=20)
+            )
 
-        st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
 
-    with col3:
-        st.metric(label="Referenz-Auslastung", value=f"{ref:,.0f} h/a")
+        with col3:
+            st.metric(label="Referenz-Auslastung", value=f"{ref:,.0f} h/a")
 
 #st.set_page_config(layout="wide")
 #run()

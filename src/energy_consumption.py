@@ -31,8 +31,8 @@ def run():
                 with st.popover("Quellen anzeigen"):
                     st.markdown("""
                             * Verbauchsdaten: ADAC, TCS (Touring Club Schweiz), ÖAMTC (Österreichischer Automobil-, Motorrad- und Touring Club) 
-                            * Reichweite BEV: ADAC
-                            Was ist WLTP:  
+                            * Reichweite BEV: ADAC  
+                            * Was ist WLTP ?  
                             WLTP steht für **Worldwide Harmonized Light-Duty Vehicles Test Procedure** (Weltweit harmonisiertes Prüfverfahren für leichte Nutzfahrzeuge).  
                             """)
 
@@ -146,9 +146,11 @@ def run():
                        file_name="strombedarf_szenario.csv", mime="text/csv")
 
     # --- Plotly Stacked Bar Chart: Strombedarf vs. EE ---
-    jahre = list(range(2025, 2036))
+   # jahre = list(range(2025, 2036))
+    jahre=[2025,2030,2035]
    # bev_bedarf = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130]
-    ee_erzeugung = [12.139*jahr-24280 for jahr in jahre]          ## Gesamt Stromerzeugung aus erneuerbaren energien, Prognose nach UBA Daten
+   # ee_erzeugung = [12.139*jahr-24280 for jahr in jahre]          ## Gesamt Stromerzeugung aus erneuerbaren energien, Prognose nach UBA Daten
+    ee_erzeugung=[283, 595, 835]
     ee={jahr:tw for jahr,tw in zip(jahre,ee_erzeugung)}
 
    # rest_ee = [ee - bev for ee, bev in zip(ee_erzeugung, bev_bedarf)]
@@ -186,6 +188,7 @@ def run():
                 #y=bev_bedarf,
                 y=bedarf_szen,
                 text=[f"{y:.1f} TWh" for y in bedarf_szen],
+                textposition='outside',
                 textfont=dict(size=18),
                 marker_color="#636EFA"))
 
@@ -194,11 +197,12 @@ def run():
                # x=jahre,
                 x=jahre_szen,
                 #y=rest_ee,
-                y=rest_ee,
+               # y=rest_ee,
+                y=ee_erzeugung,
                 marker_color="#00CC96"))
 
             fig.update_layout(
-                barmode='stack',
+                barmode='group',
                # title="⚡ Strombedarf der E-Mobilität vs. EE-Erzeugung (2025–2035)",
                # xaxis_title="Jahr",
                 yaxis_title="Energie (TWh)",
@@ -248,6 +252,12 @@ def run():
         st.session_state.check = st.checkbox("Anteil Strombedarf BEV an EE")
         fig=plot_fig(st.session_state.check)
         st.plotly_chart(fig, use_container_width=True)
+        with st.popover("Quellen anzeigen"):
+            st.markdown("""
+                           Prognose Stromerzeugung erneuerbarer Energien:
+                           * Agora Energiewende, Prognos, Consentec (2022): Klimaneutrales Stromsystem 2035. Wie der deutsche Stromsektor bis zum Jahr 2035 klimaneutral werden kann 
+                           """)
+
 
 #st.set_page_config(layout="wide")
 #run()

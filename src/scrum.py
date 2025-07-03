@@ -16,13 +16,14 @@ from render_burndown_chart import render_burndown_chart
 from datetime import datetime
 
 
+
 # ─────────────────────────────────────────────────────────────
 # Streamlit-Code als Funktion kapseln
 # ─────────────────────────────────────────────────────────────
 
 def run():
     # ───────────────── Streamlit-Setup ─────────────────
-    st.set_page_config(page_title="Scrum Dashboard", layout="wide")
+
     st.title("🧭 Scrum Übersicht – Abschlussprojekt")
 
     # ───────────────── Einleitung ──────────────────────
@@ -148,6 +149,25 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
         ax.grid(True)
 
         st.pyplot(fig)
+
+    # ───────── Projektteam─────────
+
+    with st.expander("Projektteam"):
+        st.markdown(
+            """
+    Dieses Projekt wurde im Rahmen unserer Data-Science-Weiterbildung erstellt.  
+
+    Data Science Institute by Fabian Rappert / DSI Education GmbH, Berlin  
+    <https://data-science-institute.de>
+
+    **Projektteam & Fokus**  
+    * **Philipp Schauer** – Ladeinfrastruktur  
+    * **Thomas Baur** – Projektmanagement, Stromerzeugung  
+    * **Frank Schulnies** – Fahrzeugmarkt  
+
+    Unser Ziel war es, ein nützliches und intuitives Tool zu entwickeln, das einen Beitrag zur Diskussion um die Zukunft der E-Mobilität leistet.
+    """
+        )
 
     # ───────── Projektbeschreibung ─────────
 
