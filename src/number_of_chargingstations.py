@@ -9,7 +9,7 @@ from chargingpoints_functions import berechne_entwicklung
 from chargingpoints_functions import berechne_entwicklung_nach_art
 from chargingpoints_functions import prognose_linear_referenz
 
-#st.set_page_config(layout="wide")
+
 
 def run():
     # Initialisierung der Session-State-Flags
@@ -31,6 +31,10 @@ def run():
 
     # Erstes Diagramm: kumuliert Ist + Art + Referenz
     fig, ax = plt.subplots(figsize=(9, 4))
+
+    fig.patch.set_facecolor('none')  # gesamte Figure transparent
+    ax.patch.set_facecolor((1, 1, 1, 0.5))  # Achsen-Hintergrund in 50 % Weiß
+
     xticks = [hj for hj in df_kum_lp["Halbjahr"] if hj.endswith("H2")]
     ax.plot(df_kum_lp["Halbjahr"], df_kum_lp["Kumuliert"], marker='o', label="Gesamt kumuliert")
     if "Normalladeeinrichtung" in df_group_cum.columns:
@@ -38,11 +42,13 @@ def run():
     if "Schnellladeeinrichtung" in df_group_cum.columns:
         ax.plot(df_group_cum.index, df_group_cum["Schnellladeeinrichtung"], linestyle='--', marker='x', label="Schnellladeeinrichtung kumuliert")
     ax.axvspan("2022-H2", "2023-H2", color="orange", alpha=0.3, label="Referenzzeitraum")
-    ax.set_title("Öffentliche Ladepunkte – Kumulierte Ist-Daten")
+    ax.set_title("Öffentliche Ladepunkte – Kumulierte Ist-Daten", color="white")
     ax.set_xticks(xticks)
-    ax.set_xlabel("Halbjahr")
-    ax.set_ylabel("Anzahl Ladepunkte (kumuliert)")
-    ax.grid(True, linestyle='--', alpha=0.5)
+    ax.set_xticklabels(xticks, rotation=90, color="white")
+    ax.set_xlabel("Halbjahr", color="white")
+    ax.set_ylabel("Anzahl Ladepunkte (kumuliert)", color="white")
+    ax.tick_params(axis="y", colors="white")
+    ax.grid(True, linestyle="--", alpha=0.5)
     plt.xticks(rotation=90)
     ax.legend(loc="best")
     st.pyplot(fig)
@@ -56,16 +62,20 @@ def run():
 
     # Prognose-Button setzt Flag
     if st.button("Prognose +49,74%"):
-        st.session_state['prognose_aktiv'] = True
+        st.session_state["prognose_aktiv"] = True
 
     # Anzeige und Buttons nach Klick auf Prognose
-    if st.session_state['prognose_aktiv']:
+    if st.session_state["prognose_aktiv"]:
         st.markdown("""
         Artikel 'Volle Ladung Klimaschutz': 'Bis 2030 sollen in Deutschland eine Million öffentliche Ladepunkte verfügbar sein.' 
                     [Quelle: Bundesregierung](https://www.bundesregierung.de/breg-de/bundesregierung/1873986-1873986)
                     """)
         df_prog = prognose_linear_referenz(df_kum_lp, "2022-H2", "2023-H2", "2030-H2")
         fig2, ax2 = plt.subplots(figsize=(9, 4))
+
+        fig2.patch.set_facecolor("none")  # gesamte Figure transparent
+        ax2.patch.set_facecolor((1, 1, 1, 0.5))  # Achsen-Hintergrund in 50 % Weiß
+
         # Ist-Daten
         ax2.plot(df_kum_lp["Halbjahr"], df_kum_lp["Kumuliert"], marker='o', label="Ist")
         # Prognose
@@ -79,15 +89,19 @@ def run():
         # X-Ticks: nur H2
         xt2 = [hj for hj in list(df_kum_lp["Halbjahr"]) + list(df_prog["Halbjahr"]) if hj.endswith("H2")]
         ax2.set_xticks(xt2)
-        ax2.set_xticklabels(xt2, rotation=90)
+        ax2.set_xticklabels(xt2, rotation=90, color="white")
+        ax2.tick_params(axis="x", colors="white")
+        ax2.set_xlabel("Halbjahr", color="white")
+        ax2.set_ylabel("Anzahl Ladepunkte (kumuliert)", color="white")
+        ax2.tick_params(axis="y", colors='white')
         # Grid
-        ax2.grid(axis='both', which='major', linestyle='--', alpha=0.5)
+        ax2.grid(axis="both", which="major", linestyle="--", alpha=0.5)
 
         # Button "tatsächlicher Bedarf"
         if st.button("tatsächlicher Bedarf"):
-            st.session_state['demand_aktiv'] = True
+            st.session_state["demand_aktiv"] = True
         # Anzeige Text und Link bei Bedarf
-        if st.session_state['demand_aktiv']:
+        if st.session_state["demand_aktiv"]:
             st.markdown(
                 """
                 **Tatsächlicher Bedarf**: In der Studie 'Ladeinfrastruktur nach 2025/2030' wird je nach Szenario ein
@@ -98,14 +112,18 @@ def run():
             xt_all = xt2  # Liste der getickten Halbjahre
             if "2030-H2" in xt_all:
                 start_frac = xt_all.index("2030-H2") / (len(xt_all) - 1)
-                x = ["2030-H2"[-1], df_prog["Halbjahr"].iloc[-1]]
-                y_lower = [380000, 380000]
-                y_upper = [680000, 680000]
-                ax2.fill_between(x, y_lower, y_upper, color="green", alpha=0.2, label="Zielbereich 380.000–680.000 LP")
+                ax2.axhspan(
+                    380000,
+                    680000,
+                    xmin=start_frac,
+                    xmax=1,
+                    color="green",
+                    alpha=0.2,
+                    label="Zielbereich 380.000–680.000 LP"
+                )
         ax2.legend(loc="best")
-
-
-        ax2.set_title("Prognose öffentliche Ladepunkte (konstante Steigung)")
-        ax2.set_xlabel("Halbjahr")
-        ax2.set_ylabel("Anzahl Ladepunkte (kumuliert)")
+        ax2.set_title("Prognose öffentliche Ladepunkte (konstante Steigung)", color="white")
+        ax2.set_xlabel("Halbjahr", color="white")
+        ax2.set_ylabel("Anzahl Ladepunkte (kumuliert)", color="white")
+        ax2.tick_params(axis='y', colors='white')
         st.pyplot(fig2)
