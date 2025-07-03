@@ -22,7 +22,7 @@ from datetime import datetime
 
 def run():
     # ───────────────── Streamlit-Setup ─────────────────
-    st.set_page_config(page_title="Scrum Dashboard", layout="wide")
+    #st.set_page_config(page_title="Scrum Dashboard", layout="wide")
     st.title("🧭 Scrum Übersicht – Abschlussprojekt")
 
     # ───────────────── Einleitung ──────────────────────
