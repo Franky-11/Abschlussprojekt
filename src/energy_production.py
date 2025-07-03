@@ -48,14 +48,52 @@ def run():
         st.info("Bitte mindestens eine Energieform auswählen.")
         st.stop()
 
+    # Gesamtleistung pro Energieform
+    df_selection = df[df["type"].isin(selection)]
+    leistung_summary = (
+        df_selection.groupby("type")["capacity_mw"]
+        .sum()
+        .sort_values(ascending=False)
+        .reset_index()
+    )
+    gesamtleistung_mw = leistung_summary["capacity_mw"].sum()
+    st.metric("Gesamtleistung (MW)", f"{gesamtleistung_mw:,.0f} MW")
+    st.subheader("🔋 Gesamtleistung nach Energieform")
+    leistung_summary["capacity_mw"] = leistung_summary["capacity_mw"].map(lambda x: f"{x:,.2f} MW")
+    st.dataframe(leistung_summary.rename(columns={"type": "Energieform", "capacity_mw": "Gesamtleistung"}))
+
     deck = _build_deck(df, selection, mapbox_token)
     st.pydeck_chart(deck, use_container_width=True)
 
     with st.expander("🗂️ Legende"):
-        st.dataframe(pd.DataFrame({
+        st.markdown(
+            "In der Karte sind die Kraftwerke farblich nach Energieform codiert. "
+            "Die folgende Übersicht zeigt, welcher Farbe welche Energieform entspricht:"
+        )
+        legend_df = pd.DataFrame({
             "Energieform": list(ENERGY_COLORS.keys()),
-            "Farbe (RGBA)": list(ENERGY_COLORS.values())
-        }))
+            "Farbcode (RGBA)": list(ENERGY_COLORS.values())
+        })
+
+        st.markdown("#### Farblegende (Farbzuordnung je Energieform)")
+        for _, row in legend_df.iterrows():
+            rgba = row['Farbcode (RGBA)']
+            farben = rgba if isinstance(rgba[0], (list, tuple)) else [rgba]
+            leistungsklassen = ["unter 5 MW", "5–20 MW", "20–100 MW", "über 100 MW"]
+            farbpunkte = "".join([
+                f"<span title='{row['Energieform']} mit Leistung {leistungsklassen[i]}' "
+                f"style='display:inline-block; width:16px; height:16px; margin-right:4px; "
+                f"background-color:rgba({r},{g},{b},{a / 255}); border-radius:50%; border:1px solid #ccc;'></span>"
+                for i, (r, g, b, a) in enumerate(farben)
+            ])
+
+            st.markdown(
+                f"<div style='margin: 6px 0; display:flex; align-items:center;'>"
+                f"<span style='width:120px;'>{row['Energieform']}</span>"
+                f"{farbpunkte}"
+                f"</div>",
+                unsafe_allow_html=True
+            )
 
 if __name__ == "__main__":
     run()

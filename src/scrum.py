@@ -139,7 +139,7 @@ Insgesamt führten wir **31 dokumentierte Meetings** durch (Daily Scrums, Planni
         for _, row in df.iterrows():
             ax.plot([row["Datum_fmt"], row["Datum_fmt"]], [row["Startzeit_min"], row["Endezeit_min"]], marker='o')
         ax.set_xlabel("Datum")
-        ax.xaxis.set_major_formatter(mdates.DateFormatter("%-d.%m"))
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%d.%m"))
         ax.set_ylim(0, 1440)
         ax.set_yticks(range(0, 1441, 60))
         ax.set_yticklabels([f"{h}:00" for h in range(25)])
