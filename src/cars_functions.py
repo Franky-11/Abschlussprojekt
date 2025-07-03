@@ -165,7 +165,7 @@ def plot_car_map(df_cars_for_map,geojson):
 
 @st.cache_data
 def read_df_fuel():
-    df = pd.read_csv("data/Bestand_PKW_nach_Kraftstoffarten.csv", delimiter=";")
+    df = pd.read_csv("data/Bestand_PKW_nach_Kraftstoffarten.CSV", delimiter=";")
     value_vars = ['Benzin', 'Diesel', 'Gas', "BEV", 'Hybrid', "Sonstige"]
     id_vars = ['Jahr']
     df_long = pd.melt(df,
