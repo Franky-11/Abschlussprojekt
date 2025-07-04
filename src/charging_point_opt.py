@@ -221,7 +221,8 @@ def run():
                                         args=(bev, ziel_ratio),
                                         method="SLSQP",
                                         bounds=bounds,
-                                        constraints=[constraint]
+                                        constraints=[constraint],
+                                        options={'maxiter': 100}
                                     )
                                 else:
                                     res = minimize(
@@ -229,7 +230,8 @@ def run():
                                         x0,
                                         args=(bev, ziel_ratio, gewicht),
                                         method="SLSQP",
-                                        bounds=bounds
+                                        bounds=bounds,
+                                        options={'maxiter': 100}
                                     )
 
                                 st.session_state.lp_opt = res.x
