@@ -1,18 +1,4 @@
-"""bild.py – Hintergrund-/Wasserzeichen-Utility für Streamlit
 
-Dieses Modul bindet das mitgelieferte Foto (zerbeulter Audi) als
-schwarz-weißes Wasserzeichen hinter der gesamten Streamlit-App ein.
-Es funktioniert sowohl im Light- als auch im Dark-Mode.
-
-Verwendung (in jeder Streamlit-Seite):
-
-    import streamlit as st
-    from bild import set_watermark
-
-    st.set_page_config(layout="wide")
-    set_watermark()           # optional → Pfad & Opazität anpassen
-
-"""
 from __future__ import annotations
 
 import streamlit as st

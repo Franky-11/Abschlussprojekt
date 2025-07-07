@@ -195,7 +195,7 @@ def run():
                                         {bev_gesamt / 1e6:.1f} Mio. BEV  
                                         {lp_gesamt} Ladepunkte""")
                         st.divider()
-                        ziel_ratio = st.slider("🎯 Zielverhältnis BEV / Ladepunkt", 5.0, 50.0, 12.0)
+                        ziel_ratio = st.slider("🎯 Zielverhältnis BEV / Ladepunkt", 5.0, 50.0, 35.0)
                         opt_modus = st.selectbox("Optimierungsmodus", ["Fixe Ladepunktanzahl", "Kostenfunktion (frei)"])
                         max_iter = st.slider("Anzahl Iterationsschritte", 10, 1000, 10)
                         #gewicht = None
