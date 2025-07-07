@@ -181,6 +181,7 @@ def run():
         # ------------------------- Optimierungsformular -------------------------
         with col_info:
             place_holder = st.empty()
+            place_holder.info("Parameter noch nicht gewählt!")
             if st.session_state.prognose and not st.session_state.ist and not st.session_state.opt_erfolgreich:
                 place_holder.info("Szenario noch nicht optimiert!")
 
@@ -196,7 +197,7 @@ def run():
                         st.divider()
                         ziel_ratio = st.slider("🎯 Zielverhältnis BEV / Ladepunkt", 5.0, 50.0, 12.0)
                         opt_modus = st.selectbox("Optimierungsmodus", ["Fixe Ladepunktanzahl", "Kostenfunktion (frei)"])
-
+                        max_iter = st.slider("Anzahl Iterationsschritte", 10, 1000, 10)
                         #gewicht = None
                         #if opt_modus == "Kostenfunktion (frei)":
                         gewicht = st.number_input("⚖️ Gewicht auf LP-Kosten (Beta)", 0.0, 0.1, 0.0,step=0.01,help="Wenn Modus Kostenfunktion ausgewählt: Beta steuert, wie stark zusätzliche Ladepunkte 'kosten'. Höhere Werte bevorzugen sparsame Verteilungen – auch wenn das Zielverhältnis dann schlechter getroffen wird.")
@@ -222,7 +223,7 @@ def run():
                                         method="SLSQP",
                                         bounds=bounds,
                                         constraints=[constraint],
-                                        options={'maxiter': 1}
+                                        options={'maxiter': max_iter}
                                     )
                                 else:
                                     res = minimize(
@@ -231,7 +232,7 @@ def run():
                                         args=(bev, ziel_ratio, gewicht),
                                         method="SLSQP",
                                         bounds=bounds,
-                                        options={'maxiter': 1}
+                                        options={'maxiter': max_iter}
                                     )
 
                                 st.session_state.lp_opt = res.x
