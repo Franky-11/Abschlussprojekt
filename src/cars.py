@@ -42,7 +42,7 @@ def run():
                 fig1 = plot_car_fuel(df)
                 st.plotly_chart(fig1)
                 with st.popover("Quellen anzeigen"):
-                    st.markdown("**Kraftfahrzeugbundesamt**")
+                    st.markdown("**Kraftfahrt-Bundesamt**")
 
         with tab2:
             with st.container(border=True,height=550):
@@ -110,7 +110,7 @@ def run():
             fig=plot_bev_kreise(df_filtered,geojson_kreise)
             st.plotly_chart(fig)
             with st.popover("Quellen anzeigen"):
-                st.markdown("""**Kraftfahrzeugbundesamt**    
+                st.markdown("""**Kraftfahrt-Bundesamt**    
                 Geojson:  OpenDataLab""")
 
 
@@ -152,7 +152,7 @@ def run():
                 fig=plot_bev_segmente(df_long)
                 st.plotly_chart(fig)
                 with st.popover("Quellen anzeigen"):
-                    st.markdown("**Kraftfahrzeugbundesamt**")
+                    st.markdown("**Kraftfahrt-Bundesamt**")
 
 
         with tab2:
