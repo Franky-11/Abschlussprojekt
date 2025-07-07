@@ -95,7 +95,7 @@ def run():
     with col2:
         st.markdown(":material/monitoring: **Key facts**")
 
-        st.metric(label="Mittlerer Verbrauch BEV",value=f"{stats.loc[0,"mean"]:.1f} kWh/100km",delta=f"{delta:.1f}% zum WLTP",delta_color="inverse")
+        st.metric(label="Mittlerer Verbrauch BEV",value=f"{stats.loc[0,'mean']:.1f} kWh/100km",delta=f"{delta:.1f}% zum WLTP",delta_color="inverse")
 
         st.write("")
 

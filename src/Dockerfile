@@ -1,6 +1,5 @@
 # Basierend auf dem offiziellen Python-Image
-FROM python:3.11-slim-bullseye
-
+FROM python:3.13
 # Arbeitsverzeichnis im Container setzen
 WORKDIR /app
 

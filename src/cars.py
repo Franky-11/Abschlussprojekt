@@ -170,7 +170,7 @@ def run():
     with col2:
         st.markdown(":material/monitoring: **Key facts**")
 
-        st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long["Wert"].max(),1)}% | SUVs")
+        st.metric(label="Starke Verschiebung der Segment-Dominanz bei BEV", value=f"{round(df_long['Wert'].max(),1)}% | SUVs")
         st.markdown("------------------------------------------")
         st.markdown("""
                **🔌 Trend zu größeren, energieintensiveren Fahrzeugen bei BEV**<br>
